@@ -4,7 +4,7 @@ import Link from "next/link";
 
 interface Props {
   title: string;
-  description: string;
+  description: React.ReactNode;
   dates: string;
   location: string;
   image?: string;
@@ -40,9 +40,9 @@ export function HackathonCard({
           <p className="text-sm text-muted-foreground">{location}</p>
         )}
         {description && (
-          <span className="prose dark:prose-invert text-sm text-muted-foreground">
-            {description}
-          </span>
+            <span className="prose dark:prose-invert text-sm text-muted-foreground">
+    {description}
+  </span>
         )}
       </div>
       {links && links.length > 0 && (

@@ -200,18 +200,24 @@ export default function Page() {
                 Contact
               </div>
               <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                Get in Touch
+                Get in Touch!
               </h2>
               <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Want to chat? Just shoot me a dm{" "}
+                Feel free to reach out to me at{" "}
                 <Link
-                  href={DATA.contact.social.X.url}
+                  href={'mailto:calvinwong25@gmail.com'}
                   className="text-blue-500 hover:underline"
                 >
-                  with a direct question on twitter
+                  calvinwong25@gmail.com
                 </Link>{" "}
-                and I&apos;ll respond whenever I can. I will ignore all
-                soliciting.
+                or through {" "}
+                <Link
+                    href={'https://www.linkedin.com/in/calvin-wong-aa8874251/'}
+                    className="text-blue-500 hover:underline"
+                >
+                  my LinkedIn
+                </Link>!{" "}
+                I&apos;ll respond as fast as possible, Thanks so much!!
               </p>
             </div>
           </BlurFade>

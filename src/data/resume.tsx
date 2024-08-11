@@ -1,5 +1,6 @@
 import { Icons } from "@/components/icons";
 import { HomeIcon } from "lucide-react";
+import AnimatedShinyText from "@/components/magicui/animated-shiny-text";
 
 export const DATA = {
   name: "Calvin Wong",
@@ -42,7 +43,7 @@ export const DATA = {
       },
       LinkedIn: {
         name: "LinkedIn",
-        url: "linkedin.com/in/calvin-wong-aa8874251/",
+        url: "https://www.linkedin.com/in/calvin-wong-aa8874251/",
         icon: Icons.linkedin,
 
         navbar: true,
@@ -62,7 +63,7 @@ export const DATA = {
       },
       Email: {
         name: "Send Email",
-        url: "#",
+        url: "mailto:calvinwong25@gmail.com",
         icon: Icons.email,
 
         navbar: true,
@@ -270,9 +271,12 @@ export const DATA = {
       title: "HackRice 13",
       dates: "September 24th - 26th, 2023",
       location: "Houston, Texas",
-      description:
-        " Won CapitalOne's \"Best Financial hack \", Developed a financial chatbot that helps with tracking and recording expenses that can also scan receipts and upload relevant data.",
-      image:
+      description: (
+          <>
+            <AnimatedShinyText>Won CapitalOne&apos;s &quot;Best Financial hack&quot;</AnimatedShinyText>
+            , Developed a financial chatbot that helps with tracking and recording expenses that can also scan receipts and upload relevant data.
+          </>
+      ),      image:
         "/hackrice.jpg",
       mlh: "",
       links: [],
@@ -281,8 +285,12 @@ export const DATA = {
       title: "KleinHacks 23",
       dates: "April 4th - 6th, 2023",
       location: "Klein, Texas",
-      description:
-        "Won First Place Overall, Developed a web based browser game designed to teach students the basics of Calculus and their real world applications.",
+      description: (
+          <>
+            <AnimatedShinyText>Won First Place Overall</AnimatedShinyText>, Developed a web based
+            browser game designed to teach students the basics of Calculus and their real world applications.
+          </>
+      ),
       image:
         "/kleinhacks.jpg",
       mlh: "",
@@ -292,9 +300,13 @@ export const DATA = {
       title: "KleinHacks 21",
       dates: "March 6th - 7th, 2021",
       location: "San Francisco, California",
-      description:
-        "Won third place Overall, Developed a Unity game centered around a frog crossing a river with a plethora of obstacles and challenges.",
-      icon: "public",
+      description: (
+          <>
+            <AnimatedShinyText>Won third place Overall</AnimatedShinyText>,
+            Developed a Unity game centered around a frog crossing a river with a plethora of obstacles and challenges.
+
+          </>
+),      icon: "public",
       image:
         "/kleinhacks.jpg",
       links: [],
