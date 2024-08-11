@@ -299,7 +299,7 @@ export const DATA = {
     {
       title: "KleinHacks 21",
       dates: "March 6th - 7th, 2021",
-      location: "San Francisco, California",
+      location: "Spring, Texas",
       description: (
           <>
             <AnimatedShinyText>Won third place Overall</AnimatedShinyText>,
