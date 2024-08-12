@@ -70,10 +70,9 @@ export function HeroSection({ className }: HeroSectionProps) {
         </Dock>
         <div className="flex justify-center">
           <ShimmerButton
-              className="mt-4"
               onClick={() => window.open('https://drive.google.com/file/d/1JWsQ4JVLJ_B12-KaUiMDFXoooJqIlq9f/view?usp=sharing', '_blank')}
           >
-            <span className="text-primary-foreground dark:text-primary">My Resume!</span>
+            <span className="text-white font-semibold">My Resume!</span>
           </ShimmerButton>
         </div>
       </div>

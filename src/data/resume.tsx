@@ -274,7 +274,8 @@ export const DATA = {
       description: (
           <>
             <AnimatedShinyText>Won CapitalOne&apos;s &quot;Best Financial hack&quot;</AnimatedShinyText>
-            , Developed a financial chatbot that helps with tracking and recording expenses that can also scan receipts and upload relevant data.
+            Developed a financial chatbot that helps with tracking and recording expenses that can also
+            scan receipts and upload relevant data.
           </>
       ),      image:
         "/hackrice.jpg",
@@ -287,8 +288,9 @@ export const DATA = {
       location: "Klein, Texas",
       description: (
           <>
-            <AnimatedShinyText>Won First Place Overall</AnimatedShinyText>, Developed a web based
-            browser game designed to teach students the basics of Calculus and their real world applications.
+            <AnimatedShinyText>Won First Place Overall</AnimatedShinyText>
+            Developed a web based browser game designed to teach students the basics
+            of Calculus and their real world applications.
           </>
       ),
       image:
@@ -302,8 +304,9 @@ export const DATA = {
       location: "Spring, Texas",
       description: (
           <>
-            <AnimatedShinyText>Won third place Overall</AnimatedShinyText>,
-            Developed a Unity game centered around a frog crossing a river with a plethora of obstacles and challenges.
+            <AnimatedShinyText>Won third place Overall</AnimatedShinyText>
+            Developed a Unity game centered around a frog crossing a river with a plethora
+            of obstacles and challenges.
 
           </>
 ),      icon: "public",
