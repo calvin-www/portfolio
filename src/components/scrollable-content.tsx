@@ -10,10 +10,10 @@ interface ScrollableContentProps {
     className?: string;
 }
 
-    export function ScrollableContent({ className }: ScrollableContentProps) {
-        return (
-            <div className={cn("w-2/3 space-y-20 overflow-y-auto p- px-32", className)}>
-                <div id="home">
+export function ScrollableContent({ className }: ScrollableContentProps) {
+    return (
+        <div className={cn("w-full md:w-2/3 space-y-16 md:space-y-20 overflow-y-auto p-2 px-2 md:px-4 lg:px-8", className)}>
+            <div id="home">
                     <HomeSection/>
                 </div>
                 <div id="experience">

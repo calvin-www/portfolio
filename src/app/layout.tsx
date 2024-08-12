@@ -1,5 +1,6 @@
 import { MantineProvider } from "@mantine/core";
 import { DesktopLayout } from "@/components/desktop-layout";
+import { MobileLayout } from "@/components/mobile-layout"; // We'll create this
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
@@ -50,26 +51,31 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-                                     children,
+                                       children,
                                    }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-      <html lang="en" suppressHydrationWarning>
-      <body
-          className={cn(
-              "min-h-screen bg-background font-sans antialiased",
-              fontSans.variable
-          )}
-      >
-      <MantineProvider>
-          <ThemeProvider attribute="class" defaultTheme="light">
-        <TooltipProvider delayDuration={0}>
-          <DesktopLayout>{children}</DesktopLayout>
-        </TooltipProvider>
-      </ThemeProvider>
-      </MantineProvider>
-      </body>
-      </html>
-  );
+    return (
+        <html lang="en" suppressHydrationWarning>
+        <body
+            className={cn(
+                "min-h-screen bg-background font-sans antialiased",
+                fontSans.variable
+            )}
+        >
+        <MantineProvider>
+            <ThemeProvider attribute="class" defaultTheme="light">
+<TooltipProvider delayDuration={0}>
+    <div className="lg:hidden">
+        <MobileLayout>{children}</MobileLayout>
+    </div>
+    <div className="hidden md:block">
+        <DesktopLayout>{children}</DesktopLayout>
+    </div>
+</TooltipProvider>
+            </ThemeProvider>
+        </MantineProvider>
+        </body>
+        </html>
+    );
 }
