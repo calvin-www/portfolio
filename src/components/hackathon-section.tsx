@@ -9,13 +9,10 @@ export function HackathonSection() {
     <section id="hackathons">
       <div className="space-y-12 w-full py-12">
         <BlurFade delay={BLUR_FADE_DELAY * 13}>
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
+          <div className="flex flex-col items-center justify-center space-y-4 text-left">
             <div className="space-y-2">
-              <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                Hackathons
-              </div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                I love building/creating/making
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl bg-gradient-to-r from-cyan-300 to-blue-800 text-transparent bg-clip-text">
+                Hackathons!
               </h2>
               <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 Starting in Highschool, I&apos;ve attended{" "}

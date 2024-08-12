@@ -6,7 +6,6 @@ import { HackathonSection } from "./hackathon-section";
 import { ContactSection } from "./contact-section";
 import { HomeSection } from "./home-section";
 import { cn } from "@/lib/utils";
-
 interface ScrollableContentProps {
     className?: string;
 }

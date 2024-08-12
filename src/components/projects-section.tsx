@@ -9,12 +9,9 @@ export function ProjectsSection() {
     <section id="projects">
       <div className="space-y-12 w-full py-12">
         <BlurFade delay={BLUR_FADE_DELAY * 11}>
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
+          <div className="flex flex-col items-center justify-center space-y-4 text-left">
             <div className="space-y-2">
-              <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                My Projects
-              </div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl bg-gradient-to-r from-cyan-300 to-blue-800 text-transparent bg-clip-text">
                 Check out what I&apos;ve been up to!
               </h2>
               <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -24,7 +21,7 @@ export function ProjectsSection() {
             </div>
           </div>
         </BlurFade>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto ">
           {DATA.projects.map((project, id) => (
             <BlurFade
               key={project.title}

@@ -1,3 +1,4 @@
+import { MantineProvider } from "@mantine/core";
 import { DesktopLayout } from "@/components/desktop-layout";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -61,11 +62,13 @@ export default function RootLayout({
               fontSans.variable
           )}
       >
-      <ThemeProvider attribute="class" defaultTheme="light">
+      <MantineProvider>
+          <ThemeProvider attribute="class" defaultTheme="light">
         <TooltipProvider delayDuration={0}>
           <DesktopLayout>{children}</DesktopLayout>
         </TooltipProvider>
       </ThemeProvider>
+      </MantineProvider>
       </body>
       </html>
   );

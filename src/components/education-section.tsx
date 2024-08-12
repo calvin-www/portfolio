@@ -9,11 +9,13 @@ export function EducationSection() {
     <section id="education">
       <div className="flex min-h-0 flex-col gap-y-3">
         <BlurFade delay={BLUR_FADE_DELAY * 7}>
-          <h2 className="text-xl font-bold">Education</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl bg-gradient-to-r from-cyan-300 to-blue-800 text-transparent bg-clip-text">
+                Education
+            </h2>
         </BlurFade>
-        {DATA.education.map((education, id) => (
-          <BlurFade
-            key={education.school}
+          {DATA.education.map((education, id) => (
+              <BlurFade
+                  key={education.school}
             delay={BLUR_FADE_DELAY * 8 + id * 0.05}
           >
             <ResumeCard
