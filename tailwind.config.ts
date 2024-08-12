@@ -19,6 +19,9 @@ const config = {
       },
     },
     extend: {
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
       animation: {
         shimmer: "shimmer 8s infinite",
         "accordion-down": "accordion-down 0.2s ease-out",

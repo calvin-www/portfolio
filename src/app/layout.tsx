@@ -1,6 +1,6 @@
 import { MantineProvider } from "@mantine/core";
-import { DesktopLayout } from "@/components/desktop-layout";
-import { MobileLayout } from "@/components/mobile-layout"; // We'll create this
+import { DesktopLayout } from "@/components/layouts/desktop-layout";
+import { MobileLayout } from "@/components/layouts/mobile-layout"; // We'll create this
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";

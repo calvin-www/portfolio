@@ -1,10 +1,10 @@
-import { ExperienceSection } from "./experience-section";
-import { EducationSection } from "./education-section";
-import { SkillsSection } from "./skills-section";
-import { ProjectsSection } from "./projects-section";
-import { HackathonSection } from "./hackathon-section";
-import { ContactSection } from "./contact-section";
-import { HomeSection } from "./home-section";
+import { HomeSection } from "@/components/sections/home-section";
+import { ExperienceSection } from "@/components/sections/experience-section";
+import { EducationSection } from "@/components/sections/education-section";
+import { SkillsSection } from "@/components/sections/skills-section";
+import { ProjectsSection } from "@/components/sections/projects-section";
+import { HackathonSection } from "@/components/sections/hackathon-section";
+import { ContactSection } from "@/components/sections/contact-section";
 import { cn } from "@/lib/utils";
 interface ScrollableContentProps {
     className?: string;

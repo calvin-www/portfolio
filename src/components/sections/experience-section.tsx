@@ -6,16 +6,16 @@ const BLUR_FADE_DELAY = 0.04;
 
 export function ExperienceSection() {
   return (
-    <section id="work">
+    <section id="experience">
       <div className="flex min-h-0 flex-col gap-y-3">
         <BlurFade delay={BLUR_FADE_DELAY * 5}>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl bg-gradient-to-r from-cyan-300 to-blue-800 text-transparent bg-clip-text">
-                Experience
-            </h2>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl bg-gradient-to-r from-cyan-300 to-blue-800 text-transparent bg-clip-text">
+            Experience
+          </h2>
         </BlurFade>
-          {DATA.work.map((work, id) => (
-              <BlurFade
-                  key={work.company}
+        {DATA.work.map((work, id) => (
+          <BlurFade
+            key={work.company}
             delay={BLUR_FADE_DELAY * 6 + id * 0.05}
           >
             <ResumeCard
@@ -28,6 +28,7 @@ export function ExperienceSection() {
               badges={work.badges}
               period={`${work.start} - ${work.end ?? "Present"}`}
               description={work.description}
+              className="bg-transparent border border-gray-200 dark:border-gray-800 rounded-lg"
             />
           </BlurFade>
         ))}

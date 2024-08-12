@@ -102,7 +102,7 @@ export default function Navbar({ className }: NavbarProps) {
 
 
     return (
-        <div className={cn("fixed left-0 top-0 h-full w-16 md:w-20 z-50 hidden md:block", className)}>
+        <div className={cn("fixed left-0 top-0 h-full w-16 z-50", className)}>
             <Dock className="flex flex-col h-full w-full items-center justify-center py-4 bg-background [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset]">
                 {navItems.map((item) => (
                     <DockIcon key={item.href}>
