@@ -1,13 +1,14 @@
 import { AnimatedBackground } from "@/components/animated-background";
 import { ScrollableContent } from "@/components/scrollable-content";
+import { HeroSection } from "@/components/hero-section";
 
-export default function Page() {
+function Page() {
   return (
     <>
       <AnimatedBackground />
-      <div className="flex min-h-screen">
-        <ScrollableContent />
-      </div>
+        <ScrollableContent className="w-2/3 lg:w-3/4" />
     </>
   );
 }
+
+export default Page;

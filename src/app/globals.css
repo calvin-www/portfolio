@@ -168,3 +168,9 @@ html {
 html {
   scroll-behavior: smooth;
 }
+@media (max-width: 767px) {
+  .scrollable-content-wrapper {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
