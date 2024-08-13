@@ -1,8 +1,7 @@
 import { AnimatedBackground } from "@/components/animated-background";
 import { ScrollableContent } from "@/components/scrollable-content";
-import { HeroSection } from "@/components/hero-section";
 
-function Page() {
+export default function Page() {
   return (
     <>
       <AnimatedBackground />
