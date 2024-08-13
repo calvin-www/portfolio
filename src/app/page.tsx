@@ -7,10 +7,8 @@ function Page() {
     <>
       <AnimatedBackground />
       <div className="flex min-h-screen">
-        <ScrollableContent className="w-2/3 lg:w-3/4" />
+        <ScrollableContent />
       </div>
     </>
   );
 }
-
-export default Page;

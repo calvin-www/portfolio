@@ -11,10 +11,9 @@ import { cn } from "@/lib/utils";
 
 interface ScrollableContentProps {
   className?: string;
-  children?: React.ReactNode;
 }
 
-export function ScrollableContent() {
+export function ScrollableContent({ className }: ScrollableContentProps) {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const calculatePositions = useCallback(() => {
         const positions: { [key: string]: number } = {};
@@ -72,28 +71,31 @@ export function ScrollableContent() {
         contact: useRef<HTMLDivElement>(null),
     };
     return (
-        <div ref={scrollContainerRef} className={cn("h-screen overflow-y-auto")}>
-            <div ref={sectionRefs.home} id="home" className="mb-20">
-                <HomeSection />
-            </div>
-            <div ref={sectionRefs.experience} id="experience" className="mb-20">
-                <ExperienceSection />
-            </div>
-            <div ref={sectionRefs.education} id="education" className="mb-20">
-                <EducationSection />
-            </div>
-            <div ref={sectionRefs.skills} id="skills" className="mb-20">
-                <SkillsSection />
-            </div>
-            <div ref={sectionRefs.projects} id="projects" className="mb-20">
-                <ProjectsSection />
-            </div>
-            <div ref={sectionRefs.hackathons} id="hackathons" className="mb-20">
-                <HackathonSection />
-            </div>
-            <div ref={sectionRefs.contact} id="contact" className="mb-20">
-                <ContactSection />
-            </div>
+      <div
+        ref={scrollContainerRef}
+        className={cn("h-screen overflow-y-auto", className)}
+      >
+        <div ref={sectionRefs.home} id="home" className="mb-20">
+          <HomeSection />
         </div>
+        <div ref={sectionRefs.experience} id="experience" className="mb-20">
+          <ExperienceSection />
+        </div>
+        <div ref={sectionRefs.education} id="education" className="mb-20">
+          <EducationSection />
+        </div>
+        <div ref={sectionRefs.skills} id="skills" className="mb-20">
+          <SkillsSection />
+        </div>
+        <div ref={sectionRefs.projects} id="projects" className="mb-20">
+          <ProjectsSection />
+        </div>
+        <div ref={sectionRefs.hackathons} id="hackathons" className="mb-20">
+          <HackathonSection />
+        </div>
+        <div ref={sectionRefs.contact} id="contact" className="mb-20">
+          <ContactSection />
+        </div>
+      </div>
     );
 }
