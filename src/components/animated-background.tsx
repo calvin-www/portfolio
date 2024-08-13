@@ -25,7 +25,6 @@ export function AnimatedBackground() {
   const darkModeColor = "rgb(14,17,17)";
 
   const gradientColor = theme === "dark" ? darkModeColor : lightModeColor;
-    console.log(theme);
   return (
     <div className="fixed inset-0 -z-10">
       <div

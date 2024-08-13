@@ -7,7 +7,7 @@ const BLUR_FADE_DELAY = 0.04;
 export function ExperienceSection() {
   return (
     <section id="experience">
-      <div className="flex min-h-0 flex-col gap-y-3">
+      <div className=" flex min-h-0 flex-col gap-y-3">
         <BlurFade delay={BLUR_FADE_DELAY * 5}>
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl bg-gradient-to-r from-cyan-300 to-blue-800 text-transparent bg-clip-text">
             Experience

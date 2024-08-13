@@ -22,7 +22,7 @@ export function HeroSection({ className }: HeroSectionProps) {
   return (
       <section
           className={cn(
-              "flex flex-col justify-center md:justify-start md:sticky md:top-0 md:left-0 md:h-screen md:w-1/3 lg:w-1/4 md:pl-20 lg:pl-4",
+              "flex-shrink-0",
               className
           )}
       >

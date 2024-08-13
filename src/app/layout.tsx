@@ -1,6 +1,5 @@
-import { MantineProvider } from "@mantine/core";
 import { DesktopLayout } from "@/components/layouts/desktop-layout";
-import { MobileLayout } from "@/components/layouts/mobile-layout"; // We'll create this
+import { MobileLayout } from "@/components/layouts/mobile-layout";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
@@ -13,6 +12,7 @@ const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
+
 
 export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
@@ -51,31 +51,29 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-                                       children,
+                                     children,
                                    }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-    return (
-        <html lang="en" suppressHydrationWarning>
-        <body
-            className={cn(
-                "min-h-screen bg-background font-sans antialiased",
-                fontSans.variable
-            )}
-        >
-        <MantineProvider>
-            <ThemeProvider attribute="class" defaultTheme="light">
-<TooltipProvider delayDuration={0}>
-    <div className="lg:hidden">
-        <MobileLayout>{children}</MobileLayout>
-    </div>
-    <div className="hidden md:block">
-        <DesktopLayout>{children}</DesktopLayout>
-    </div>
-</TooltipProvider>
-            </ThemeProvider>
-        </MantineProvider>
-        </body>
-        </html>
-    );
+  return (
+      <html lang="en" suppressHydrationWarning>
+      <body
+          className={cn(
+              "min-h-screen bg-background font-sans antialiased",
+              fontSans.variable
+          )}
+      >
+      <ThemeProvider attribute="class" defaultTheme="light">
+        <TooltipProvider delayDuration={0}>
+          <div className="md:hidden">
+            <MobileLayout>{children}</MobileLayout>
+          </div>
+          <div className="hidden md:block">
+            <DesktopLayout>{children}</DesktopLayout>
+          </div>
+        </TooltipProvider>
+      </ThemeProvider>
+      </body>
+      </html>
+  );
 }

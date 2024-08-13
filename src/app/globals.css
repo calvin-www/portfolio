@@ -134,7 +134,16 @@
   text-align: right;
   color: gray;
 }
- 
+   .section-content {
+     min-height: 100vh;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+   }
+.scrollable-content {
+  max-height: calc(100vh - 64px); /* Adjust based on your layout */
+  overflow-y: auto;
+}
 code[data-line-numbers-max-digits="2"] > [data-line]::before {
   width: 2rem;
 }
@@ -155,4 +164,7 @@ html {
   top: 0;
   left: 0;
   z-index: -1;
+}
+html {
+  scroll-behavior: smooth;
 }

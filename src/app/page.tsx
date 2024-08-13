@@ -1,18 +1,13 @@
-import { HeroSection } from "@/components/hero-section";
-import { ScrollableContent } from "@/components/scrollable-content";
 import { AnimatedBackground } from "@/components/animated-background";
+import { ScrollableContent } from "@/components/scrollable-content";
+import { HeroSection } from "@/components/hero-section";
 
 function Page() {
   return (
     <>
       <AnimatedBackground />
-      <div className="md:hidden">
-        <HeroSection className="w-full" />
-        <ScrollableContent className="w-full" />
-      </div>
-      <div className="hidden md:flex min-h-screen">
-        <HeroSection className="flex-shrink-0 w-1/4" />
-        <ScrollableContent className="flex-grow" />
+      <div className="flex min-h-screen">
+        <ScrollableContent className="w-2/3 lg:w-3/4" />
       </div>
     </>
   );
