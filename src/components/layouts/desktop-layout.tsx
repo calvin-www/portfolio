@@ -1,7 +1,6 @@
 import React from 'react';
 import Navbar from '@/components/navbar';
 import { HeroSection } from '@/components/hero-section';
-import { cn } from '@/lib/utils';
 
 interface DesktopLayoutProps {
   children: React.ReactNode;
