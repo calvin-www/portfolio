@@ -11,9 +11,9 @@ import { HackathonSection } from "@/components/sections/hackathon-section";
 import { ContactSection } from "@/components/sections/contact-section";
 
 interface ScrollableContentProps {
-  className?: string;
-  calculatePositions: () => void;
-  children: React.ReactNode;
+    className?: string;
+    calculatePositions?: () => void;
+    children?: React.ReactNode;
 }
 
 export function ScrollableContent({
@@ -28,8 +28,8 @@ export function ScrollableContent({
   }, [calculatePositions]);
 
   return (
-    <div className={cn("w-full max-w-full flex flex-col items-center space-y-16 md:space-y-20 !p-0 !px-0 md:px-4 lg:px-8 scrollable-content-wrapper", className)}>
-      <div className="w-full">
+<div className={cn("w-full max-w-full flex flex-col items-center space-y-16 md:space-y-20 !p-0 md:px-4 lg:px-8 scrollable-content-wrapper", className)}>
+    <div className="w-full">
         <HomeSection />
       </div>
       <div className="w-full">
