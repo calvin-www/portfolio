@@ -76,7 +76,7 @@ export function HeroSection({ className }: HeroSectionProps) {
           </div>
           <div className="flex justify-center">
             <ShimmerButton
-                onClick={() => window.open('https://drive.google.com/file/d/1JWsQ4JVLJ_B12-KaUiMDFXoooJqIlq9f/view?usp=sharing', '_blank')}
+                onClick={() => window.open('https://drive.google.com/file/d/1ZU_gMLvFw_cufJzT5roMmGBSwXUU-7Yw/view?usp=sharing', '_blank')}
             >
               <span className="text-white font-semibold">My Resume!</span>
             </ShimmerButton>
