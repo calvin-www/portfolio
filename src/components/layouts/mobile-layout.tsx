@@ -1,6 +1,5 @@
-// src/components/layouts/mobile-layout.tsx
 import { BottomDock } from "@/components/bottom-dock";
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
 import { HeroSection } from "@/components/hero-section";
 
 interface MobileLayoutProps {
