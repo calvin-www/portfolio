@@ -7,8 +7,8 @@ const BLUR_FADE_DELAY = 0.04;
 export function EducationSection() {
   return (
     <section id="education">
-      <div className="flex min-h-0 flex-col gap-y-3">
-        <BlurFade delay={BLUR_FADE_DELAY * 7}>
+        <div className="space-y-12 w-full py-12">
+            <BlurFade delay={BLUR_FADE_DELAY * 7}>
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl bg-gradient-to-r from-cyan-300 to-blue-800 text-transparent bg-clip-text">
                 Education
             </h2>

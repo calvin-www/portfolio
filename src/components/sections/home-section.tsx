@@ -4,8 +4,8 @@ const ABOUT_TEXT = "I've always had a love for creating and improving, whether i
 
 export function HomeSection() {
   return (
-    <div className="space-y-4">
-      <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl bg-gradient-to-r from-cyan-300 to-blue-800 text-transparent bg-clip-text">
+      <div className="space-y-12 w-full py-12">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl bg-gradient-to-r from-cyan-300 to-blue-800 text-transparent bg-clip-text">
           About
       </h2>
       <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">

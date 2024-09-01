@@ -28,28 +28,28 @@ export function ScrollableContent({
   }, [calculatePositions]);
 
   return (
-<div className={cn("w-full max-w-full flex flex-col items-center space-y-16 md:space-y-20 !p-0 md:px-4 lg:px-8 scrollable-content-wrapper", className)}>
-    <div className="w-full">
-        <HomeSection />
+      <div className={cn("w-full max-w-full flex flex-col items-center space-y-16 md:space-y-20 !p-0 md:px-4 lg:px-8 scrollable-content-wrapper", className)}>
+        <div className="w-full">
+          <HomeSection />
+        </div>
+        <div className="w-full">
+          <ExperienceSection />
+        </div>
+        <div className="w-full ">
+          <EducationSection />
+        </div>
+        <div className="w-full ">
+          <SkillsSection />
+        </div>
+        <div className="w-full ">
+          <ProjectsSection />
+        </div>
+        <div className="w-full">
+          <HackathonSection />
+        </div>
+        <div className="w-full ">
+          <ContactSection />
+        </div>
       </div>
-      <div className="w-full">
-        <ExperienceSection />
-      </div>
-      <div className="w-full">
-        <EducationSection />
-      </div>
-      <div className="w-full">
-        <SkillsSection />
-      </div>
-      <div className="w-full">
-        <ProjectsSection />
-      </div>
-      <div className="w-full">
-        <HackathonSection />
-      </div>
-      <div className="w-full">
-        <ContactSection />
-      </div>
-    </div>
   );
 }

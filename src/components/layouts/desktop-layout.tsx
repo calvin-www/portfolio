@@ -56,7 +56,13 @@ export function DesktopLayout({ children }: DesktopLayoutProps) {
         setActiveSection(newActiveSection);
     }, []);
 
-    const handleNavClick = (sectionId: string) => {
+const handleNavClick = (sectionId: string) => {
+    if (sectionId === 'home' && mainRef.current) {
+        mainRef.current.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    } else {
         const position = sectionPositionsRef.current[sectionId];
         if (position !== undefined && mainRef.current) {
             mainRef.current.scrollTo({
@@ -64,7 +70,8 @@ export function DesktopLayout({ children }: DesktopLayoutProps) {
                 behavior: 'smooth'
             });
         }
-    };
+    }
+};
 
     return (
         <div className="hidden md:flex h-screen overflow-hidden">
