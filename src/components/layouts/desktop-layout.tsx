@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Navbar from '@/components/navbar';
 import { HeroSection } from '@/components/hero-section';
 import { ScrollableContent } from '@/components/scrollable-content';
+import { AnimatedBackground } from '@/components/animated-background';
 
 interface DesktopLayoutProps {
   children: React.ReactNode;
@@ -74,6 +75,8 @@ const handleNavClick = (sectionId: string) => {
 };
 
     return (
+        <>
+        <AnimatedBackground />
         <div className="hidden md:flex h-screen overflow-hidden">
             <Navbar activeSection={activeSection} onNavClick={handleNavClick} className="" />
             <div className="flex-1 overflow-hidden">
@@ -87,5 +90,6 @@ const handleNavClick = (sectionId: string) => {
                 </div>
             </div>
         </div>
+        </>
     );
 }
