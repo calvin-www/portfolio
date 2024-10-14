@@ -34,6 +34,10 @@ export function SkillsSection() {
         "nextui",
         "tailwindcss",
         "mui",
+        "latex",
+        "mongodb",
+        "c",
+        "prisma",
     ];
     return (
         <section id="skills">

@@ -14,18 +14,41 @@ export const DATA = {
   "I've always had a love for creating and improving, whether it be physical electronics or software development, designing, testing, and failing was all apart of the joy of it. After taking on a brief Sidequest into the field of Classics and winning a National Championship, I commited myself to the challenge of software development, which has been so much fun!",
   avatarUrl: "/me.png",
   skills: [
+    // Frontend
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "TypeScript",
     "React",
     "Next.js",
-    "Typescript",
+
+    // Backend
     "Node.js",
     "Python",
-    "Adobe Suite",
-    "firebase",
+    "Java",
+    "C",
+
+    // Databases
+    "MongoDB",
+    "SQL",
+    "Prisma",
+
+    // UI Frameworks
     "Tailwind CSS",
-    "GitHub",
+    "Shadcn/ui",
     "Mantine UI",
     "Next UI",
+
+    // Cloud & DevOps
+    "Firebase",
     "Vercel",
+    "GitHub",
+
+    // Design
+    "Adobe Suite",
+
+    // Others
+    "LaTeX",
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
@@ -154,7 +177,7 @@ export const DATA = {
     },
     {
       title: "PantryPal",
-      href: "https://magicui.design",
+      href: "",
       active: true,
       description:
         "A dynamic inventory management application designed to streamline pantry organization. It offers intuitive item tracking with features like voice recognition and image capture for easy input. Users can efficiently search, sort, and view their pantry items in both card and list formats.",
@@ -183,11 +206,50 @@ export const DATA = {
       video: "pantrypaldemo.mp4",
     },
     {
+      title: "Market Madness",
+      href: "",
+      active: true,
+            description:
+        "Engineered a comprehensive full-stack application that simulates the dynamic world of stock trading. " +
+                "This immersive platform empowers users to engage in virtual stock transactions using mock currency, " +
+                "providing a risk-free environment to hone their investment skills. " +
+                "The standout feature is an integrated AI assistant that offers personalized, " +
+                "data-driven investment advice and walks users through sophisticated trading strategies. "
+      ,technologies: [
+        "Next.js",
+        "Typescript",
+        "Next UI",
+        "Neon",
+        "Prisma",
+        "Clerk",
+        "Shadcn/ui",
+        "Gemini AI",
+      ],
+      links: [
+        {
+          type: "Devpost",
+          href: "https://devpost.com/software/market-madness",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/moyindavid16/market-madness",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "/marketmadness.png",
+      video: "",
+    },
+    {
       title: "AI Customer Service Chatbot",
       href: "",
       active: true,
       description:
-          "A modern, responsive AI customer support chat application featuring real-time conversation management, user authentication, and a sleek interface. Users can effortlessly create, select, and delete chat conversations, each with a unique interface. The AI leverages RAG to adapt and meet the user's needs effectively. Additionally, the app includes a feedback mechanism that stores user feedback in the database.",
+          "A modern, responsive AI customer support chat application featuring real-time conversation " +
+          "management, user authentication, and a sleek interface. Users can effortlessly create, select, " +
+          "and delete chat conversations, each with a unique interface. " +
+          "The AI leverages RAG to adapt and meet the user's needs effectively. " +
+          "Additionally, the app includes a feedback mechanism that stores user feedback in the database.",
       technologies: [
         "Next.js",
         "Typescript",
@@ -267,6 +329,20 @@ export const DATA = {
     },
   ],
   hackathons: [
+    {
+      title: "HackRice 14",
+      dates: "September 20th - 23th, 2024",
+      location: "Houston, Texas",
+      description: (
+          <>
+            Developed a full-stack application simulating the real-world stock market, allowing users to trade stocks with virtual
+            currency, while an integrated AI offered personalized investment tips and guided users through trading strategies.
+          </>
+      ),      image:
+          "/hackrice14.png",
+      mlh: "",
+      links: [],
+    },
     {
       title: "HackRice 13",
       dates: "September 24th - 26th, 2023",
