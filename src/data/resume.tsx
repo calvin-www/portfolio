@@ -96,6 +96,18 @@ export const DATA = {
 
   work: [
     {
+      company: "DUNE (Deep Underground Neutrino Experiment)",
+      href: "https://www.dunescience.org",
+      badges: [],
+      location: "Houston, TX",
+      title: "Webpage Designer and Developer",
+      logoUrl: "/dune.jpg",
+      start: "Oct 2024",
+      end: "Present",
+      description:
+          "Developed a modernized webpage with comprehensive search functionality, ensuring seamless integration with the updated file server to efficiently manage and display millions of data files from DUNE.",
+    },
+    {
       company: "Headstarter",
       href: "https://headstarter.co",
       badges: [],
