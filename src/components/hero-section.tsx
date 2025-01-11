@@ -77,7 +77,7 @@ export function HeroSection({ className }: HeroSectionProps) {
         <div className="flex justify-center mt-4 md:mt-6">
           <ShimmerButton
             onClick={() => window.open(
-                'https://drive.google.com/file/d/1MrAH3w51xRRfnsJ72cP__t4gc9XKCSCQ/view?usp=sharing'
+                'https://drive.google.com/file/d/1n-ZABGe0sQ0L4UAOWQzqVtOW3QUDTRFL/view?usp=sharing'
                 , '_blank')}
             className="text-sm md:text-base"
           >

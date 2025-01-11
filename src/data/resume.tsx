@@ -14,41 +14,39 @@ export const DATA = {
   "I've always had a love for creating and improving, whether it be physical electronics or software development, designing, testing, and failing was all apart of the joy of it. After taking on a brief Sidequest into the field of Classics and winning a National Championship, I commited myself to the challenge of software development, which has been so much fun!",
   avatarUrl: "/me.png",
   skills: [
-    // Frontend
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "TypeScript",
-    "React",
-    "Next.js",
-
-    // Backend
-    "Node.js",
-    "Python",
-    "Java",
-    "C",
-
-    // Databases
-    "MongoDB",
-    "SQL",
-    "Prisma",
-
-    // UI Frameworks
-    "Tailwind CSS",
-    "Shadcn/ui",
-    "Mantine UI",
-    "Next UI",
-
-    // Cloud & DevOps
-    "Firebase",
-    "Vercel",
-    "GitHub",
-
-    // Design
-    "Adobe Suite",
-
-    // Others
-    "LaTeX",
+    "typescript",
+    "javascript",
+    "java",
+    "python",
+    "c",
+    "react",
+    "nextdotjs",
+    "nodedotjs",
+    "prisma",
+    "graphql",
+    "html5",
+    "css3",
+    "tailwindcss",
+    "shadcn-ui",
+    "mantine",
+    "mui",
+    "nextui",
+    "amazonaws",
+    "firebase",
+    "vercel",
+    "mongodb",
+    "sql",
+    "git",
+    "github",
+    "vscode",
+    "intellijidea",
+    "figma",
+    "latex",
+    "adobe",
+    "photoshop",
+    "lightroom",
+    "illustrator",
+    "premierepro"
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
@@ -101,11 +99,11 @@ export const DATA = {
       badges: [],
       location: "Houston, TX",
       title: "Webpage Designer and Developer",
-      logoUrl: "/dune.jpg",
+      logoUrl: "/dune.png",
       start: "Oct 2024",
       end: "Present",
       description:
-          "Developed a modernized webpage with comprehensive search functionality, ensuring seamless integration with the updated file server to efficiently manage and display millions of data files from DUNE.",
+          "At DUNE, I transformed the project’s outdated static website into a dynamic, user-friendly platform built with Next.js and React. This overhaul included implementing an advanced search system to efficiently manage and display millions of data files, ensuring seamless integration with an updated SQL-backed file server. I also tackled the challenges of adapting modern architecture to legacy infrastructure, managing large datasets, and improving accessibility for a global research audience.",
     },
     {
       company: "Headstarter",
@@ -117,7 +115,7 @@ export const DATA = {
       start: "July 2024",
       end: "September 2024",
       description:
-      " Developed 5 Full Stack Projects with fully integrated AI Components whilst coached by Amazon, Bloomberg, and CapitalOne engineers on design patterns, user testing, and CI/CD.",
+      "During my fellowship at HeadStarter AI, I built five full-stack projects, each powered by integrated AI components. Notable applications included PantryPal, a pantry management tool with voice and image-based item addition using Google’s Gemini AI, and an AI-powered flashcard generator tailored to personalized study needs. I collaborated with industry professionals from Amazon, Bloomberg, and CapitalOne to refine my skills in design patterns, user testing, and CI/CD practices, delivering impactful AI-driven solutions.",
     },
     {
       company: "Owl Certamen",
@@ -129,7 +127,7 @@ export const DATA = {
       start: "July 2023",
       end: "January 2024",
       description:
-          "Created an HTML and CSS website for a state-wide convention for highschoolers and middleschoolers that I also fully organized and ran.",
+          "As Lead Organizer for Owl Certamen, I planned and executed a statewide convention for high school and middle school students centered on Latin language and culture. I designed and built the event’s HTML and CSS website, providing participants with a seamless online experience. Additionally, I created hundreds of academic test questions and Latin Quizbowl (Certamen) prompts, ensuring a challenging and enriching competition for attendees. This role showcased my leadership, organizational, and technical skills in a unique academic setting." ,
     },
     {
       company: "Oculosophy",
@@ -141,7 +139,7 @@ export const DATA = {
       start: "June 2020",
       end: "August 2020",
       description:
-      "Spent a summer working as a graphic designer and photo/video editor in Hawaii using the Adobe Suite and DSLR Cameras",
+      "As a Graphic Design Intern at Oculosophy, I honed my skills in photo composition and DSLR operation, capturing professional-grade photos and videos. Using Adobe Suite, I edited and enhanced these visuals to create polished final products. Additionally, I designed and animated logos, videos, and promotional content, blending creativity with technical expertise to deliver visually compelling media.",
     },
   ],
   education: [
