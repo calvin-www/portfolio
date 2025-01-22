@@ -162,26 +162,30 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "MockOwl",
-      href: "",
-      active: true,
-      description:
-        "A Full Stack application designed to replicate any external service to ease development costs as well as educate students on backend calls",
-      technologies: [
-        "Next.js",
+        title: "MockOwl",
+        href: "",
+        active: true,
+        description: "A comprehensive API mocking platform designed to simplify development and testing workflows by providing robust mock servers across multiple communication protocols. MockOwl enables developers to create dynamic, configurable mock endpoints, simulate complex network conditions, and streamline the process of building and testing distributed systems with an intuitive, developer-friendly interface.",
+        technologies: [
+          "Next.js",
           "React",
-        "Typescript",
-        "TailwindCSS",
-        "Mantine UI",
-      ],
+          "Typescript", 
+          "TailwindCSS", 
+          "Mantine UI",
+          "Prisma",
+          "gRPC",
+          "WebSocket",
+          "Monaco Editor",
+          "Node.js"
+        ],
       links: [
         {
           type: "Source",
-          href: "https://github.com/calvin-www/mockowl",
+          href: "https://github.com/calvin-www/mock-owl",
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/ricelong.jpg",
+      image: "/mock-owl.png",
       video:
         "",
     },
@@ -212,8 +216,8 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "",
-      video: "pantrypaldemo.mp4",
+      image: "/pantrypal.png",
+      video: "",
     },
     {
       title: "Market Madness",
@@ -282,8 +286,8 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "",
-      video: "/chatappdemo.mp4",
+      image: "/chatapp.png",
+      video: "",
     },
     {
       title: "Money Buddy",
@@ -308,9 +312,8 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "",
-      video:
-        "/moneybuddydemo.mp4",
+      image: "/moneybuddy.png",
+      video: "",
     },
     {
       title: "Calc Hunter",
