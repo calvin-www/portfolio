@@ -1,10 +1,10 @@
-import { AnimatedBackground } from "@/components/animated-background";
+import { OceanBackground } from "@/components/ocean/OceanBackground";
 import { ScrollableContent } from "@/components/scrollable-content";
 
 function Page() {
     return (
         <>
-            <AnimatedBackground />
+            <OceanBackground />
             <ScrollableContent className=" lg:w-3/4">
                 {null}
             </ScrollableContent>
