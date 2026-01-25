@@ -208,3 +208,34 @@ html {
     padding-right: 0 !important;
   }
 }
+
+/* Jellyfish Animations */
+@keyframes pulse-slow {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+@keyframes float-vertical {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes tentacle-sway {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(2px) rotate(2deg); }
+  75% { transform: translateX(-2px) rotate(-2deg); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+.animate-float-vertical {
+  animation: float-vertical 10s ease-in-out infinite;
+}
+
+.animate-tentacle-sway {
+  transform-origin: top center;
+  animation: tentacle-sway 3s ease-in-out infinite;
+}
+
