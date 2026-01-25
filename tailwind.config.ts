@@ -103,6 +103,20 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        /* Ocean Depth Colors - Available as bg-ocean-*, text-ocean-*, border-ocean-* */
+        ocean: {
+          surface: "var(--ocean-surface)",
+          shallow: "var(--ocean-shallow)",
+          mid: "var(--ocean-mid)",
+          deep: "var(--ocean-deep)",
+          coral: "var(--ocean-coral)",
+          seafoam: "var(--ocean-seafoam)",
+          biolum: "var(--ocean-biolum)",
+          "surface-text": "var(--ocean-surface-text)",
+          "shallow-text": "var(--ocean-shallow-text)",
+          "mid-text": "var(--ocean-mid-text)",
+          "deep-text": "var(--ocean-deep-text)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

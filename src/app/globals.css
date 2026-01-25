@@ -64,6 +64,42 @@
       --input: 0 0% 14.9%;
       --ring: 0 0% 83.1%;
     }
+
+    /* Ocean Depth Color Palette */
+    /* Depth-based colors progressing from bright surface to dark deep ocean */
+    :root {
+      /* Ocean Depth Colors - Surface to Deep */
+      --ocean-surface: #E0F7FA;      /* Bright aqua - sunlit surface */
+      --ocean-shallow: #00BCD4;      /* Turquoise - shallow waters */
+      --ocean-mid: #0288D1;          /* Ocean blue - mid-depth waters */
+      --ocean-deep: #01579B;         /* Navy - deep ocean abyss */
+
+      /* Ocean Accent Colors */
+      --ocean-coral: #FF6B9D;        /* Coral pink - vibrant accent */
+      --ocean-seafoam: #26C6DA;      /* Seafoam green - secondary accent */
+      --ocean-biolum: #00E5FF;       /* Bioluminescent cyan - glow accent */
+
+      /* Text Colors for Readability at Each Depth */
+      --ocean-surface-text: #01579B; /* Dark text on bright surface */
+      --ocean-shallow-text: #FFFFFF; /* White text on turquoise */
+      --ocean-mid-text: #FFFFFF;     /* White text on ocean blue */
+      --ocean-deep-text: #E0F7FA;    /* Light text on dark deep */
+    }
+
+    .dark {
+      /* Ocean colors remain consistent in dark mode */
+      --ocean-surface: #E0F7FA;
+      --ocean-shallow: #00BCD4;
+      --ocean-mid: #0288D1;
+      --ocean-deep: #01579B;
+      --ocean-coral: #FF6B9D;
+      --ocean-seafoam: #26C6DA;
+      --ocean-biolum: #00E5FF;
+      --ocean-surface-text: #01579B;
+      --ocean-shallow-text: #FFFFFF;
+      --ocean-mid-text: #FFFFFF;
+      --ocean-deep-text: #E0F7FA;
+    }
   }
 
   @layer base {
