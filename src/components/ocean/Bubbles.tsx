@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 interface MousePosition {
   x: number;
@@ -48,12 +49,15 @@ export const Bubbles: React.FC<BubblesProps> = ({
   const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
+  const isMobile = useMediaQuery("(max-width: 768px)");
   
   const { scrollYProgress } = useScroll();
   const [targetQuantity, setTargetQuantity] = useState(minBubbles);
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    setTargetQuantity(Math.floor(minBubbles + latest * (maxBubbles - minBubbles)));
+    const currentMin = isMobile ? Math.floor(minBubbles / 2) : minBubbles;
+    const currentMax = isMobile ? Math.floor(maxBubbles / 2) : maxBubbles;
+    setTargetQuantity(Math.floor(currentMin + latest * (currentMax - currentMin)));
   });
 
   useEffect(() => {

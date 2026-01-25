@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { Fish } from "./Fish";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 interface FishData {
   id: string;
@@ -25,10 +26,11 @@ export const FishSchool = () => {
   const [schools, setSchools] = useState<School[]>([]);
   const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
   const containerRef = useRef<HTMLDivElement>(null);
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   // Initialize schools
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || isMobile) return;
 
     const generateSchools = () => {
       const newSchools: School[] = [];
@@ -70,7 +72,7 @@ export const FishSchool = () => {
     const handleResize = () => generateSchools();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [isMobile]);
 
   // Handle mouse move
   useEffect(() => {
@@ -126,7 +128,7 @@ export const FishSchool = () => {
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [isMobile]);
 
   // Idle animation loop
   useEffect(() => {
@@ -154,6 +156,8 @@ export const FishSchool = () => {
     animate();
     return () => cancelAnimationFrame(animationFrameId);
   }, []);
+
+  if (isMobile) return null;
 
   return (
     <div 

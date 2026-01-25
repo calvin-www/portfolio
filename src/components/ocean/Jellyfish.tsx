@@ -1,8 +1,13 @@
 "use client";
 
 import React from "react";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 export function Jellyfish() {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
+  if (isMobile) return null;
+
   // Mid-depth zone: 40-60% of viewport height
   // 2-3 jellyfish max
   const jellyfish = [

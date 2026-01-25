@@ -4,6 +4,8 @@ import { Canvas } from "@react-three/fiber";
 import { DATA } from "@/data/resume";
 import { ProjectFish } from "./ProjectFish";
 import { Suspense } from "react";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { ProjectCard } from "@/components/project-card";
 
 const FISH_CONFIG = [
   {
@@ -53,6 +55,27 @@ const FISH_CONFIG = [
 export function FishProjects() {
   // Take only the first 6 projects
   const projects = DATA.projects.slice(0, 6);
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
+  if (isMobile) {
+    return (
+      <div className="grid grid-cols-1 gap-4 p-4 w-full">
+        {projects.map((project) => (
+          <ProjectCard
+            key={project.title}
+            title={project.title}
+            description={project.description}
+            dates=""
+            tags={project.technologies}
+            image={project.image}
+            video={project.video}
+            links={project.links}
+            href={project.href}
+          />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="w-full h-[600px] relative -my-20 z-10">

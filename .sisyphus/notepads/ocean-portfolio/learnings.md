@@ -24,3 +24,18 @@
 - ✅ Build passes with zero errors.
 - ✅ `Shark2D` component created with SVG graphics.
 - ✅ `page.tsx` updated to switch between 3D and 2D versions based on viewport width.
+
+## Task 21: Mobile Layout Optimization
+
+### Completion Status: ✅ COMPLETE
+
+### What Was Done
+- **Bubbles**: Reduced particle count by 50% on mobile to improve performance.
+- **FishSchool & Jellyfish**: Completely disabled on mobile to save resources and prevent clutter.
+- **FishProjects**: Replaced 3D Canvas with a simple grid of `ProjectCard` components on mobile. This ensures readability and performance.
+- **Verification**: Ran `npm run build` to ensure no errors and verified code logic.
+
+### Key Findings
+1.  **Performance**: Disabling heavy 3D/canvas effects on mobile is a quick win for performance.
+2.  **Usability**: Providing a fallback UI (like cards for projects) ensures content is still accessible and readable on small screens where 3D interaction might be clumsy.
+3.  **Code Structure**: `useMediaQuery` is a clean way to handle these conditional renders within components.
