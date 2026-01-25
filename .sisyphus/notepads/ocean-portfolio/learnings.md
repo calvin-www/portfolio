@@ -39,3 +39,22 @@
 1.  **Performance**: Disabling heavy 3D/canvas effects on mobile is a quick win for performance.
 2.  **Usability**: Providing a fallback UI (like cards for projects) ensures content is still accessible and readable on small screens where 3D interaction might be clumsy.
 3.  **Code Structure**: `useMediaQuery` is a clean way to handle these conditional renders within components.
+
+## Task 22: Reduced Motion Support
+
+### Completion Status: ✅ COMPLETE
+
+### What Was Done
+- **Detection**: Implemented `useReducedMotion` hook to detect user preference.
+- **Global CSS**: Added `@media (prefers-reduced-motion: reduce)` to force minimal animation duration globally.
+- **Accessibility**: Added "Skip to content" link for keyboard navigation.
+- **Component Updates**:
+  - `Shark3D`: Static position, no mouse following when reduced motion is on.
+  - `FishProjects`: Replaced 3D canvas with static grid of project cards (reusing mobile fallback).
+  - `OceanBackground`: Disabled mouse-tracking gradient.
+  - `Bubbles`, `Jellyfish`, `LightRays`, `FishSchool`: Completely hidden/disabled to reduce visual noise.
+
+### Key Findings
+1.  **Static Fallbacks**: For complex 3D/Canvas animations, it's often better to completely unmount or replace the component rather than trying to "pause" it.
+2.  **Reusability**: The mobile fallback for `FishProjects` (static cards) was perfectly reusable for the reduced motion state, saving effort and ensuring consistency.
+3.  **Global vs. Local**: While global CSS handles CSS animations, JavaScript-driven animations (Canvas, Framer Motion values) require explicit hooks to disable.

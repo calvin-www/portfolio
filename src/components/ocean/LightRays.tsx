@@ -2,9 +2,11 @@
 
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 export function LightRays() {
   const { scrollYProgress } = useScroll();
+  const prefersReducedMotion = useReducedMotion();
   // Opacity 100% at top -> 0% at 35% scroll (surface only)
   const rayOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
   
@@ -15,7 +17,7 @@ export function LightRays() {
     setIsMounted(true);
   }, []);
 
-  if (!isMounted) return null;
+  if (!isMounted || prefersReducedMotion) return null;
 
   const rays = [
     { id: 1, left: "15%", width: "80px", height: "120vh", delay: 0, duration: 7, angle: -25 },

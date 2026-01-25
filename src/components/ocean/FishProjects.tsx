@@ -5,6 +5,7 @@ import { DATA } from "@/data/resume";
 import { ProjectFish } from "./ProjectFish";
 import { Suspense } from "react";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { ProjectCard } from "@/components/project-card";
 
 const FISH_CONFIG = [
@@ -56,8 +57,9 @@ export function FishProjects() {
   // Take only the first 6 projects
   const projects = DATA.projects.slice(0, 6);
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const prefersReducedMotion = useReducedMotion();
 
-  if (isMobile) {
+  if (isMobile || prefersReducedMotion) {
     return (
       <div className="grid grid-cols-1 gap-4 p-4 w-full">
         {projects.map((project) => (

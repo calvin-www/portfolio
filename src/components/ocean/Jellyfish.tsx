@@ -2,11 +2,13 @@
 
 import React from "react";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 export function Jellyfish() {
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const prefersReducedMotion = useReducedMotion();
 
-  if (isMobile) return null;
+  if (isMobile || prefersReducedMotion) return null;
 
   // Mid-depth zone: 40-60% of viewport height
   // 2-3 jellyfish max

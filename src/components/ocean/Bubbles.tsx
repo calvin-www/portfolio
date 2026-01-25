@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 interface MousePosition {
   x: number;
@@ -50,6 +51,7 @@ export const Bubbles: React.FC<BubblesProps> = ({
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const prefersReducedMotion = useReducedMotion();
   
   const { scrollYProgress } = useScroll();
   const [targetQuantity, setTargetQuantity] = useState(minBubbles);
@@ -61,6 +63,8 @@ export const Bubbles: React.FC<BubblesProps> = ({
   });
 
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     if (canvasRef.current) {
       context.current = canvasRef.current.getContext("2d");
     }
@@ -71,11 +75,14 @@ export const Bubbles: React.FC<BubblesProps> = ({
     return () => {
       window.removeEventListener("resize", initCanvas);
     };
-  }, []);
+  }, [prefersReducedMotion]);
 
   useEffect(() => {
+    if (prefersReducedMotion) return;
     onMouseMove();
-  }, [mousePosition.x, mousePosition.y]);
+  }, [mousePosition.x, mousePosition.y, prefersReducedMotion]);
+
+  if (prefersReducedMotion) return null;
 
   const initCanvas = () => {
     resizeCanvas();

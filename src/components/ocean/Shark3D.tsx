@@ -4,6 +4,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useRef, useMemo, useEffect } from "react";
 import * as THREE from "three";
 import { useMotionValue, useSpring } from "framer-motion";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 function SharkMesh() {
   const groupRef = useRef<THREE.Group>(null);
@@ -11,6 +12,7 @@ function SharkMesh() {
   const followGroupRef = useRef<THREE.Group>(null);
   
   const { viewport } = useThree();
+  const prefersReducedMotion = useReducedMotion();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -22,6 +24,8 @@ function SharkMesh() {
   const lastAngle = useRef(0);
 
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       // Normalize to -1 to 1
       const x = (e.clientX / window.innerWidth) * 2 - 1;
@@ -34,7 +38,7 @@ function SharkMesh() {
     
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY, prefersReducedMotion]);
   
   // Shark colors
   const bodyColor = "#00BCD4"; // Cyan 500
@@ -43,6 +47,24 @@ function SharkMesh() {
 
   useFrame((state) => {
     const t = state.clock.elapsedTime;
+
+    // If reduced motion is preferred, keep shark static in center
+    if (prefersReducedMotion) {
+      if (followGroupRef.current) {
+        followGroupRef.current.position.x = 0;
+        followGroupRef.current.position.y = 0;
+        followGroupRef.current.rotation.z = 0;
+      }
+      if (tailGroupRef.current) {
+        tailGroupRef.current.rotation.y = 0;
+      }
+      if (groupRef.current) {
+        groupRef.current.position.y = 0;
+        groupRef.current.rotation.z = 0;
+        groupRef.current.rotation.y = 0;
+      }
+      return;
+    }
 
     // --- Cursor Following Logic ---
     if (followGroupRef.current) {

@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { Fish } from "./Fish";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 interface FishData {
   id: string;
@@ -27,10 +28,11 @@ export const FishSchool = () => {
   const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
   const containerRef = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const prefersReducedMotion = useReducedMotion();
 
   // Initialize schools
   useEffect(() => {
-    if (typeof window === "undefined" || isMobile) return;
+    if (typeof window === "undefined" || isMobile || prefersReducedMotion) return;
 
     const generateSchools = () => {
       const newSchools: School[] = [];
@@ -72,10 +74,12 @@ export const FishSchool = () => {
     const handleResize = () => generateSchools();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [isMobile]);
+  }, [isMobile, prefersReducedMotion]);
 
   // Handle mouse move
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePos({ x: e.clientX, y: e.clientY });
       
@@ -128,10 +132,12 @@ export const FishSchool = () => {
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [isMobile]);
+  }, [isMobile, prefersReducedMotion]);
 
   // Idle animation loop
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     let animationFrameId: number;
     
     const animate = () => {
@@ -155,9 +161,9 @@ export const FishSchool = () => {
     
     animate();
     return () => cancelAnimationFrame(animationFrameId);
-  }, []);
+  }, [prefersReducedMotion]);
 
-  if (isMobile) return null;
+  if (isMobile || prefersReducedMotion) return null;
 
   return (
     <div 
