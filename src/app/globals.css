@@ -234,8 +234,49 @@ html {
   animation: float-vertical 10s ease-in-out infinite;
 }
 
-.animate-tentacle-sway {
-  transform-origin: top center;
-  animation: tentacle-sway 3s ease-in-out infinite;
+
+/* Ocean Animations */
+@keyframes ripple {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+    border-width: 2px;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+    border-width: 0px;
+  }
 }
+
+@keyframes wave-surface {
+  0%, 100% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(-25px) translateY(5px);
+  }
+}
+
+@keyframes float-bubble {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-ripple {
+  animation: ripple 3s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.animate-wave-surface {
+  animation: wave-surface 8s ease-in-out infinite;
+}
+
+.animate-float-bubble {
+  animation: float-bubble 4s ease-in-out infinite;
+}
+
 
