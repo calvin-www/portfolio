@@ -1,28 +1,26 @@
 
-## Task 19: Restyle Contact Section (The Deep)
+## Task 20: Mobile Shark Fallback (2D)
 
 ### Completion Status: ✅ COMPLETE
 
 ### What Was Done
-- **Deepest Ocean Aesthetic**:
-  - Set background to abyss black/navy (`bg-[#000a12]`) to represent the deepest zone.
-  - Added subtle, large blur blobs (`bg-[#01579B]/20`, `bg-[#00E5FF]/5`) to create a sense of depth and pressure without distraction.
-- **"Signal to Surface" Theme**:
-  - Replaced standard header with "Send a Signal".
-  - Added a glowing `Mail` icon inside a "capsule" (rounded div) to represent a message in a bottle or a deep-sea beacon.
-  - Icon pulses (`animate-pulse`) and glows (`drop-shadow`) to mimic bioluminescence.
-- **Bioluminescent Links**:
-  - Styled email and LinkedIn links with `#00E5FF` (cyan).
-  - Added hover effects that increase brightness and add a strong glow (`drop-shadow-[0_0_15px_rgba(0,229,255,1)]`), simulating a creature lighting up when disturbed.
-  - Used `text-blue-100/70` for body text to ensure readability while maintaining the dark atmosphere.
+- **2D Shark Component**:
+  - Created `Shark2D.tsx` using a lightweight SVG implementation.
+  - Replicated the geometric/low-poly aesthetic of the 3D shark using simple SVG paths.
+  - Implemented touch-following behavior with smooth CSS transitions (`transition-all duration-700`).
+  - Added rotation logic to make the shark face its movement direction.
+- **Conditional Rendering**:
+  - Modified `page.tsx` to be a client component.
+  - Implemented `useMediaQuery` hook to detect desktop vs. mobile (< 768px).
+  - Used a `mounted` state check to prevent hydration mismatches.
+  - Conditionally renders `Shark3D` (Canvas) on desktop and `Shark2D` (SVG) on mobile.
 
 ### Key Findings
-1.  **Ending the Journey**: A very dark, quiet section at the bottom of the page effectively signals the end of the user's journey, providing a peaceful contrast to the busier sections above.
-2.  **Glow as Interaction**: Using `drop-shadow` on text and icons is a perfect way to represent bioluminescence in a UI. It feels organic and responsive.
-3.  **Minimalism in the Deep**: The deep ocean is empty and vast. Keeping the layout simple (just the signal and the text) reinforces this theme better than adding too many decorative elements.
+1.  **Performance vs. Fidelity**: On mobile, a simple SVG with CSS transitions provides a much smoother experience than a heavy WebGL canvas, while maintaining the "spirit" of the design.
+2.  **Hydration Safety**: When using `window.matchMedia` or viewport checks, it's crucial to use a `mounted` state to ensure the server (which has no window) and client initial render match, preventing hydration errors.
+3.  **Visual Consistency**: By carefully matching colors (`#00BCD4`, `#B2EBF2`, `#0097A7`) and geometric shapes, the 2D fallback feels like a deliberate design choice rather than a broken feature.
 
 ### Verification
 - ✅ Build passes with zero errors.
-- ✅ Contact section has a distinct "abyss" look.
-- ✅ Links are highly visible and interactive (bioluminescent).
-- ✅ Theme matches the "deepest ocean" concept.
+- ✅ `Shark2D` component created with SVG graphics.
+- ✅ `page.tsx` updated to switch between 3D and 2D versions based on viewport width.
