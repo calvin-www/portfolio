@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown, Check } from 'lucide-react';
+import Link from 'next/link';
 
 interface OceanNavProps {
   activeSection: string;
@@ -24,6 +25,7 @@ const navItems = [
 export function OceanNav({ activeSection, onNavClick, className }: OceanNavProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isVersionOpen, setIsVersionOpen] = useState(false);
 
   // Handle scroll effect for navbar background
   useEffect(() => {
@@ -98,6 +100,44 @@ export function OceanNav({ activeSection, onNavClick, className }: OceanNavProps
               )}
             </div>
           ))}
+
+          {/* Version Dropdown (Desktop) */}
+          <div className="relative ml-2">
+            <button
+              onClick={() => setIsVersionOpen(!isVersionOpen)}
+              className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-ocean-deep dark:text-ocean-surface hover:bg-ocean-surface/50 dark:hover:bg-ocean-deep/50 rounded-md transition-colors"
+            >
+              v2 (Ocean)
+              <ChevronDown size={14} className={cn("transition-transform", isVersionOpen && "rotate-180")} />
+            </button>
+
+            <AnimatePresence>
+              {isVersionOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  className="absolute top-full right-0 mt-2 w-40 bg-white dark:bg-slate-950 border border-ocean-surface/20 rounded-md shadow-lg overflow-hidden z-50"
+                >
+                  <div className="py-1">
+                    <button
+                      className="w-full flex items-center justify-between px-4 py-2 text-sm text-ocean-deep dark:text-ocean-surface bg-ocean-surface/30 dark:bg-ocean-deep/30 font-medium cursor-default"
+                      disabled
+                    >
+                      v2 (Ocean)
+                      <Check size={14} />
+                    </button>
+                    <Link
+                      href="/v1"
+                      className="w-full flex items-center justify-between px-4 py-2 text-sm text-muted-foreground hover:text-ocean-mid hover:bg-ocean-surface/50 dark:hover:bg-ocean-deep/50 transition-colors"
+                    >
+                      v1 (Classic)
+                    </Link>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -145,6 +185,27 @@ export function OceanNav({ activeSection, onNavClick, className }: OceanNavProps
                 )}
               </motion.button>
             ))}
+
+            {/* Mobile Version Switcher */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="mt-8 flex flex-col items-center gap-4"
+            >
+              <div className="text-sm font-medium text-muted-foreground uppercase tracking-widest">Version</div>
+              <div className="flex items-center gap-4 bg-white/50 dark:bg-slate-900/50 p-1 rounded-full border border-ocean-surface/20">
+                <div className="px-4 py-2 rounded-full bg-ocean-surface dark:bg-ocean-deep text-ocean-deep dark:text-ocean-surface font-medium text-sm flex items-center gap-2">
+                  v2 (Ocean) <Check size={14} />
+                </div>
+                <Link 
+                  href="/v1"
+                  className="px-4 py-2 rounded-full text-muted-foreground hover:text-ocean-mid transition-colors text-sm font-medium"
+                >
+                  v1 (Classic)
+                </Link>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
