@@ -1,13 +1,40 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
-import { useRef, useMemo } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useRef, useMemo, useEffect } from "react";
 import * as THREE from "three";
+import { useMotionValue, useSpring } from "framer-motion";
 
 function SharkMesh() {
   const groupRef = useRef<THREE.Group>(null);
   const tailGroupRef = useRef<THREE.Group>(null);
-  const bodyRef = useRef<THREE.Mesh>(null);
+  const followGroupRef = useRef<THREE.Group>(null);
+  
+  const { viewport } = useThree();
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { damping: 20, stiffness: 80, mass: 1 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
+
+  const lastMoveTime = useRef(Date.now());
+  const lastAngle = useRef(0);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      // Normalize to -1 to 1
+      const x = (e.clientX / window.innerWidth) * 2 - 1;
+      const y = -(e.clientY / window.innerHeight) * 2 + 1;
+      
+      mouseX.set(x);
+      mouseY.set(y);
+      lastMoveTime.current = Date.now();
+    };
+    
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
   
   // Shark colors
   const bodyColor = "#00BCD4"; // Cyan 500
@@ -17,6 +44,56 @@ function SharkMesh() {
   useFrame((state) => {
     const t = state.clock.elapsedTime;
 
+    // --- Cursor Following Logic ---
+    if (followGroupRef.current) {
+      // 1. Calculate Target Position
+      let x = smoothX.get() * (viewport.width / 2);
+      let y = smoothY.get() * (viewport.height / 2);
+      
+      // Clamp to viewport with padding to keep shark fully visible
+      const paddingX = 2; 
+      const paddingY = 1.5;
+      const maxX = viewport.width / 2 - paddingX;
+      const maxY = viewport.height / 2 - paddingY;
+      x = Math.max(-maxX, Math.min(maxX, x));
+      y = Math.max(-maxY, Math.min(maxY, y));
+
+      // Idle Circling Behavior
+      const timeSinceMove = Date.now() - lastMoveTime.current;
+      if (timeSinceMove > 2000) {
+        // Circle around the last position
+        const circleSpeed = 0.5;
+        const circleRadius = 1.5;
+        // Use t to animate the circle
+        x += Math.cos(t * circleSpeed) * circleRadius;
+        y += Math.sin(t * circleSpeed) * circleRadius;
+      }
+
+      // 2. Calculate Rotation (Face movement direction)
+      const currentPos = followGroupRef.current.position;
+      const dx = x - currentPos.x;
+      const dy = y - currentPos.y;
+      
+      // Only update angle if moving significantly
+      if (Math.abs(dx) > 0.005 || Math.abs(dy) > 0.005) {
+        const targetAngle = Math.atan2(dy, dx);
+        
+        // Smooth rotation interpolation
+        let angleDiff = targetAngle - lastAngle.current;
+        // Normalize to -PI..PI for shortest rotation path
+        while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
+        while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
+        
+        lastAngle.current += angleDiff * 0.1;
+        followGroupRef.current.rotation.z = lastAngle.current;
+      }
+
+      // 3. Apply Position
+      followGroupRef.current.position.x = x;
+      followGroupRef.current.position.y = y;
+    }
+
+    // --- Existing Idle Animations ---
     if (tailGroupRef.current) {
       // Tail sway animation - faster frequency
       tailGroupRef.current.rotation.y = Math.sin(t * 3) * 0.3;
@@ -24,19 +101,20 @@ function SharkMesh() {
     
     if (groupRef.current) {
       // Whole body idle movement
-      // Bobbing up and down
+      // Bobbing up and down (local Y)
       groupRef.current.position.y = Math.sin(t * 0.8) * 0.2;
-      // Slight roll
+      // Slight roll (local Z)
       groupRef.current.rotation.z = Math.sin(t * 0.5) * 0.05;
-      // Slight yaw counter to tail to look more natural
+      // Slight yaw counter to tail (local Y)
       groupRef.current.rotation.y = Math.cos(t * 3) * 0.05;
     }
   });
 
   return (
-    <group ref={groupRef} position={[0, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
-      {/* Main Body Group */}
-      <group>
+    <group ref={followGroupRef}>
+      <group ref={groupRef}>
+        {/* Main Body Group */}
+        <group>
         {/* Torso - Main body segment */}
         <mesh position={[0, 0, 0]} castShadow receiveShadow>
           <boxGeometry args={[2.5, 1, 0.8]} />
@@ -105,6 +183,7 @@ function SharkMesh() {
             <meshStandardMaterial color={finColor} flatShading />
           </mesh>
         </group>
+      </group>
       </group>
     </group>
   );
