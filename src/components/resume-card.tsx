@@ -47,9 +47,12 @@ export const ResumeCard = ({
       className="block cursor-pointer"
       onClick={handleClick}
     >
-      <Card className={cn("flex overflow-hidden pl-6 rounded-l-full", className)}>
-        <div className="flex-none -ml-6">
-          <Avatar className="border size-12 rounded-full bg-muted-background dark:bg-foreground">
+      <Card className={cn("flex overflow-hidden pl-6 rounded-l-full relative group/card", className)}>
+        {/* Seaweed Accent - Decorative organic element */}
+        <div className="absolute left-0 top-4 bottom-4 w-1.5 bg-gradient-to-b from-[var(--ocean-seafoam)] via-[var(--ocean-shallow)] to-transparent opacity-60 rounded-r-full blur-[1px] group-hover/card:opacity-100 transition-opacity duration-500" />
+        
+        <div className="flex-none -ml-6 z-10">
+          <Avatar className="border-2 border-[var(--ocean-shallow)]/20 size-12 rounded-full bg-white/80 dark:bg-black/80 backdrop-blur-sm">
             <AvatarImage
               src={logoUrl}
               alt={altText}
@@ -66,9 +69,9 @@ export const ResumeCard = ({
                 {badges && (
                   <span className="inline-flex gap-x-1">
                     {badges.map((badge, index) => (
-                      <Badge
+                <Badge
                         variant="secondary"
-                        className="align-middle text-xs"
+                        className="align-middle text-xs bg-[var(--ocean-surface)] text-[var(--ocean-deep)] hover:bg-[var(--ocean-shallow)] hover:text-white transition-colors border border-[var(--ocean-shallow)]/20"
                         key={index}
                       >
                         {badge}
@@ -78,7 +81,7 @@ export const ResumeCard = ({
                 )}
                 <ChevronRightIcon
                   className={cn(
-                    "size-4 translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100",
+                    "size-4 translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100 text-[var(--ocean-coral)]",
                     isExpanded ? "rotate-90" : "rotate-0"
                   )}
                 />
