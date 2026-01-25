@@ -16,7 +16,7 @@ export const cloudProps: Omit<ICloud, "children"> = {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      width: "40%",
+      width: "100%",
       paddingTop: 40,
       margin: "0 auto",
     },
@@ -32,16 +32,18 @@ export const cloudProps: Omit<ICloud, "children"> = {
     clickToFront: 500,
     tooltipDelay: 0,
     outlineColour: "#0000",
-    maxSpeed: 0.04,
-    minSpeed: 0.02,
+    maxSpeed: 0.03,
+    minSpeed: 0.01,
     // dragControl: false,
   },
 };
 
 export const renderCustomIcon = (icon: SimpleIcon, theme: string) => {
-  const bgHex = theme === "light" ? "#f3f2ef" : "#080510";
-  const fallbackHex = theme === "light" ? "#6e6e73" : "#ffffff";
-  const minContrastRatio = theme === "dark" ? 2 : 1.2;
+  // Force underwater theme colors regardless of system theme
+  // Bubble effect: semi-transparent white background
+  const bgHex = "#ffffff15"; 
+  const fallbackHex = "#ffffff";
+  const minContrastRatio = 1.2;
 
   return renderSimpleIcon({
     icon,
@@ -54,6 +56,13 @@ export const renderCustomIcon = (icon: SimpleIcon, theme: string) => {
       target: undefined,
       rel: undefined,
       onClick: (e: any) => e.preventDefault(),
+      style: {
+        // Add extra bubble styling via inline styles if possible
+        // Note: react-icon-cloud might override some styles, but let's try
+        borderRadius: '50%',
+        boxShadow: '0 0 10px rgba(255, 255, 255, 0.2)',
+        backdropFilter: 'blur(2px)',
+      }
     },
   });
 };
