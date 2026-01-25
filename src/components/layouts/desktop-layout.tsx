@@ -1,9 +1,9 @@
 'use client'
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import Navbar from '@/components/navbar';
+import { OceanNav } from '@/components/ocean/OceanNav';
 import { HeroSection } from '@/components/hero-section';
 import { ScrollableContent } from '@/components/scrollable-content';
-import { AnimatedBackground } from '@/components/animated-background';
+import { OceanBackground } from '@/components/ocean/OceanBackground';
 
 interface DesktopLayoutProps {
   children: React.ReactNode;
@@ -76,13 +76,13 @@ const handleNavClick = (sectionId: string) => {
 
     return (
         <>
-        <AnimatedBackground />
-        <div className="hidden md:flex h-screen overflow-hidden">
-            <Navbar activeSection={activeSection} onNavClick={handleNavClick} className="" />
-            <div className="flex-1 overflow-hidden">
+        <OceanBackground />
+        <div className="hidden md:flex h-screen overflow-hidden flex-col">
+            <OceanNav activeSection={activeSection} onNavClick={handleNavClick} />
+            <div className="flex-1 overflow-hidden pt-20">
                 <div className="flex h-full">
-                    <HeroSection className="w-1/3 lg:w-1/4 sticky top-0 h-screen pl-32" />
-                    <main ref={mainRef} className="flex-1 overflow-y-auto scrollbar-hide  pl-6 pr-32" onScroll={handleScroll}>
+                    <HeroSection className="w-1/3 lg:w-1/4 sticky top-0 h-screen pl-12" />
+                    <main ref={mainRef} className="flex-1 overflow-y-auto scrollbar-hide pl-6 pr-12" onScroll={handleScroll}>
                         <ScrollableContent calculatePositions={calculatePositions}>
                             {children}
                         </ScrollableContent>
