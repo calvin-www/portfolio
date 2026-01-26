@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
@@ -62,43 +62,17 @@ export const Bubbles: React.FC<BubblesProps> = ({
     setTargetQuantity(Math.floor(currentMin + latest * (currentMax - currentMin)));
   });
 
-  useEffect(() => {
-    if (prefersReducedMotion) return;
-
-    if (canvasRef.current) {
-      context.current = canvasRef.current.getContext("2d");
+  const resizeCanvas = useCallback(() => {
+    if (canvasContainerRef.current && canvasRef.current && context.current) {
+      canvasSize.current.w = canvasContainerRef.current.offsetWidth;
+      canvasSize.current.h = canvasContainerRef.current.offsetHeight;
+      canvasRef.current.width = canvasSize.current.w * dpr;
+      canvasRef.current.height = canvasSize.current.h * dpr;
+      canvasRef.current.style.width = `${canvasSize.current.w}px`;
+      canvasRef.current.style.height = `${canvasSize.current.h}px`;
+      context.current.scale(dpr, dpr);
     }
-    initCanvas();
-    animate();
-    window.addEventListener("resize", initCanvas);
-
-    return () => {
-      window.removeEventListener("resize", initCanvas);
-    };
-  }, [prefersReducedMotion]);
-
-  useEffect(() => {
-    if (prefersReducedMotion) return;
-    onMouseMove();
-  }, [mousePosition.x, mousePosition.y, prefersReducedMotion]);
-
-  if (prefersReducedMotion) return null;
-
-  const initCanvas = () => {
-    resizeCanvas();
-    // Don't clear and redraw immediately, let the loop handle it to avoid flickering
-  };
-
-  const onMouseMove = () => {
-    if (canvasRef.current) {
-      const rect = canvasRef.current.getBoundingClientRect();
-      const { w, h } = canvasSize.current;
-      const x = mousePosition.x - rect.left; // Local coordinates
-      const y = mousePosition.y - rect.top;
-      mouse.current.x = x;
-      mouse.current.y = y;
-    }
-  };
+  }, [dpr]);
 
   type Circle = {
     x: number;
@@ -112,19 +86,7 @@ export const Bubbles: React.FC<BubblesProps> = ({
     wobbleAmp: number;
   };
 
-  const resizeCanvas = () => {
-    if (canvasContainerRef.current && canvasRef.current && context.current) {
-      canvasSize.current.w = canvasContainerRef.current.offsetWidth;
-      canvasSize.current.h = canvasContainerRef.current.offsetHeight;
-      canvasRef.current.width = canvasSize.current.w * dpr;
-      canvasRef.current.height = canvasSize.current.h * dpr;
-      canvasRef.current.style.width = `${canvasSize.current.w}px`;
-      canvasRef.current.style.height = `${canvasSize.current.h}px`;
-      context.current.scale(dpr, dpr);
-    }
-  };
-
-  const circleParams = (fromBottom = false): Circle => {
+  const circleParams = useCallback((fromBottom = false): Circle => {
     const x = Math.random() * canvasSize.current.w;
     const y = fromBottom 
       ? canvasSize.current.h + 10 
@@ -152,9 +114,9 @@ export const Bubbles: React.FC<BubblesProps> = ({
       wobbleSpeed,
       wobbleAmp,
     };
-  };
+  }, []);
 
-  const drawCircle = (circle: Circle) => {
+  const drawCircle = useCallback((circle: Circle) => {
     if (context.current) {
       context.current.beginPath();
       context.current.arc(circle.x, circle.y, circle.size, 0, 2 * Math.PI);
@@ -167,9 +129,9 @@ export const Bubbles: React.FC<BubblesProps> = ({
       context.current.lineWidth = 1;
       context.current.stroke();
     }
-  };
+  }, []);
 
-  const clearContext = () => {
+  const clearContext = useCallback(() => {
     if (context.current) {
       context.current.clearRect(
         0,
@@ -178,9 +140,9 @@ export const Bubbles: React.FC<BubblesProps> = ({
         canvasSize.current.h,
       );
     }
-  };
+  }, []);
 
-  const animate = () => {
+  const animate = useCallback(() => {
     clearContext();
     
     // Manage quantity
@@ -237,7 +199,45 @@ export const Bubbles: React.FC<BubblesProps> = ({
     }
 
     window.requestAnimationFrame(animate);
-  };
+  }, [targetQuantity, circleParams, drawCircle, clearContext]);
+
+  const initCanvas = useCallback(() => {
+    resizeCanvas();
+    // Don't clear and redraw immediately, let the loop handle it to avoid flickering
+  }, [resizeCanvas]);
+
+  const onMouseMove = useCallback(() => {
+    if (canvasRef.current) {
+      const rect = canvasRef.current.getBoundingClientRect();
+      const { w, h } = canvasSize.current;
+      const x = mousePosition.x - rect.left; // Local coordinates
+      const y = mousePosition.y - rect.top;
+      mouse.current.x = x;
+      mouse.current.y = y;
+    }
+  }, [mousePosition.x, mousePosition.y]);
+
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+
+    if (canvasRef.current) {
+      context.current = canvasRef.current.getContext("2d");
+    }
+    initCanvas();
+    animate();
+    window.addEventListener("resize", initCanvas);
+
+    return () => {
+      window.removeEventListener("resize", initCanvas);
+    };
+  }, [prefersReducedMotion, initCanvas, animate]);
+
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    onMouseMove();
+  }, [mousePosition.x, mousePosition.y, prefersReducedMotion, onMouseMove]);
+
+  if (prefersReducedMotion) return null;
 
   return (
     <div className={`fixed inset-0 pointer-events-none z-0 ${className}`} ref={canvasContainerRef} aria-hidden="true">
