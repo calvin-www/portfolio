@@ -1,15 +1,5 @@
-import { AnimatedBackground } from "@/components/animated-background";
-import { ScrollableContent } from "@/components/scrollable-content";
+import { redirect } from 'next/navigation';
 
-function Page() {
-    return (
-        <>
-            <AnimatedBackground />
-            <ScrollableContent className=" lg:w-3/4">
-                {null}
-            </ScrollableContent>
-        </>
-    );
+export default function Home() {
+  redirect('/v1');
 }
-
-export default Page;
