@@ -1,7 +1,8 @@
 {
-  "active_plan": "/home/calvin/projects/github/portfolio/.sisyphus/plan.md",
-  "started_at": "2026-01-28T05:50:00.000Z",
-  "session_ids": ["ses_3fce64c10ffee3ds9jycbNHNAb"],
-  "plan_name": "move-portfolio-to-v1",
-  "status": "in_progress"
+  "active_plan": "/home/calvin/projects/github/portfolio/.sisyphus/plans/underwater-portfolio-v2.md",
+  "started_at": "2026-01-29T19:54:24.842Z",
+  "session_ids": [
+    "ses_3f50f67f1ffeq7fsIAcbUbvXmC"
+  ],
+  "plan_name": "underwater-portfolio-v2"
 }
