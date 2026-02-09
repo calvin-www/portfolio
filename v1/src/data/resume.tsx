@@ -1,7 +1,7 @@
 import { Icons } from "@/components/icons";
 import { HomeIcon } from "lucide-react";
 import AnimatedShinyText from "@/components/magicui/animated-shiny-text";
-import resumeData from "../../resume.json";
+import resumeData from "../../../src/data/resume.json";
 
 const iconMap: Record<string, any> = {
   github: Icons.github,
