@@ -31,10 +31,18 @@ const BlurFade = ({
   const ref = useRef(null);
   const inViewResult = useInView(ref, { once: true, margin: inViewMargin as any });
   const isInView = !inView || inViewResult;
-  const [hasMounted, setHasMounted] = useState(false);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    setHasMounted(true);
+    // Wait for IntersectionObserver to report before enabling hide logic.
+    // IO callbacks fire before rAF in the event loop, so by the second rAF
+    // useInView will have reported true for elements already in the viewport.
+    const id = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setReady(true);
+      });
+    });
+    return () => cancelAnimationFrame(id);
   }, []);
 
   const defaultVariants: Variants = {
@@ -46,8 +54,8 @@ const BlurFade = ({
       <AnimatePresence>
         <motion.div
             ref={ref}
-            initial={hasMounted ? "hidden" : false}
-            animate={isInView ? "visible" : "hidden"}
+            initial={false}
+            animate={!ready || isInView ? "visible" : "hidden"}
             exit="hidden"
             variants={combinedVariants}
             transition={{
