@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "cd v1 && npm install && npx next build && cd .. && rm -rf public/v1 && cp -r v1/out public/v1 && next build",
     "start": "next start"
   },
   "dependencies": {
