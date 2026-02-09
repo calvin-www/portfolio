@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-ocean-muted/20;
+  }
+  
+  body {
+    @apply bg-ocean-light text-ocean-text;
+  }
+  
+  .dark body {
+    @apply bg-abyss text-abyss-text;
+  }
+  
+  /* Hide default cursor on desktop when custom cursor active */
+  @media (hover: hover) and (pointer: fine) {
+    body.custom-cursor-active {
+      cursor: none;
+    }
+    
+    body.custom-cursor-active a,
+    body.custom-cursor-active button,
+    body.custom-cursor-active [data-interactive] {
+      cursor: none;
+    }
+  }
+}
+
+@layer utilities {
+  /* HUD text styling */
+  .hud-text {
+    @apply font-mono text-xs uppercase tracking-wider text-ocean-muted;
+  }
+  
+  .dark .hud-text {
+    @apply text-ocean-muted/70;
+  }
+}

@@ -8,18 +8,21 @@ import * as THREE from "three";
 
 function SharkModel({ mouseX, mouseY }: { mouseX: number; mouseY: number }) {
   const groupRef = useRef<THREE.Group>(null);
+  const modelRef = useRef<THREE.Group>(null);
   const gltf = useLoader(GLTFLoader, "/models/scene.gltf");
   const mixerRef = useRef<THREE.AnimationMixer | null>(null);
   const actionRef = useRef<THREE.AnimationAction | null>(null);
   const smoothVelocity = useRef(0);
+  const facingRight = useRef(true);
+  const laggedTarget = useRef({ x: 0, y: 0 });
 
   const [springs, api] = useSpring(() => ({
     position: [0, 0, 0] as [number, number, number],
-    config: { mass: 2, tension: 50, friction: 20 },
+    config: { mass: 1.5, tension: 180, friction: 20 },
   }));
 
-  const targetX = (mouseX - 0.5) * 10;
-  const targetY = -(mouseY - 0.5) * 6;
+  const cursorWorldX = (mouseX - 0.5) * 10;
+  const cursorWorldY = -(mouseY - 0.5) * 6;
 
   useEffect(() => {
     if (gltf.animations && gltf.animations.length > 0) {
@@ -36,33 +39,49 @@ function SharkModel({ mouseX, mouseY }: { mouseX: number; mouseY: number }) {
     };
   }, [gltf]);
 
-  useEffect(() => {
-    api.start({ position: [targetX, targetY, 0] });
-  }, [targetX, targetY, api]);
-
   useFrame((_, delta) => {
     if (!groupRef.current) return;
+
+    laggedTarget.current.x = THREE.MathUtils.lerp(laggedTarget.current.x, cursorWorldX, 0.04);
+    laggedTarget.current.y = THREE.MathUtils.lerp(laggedTarget.current.y, cursorWorldY, 0.04);
+    
+    api.start({ position: [laggedTarget.current.x, laggedTarget.current.y, 0] });
 
     const currentX = groupRef.current.position.x;
     const currentY = groupRef.current.position.y;
 
-    const dirX = targetX - currentX;
-    const dirY = targetY - currentY;
+    const dirX = cursorWorldX - currentX;
+    const dirY = cursorWorldY - currentY;
     const speed = Math.sqrt(dirX * dirX + dirY * dirY);
     smoothVelocity.current = THREE.MathUtils.lerp(smoothVelocity.current, speed, 0.1);
 
-    const angleToTarget = Math.atan2(dirY, dirX);
+    const cursorIsRightOfShark = cursorWorldX > currentX;
+    const shouldFaceRight = cursorIsRightOfShark;
+    if (shouldFaceRight !== facingRight.current && modelRef.current) {
+      facingRight.current = shouldFaceRight;
+      modelRef.current.rotation.y = shouldFaceRight ? Math.PI / 2 : (Math.PI / 2 + Math.PI);
+    }
+    
+    const dxToCursor = cursorWorldX - currentX;
+    const dyToCursor = cursorWorldY - currentY;
+    let pitchAngle: number;
+    if (facingRight.current) {
+      pitchAngle = Math.atan2(dyToCursor, dxToCursor);
+    } else {
+      pitchAngle = -Math.atan2(dyToCursor, -dxToCursor);
+    }
+    
     groupRef.current.rotation.z = THREE.MathUtils.lerp(
       groupRef.current.rotation.z,
-      angleToTarget,
-      0.08
+      pitchAngle,
+      0.12
     );
 
-    const bankAngle = THREE.MathUtils.clamp(dirX * 0.15, -0.4, 0.4);
+    const bankAngle = THREE.MathUtils.clamp(dirX * 0.1, -0.3, 0.3);
     groupRef.current.rotation.x = THREE.MathUtils.lerp(
       groupRef.current.rotation.x,
       bankAngle,
-      0.1
+      0.12
     );
 
     if (mixerRef.current) {
@@ -80,7 +99,9 @@ function SharkModel({ mouseX, mouseY }: { mouseX: number; mouseY: number }) {
 
   return (
     <animated.group ref={groupRef} position={springs.position}>
-      <primitive object={gltf.scene} scale={0.8} rotation={[0, Math.PI / 2, 0]} />
+      <group ref={modelRef} rotation={[0, Math.PI / 2, 0]} scale={[0.8, 0.8, 0.8]}>
+        <primitive object={gltf.scene} />
+      </group>
     </animated.group>
   );
 }
@@ -146,7 +167,6 @@ function Bubbles({ mouseX, mouseY }: { mouseX: number; mouseY: number }) {
 export function SharkCompanion() {
   const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
   const [isTouch, setIsTouch] = useState(true);
-  const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
     const checkTouch = () => {
@@ -165,16 +185,9 @@ export function SharkCompanion() {
       });
     };
 
-    const handleClick = () => {
-      setIsClicked(true);
-      setTimeout(() => setIsClicked(false), 300);
-    };
-
     window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("click", handleClick);
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("click", handleClick);
     };
   }, []);
 
@@ -183,8 +196,7 @@ export function SharkCompanion() {
   return (
     <div
       data-testid="shark-canvas"
-      className="fixed inset-0 pointer-events-none z-30"
-      style={{ transform: isClicked ? "scale(1.05)" : "scale(1)", transition: "transform 0.15s" }}
+      className="fixed inset-0 pointer-events-none z-[100]"
     >
       <Canvas camera={{ position: [0, 0, 10], fov: 50 }}>
         <ambientLight intensity={0.6} />
