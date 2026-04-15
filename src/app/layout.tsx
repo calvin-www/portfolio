@@ -1,40 +1,26 @@
-import { Inter, Oswald, JetBrains_Mono } from "next/font/google";
-import { ThemeProvider } from "@/contexts/ThemeContext";
+import { cn } from "@/lib/utils";
+import type { Metadata } from "next";
+import { Inter as FontSans } from "next/font/google";
+import { DATA } from "@/data";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
+const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" });
 
-const oswald = Oswald({
-  subsets: ["latin"],
-  variable: "--font-oswald",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains",
-});
-
-export const metadata = {
-  title: "Calvin Wong | Portfolio",
-  description: "Creative Frontend Engineer - Building immersive web experiences",
+export const metadata: Metadata = {
+  metadataBase: new URL(DATA.url),
+  title: { default: DATA.name, template: `%s | ${DATA.name}` },
+  description: DATA.description,
+  openGraph: { title: DATA.name, description: DATA.description, url: DATA.url, siteName: DATA.name, locale: "en_US", type: "website" },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-video-preview": -1, "max-image-preview": "large", "max-snippet": -1 } },
+  twitter: { title: DATA.name, card: "summary_large_image" },
+  verification: { google: "", yandex: "" },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${oswald.variable} ${jetbrainsMono.variable}`}
-      suppressHydrationWarning
-    >
-      <body className="font-body antialiased">
-        <ThemeProvider>{children}</ThemeProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
+        {children}
       </body>
     </html>
   );

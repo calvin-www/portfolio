@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import { fontFamily } from 'tailwindcss/defaultTheme'
 
 const config: Config = {
   content: [
@@ -10,24 +11,65 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Ocean theme - Light mode
-        'ocean-light': '#F5F9FC',
-        'ocean-deep': '#006994',
-        'ocean-blue': '#3182CE',
-        'ocean-cyan': '#00B5D8',
-        'ocean-text': '#1A202C',
-        'ocean-muted': '#718096',
-        // Dark mode
-        'abyss': '#0A1628',
-        'abyss-text': '#F7FAFC',
-        'abyss-blue': '#63B3ED',
+        // V1 design tokens
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        // Ocean theme (V2)
+        ocean: {
+          cyan: "#00B5D8",
+          blue: "#3182CE",
+          deep: "#1a365d",
+          light: "#EBF8FF",
+          text: "#1A202C",
+          muted: "#718096",
+        },
+        abyss: {
+          DEFAULT: "#0A1628",
+          text: "#E2E8F0",
+        },
         // Legacy
-        'coral': '#FF6B6B',
+        coral: '#FF6B6B',
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        'heading': ['var(--font-oswald)', 'Oswald', 'sans-serif'],
-        'body': ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
-        'mono': ['var(--font-jetbrains)', 'JetBrains Mono', 'monospace'],
+        sans: ["var(--font-sans)", ...fontFamily.sans],
+        heading: ["var(--font-sans)", ...fontFamily.sans],
+        mono: ['var(--font-jetbrains)', 'JetBrains Mono', 'monospace'],
       },
       animation: {
         'radar-spin': 'spin 8s linear infinite',
