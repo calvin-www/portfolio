@@ -10,6 +10,11 @@ export default defineConfig({
   use: {
     baseURL: "http://localhost:3000",
     trace: "on-first-retry",
+    // Containers and CI images often ship a browser that Playwright didn't
+    // download itself; point PW_CHROMIUM_PATH at it instead of re-fetching.
+    launchOptions: process.env.PW_CHROMIUM_PATH
+      ? { executablePath: process.env.PW_CHROMIUM_PATH }
+      : {},
   },
   projects: [
     {

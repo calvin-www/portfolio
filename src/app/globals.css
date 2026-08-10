@@ -140,6 +140,447 @@
   }
 }
 
+/* ─────────────────────────────────────────────────────────────────────────
+   V3 "Scroll World" — a night flight through the resume.
+   Committed to a dark palette: the scenes are glowing accent geometry on
+   near-black, which a light theme would only wash out.
+   Token names match the scroll-world engine (--sw-bg / --sw-ink / --sw-accent)
+   so a regenerated engine drops in without restyling.
+   ───────────────────────────────────────────────────────────────────────── */
+[data-portfolio="v3"] {
+  --sw-bg: #08090c;
+  --sw-ink: #eef1f6;
+  --sw-muted: rgba(238, 241, 246, 0.62);
+  --sw-faint: rgba(238, 241, 246, 0.34);
+  --sw-accent: #5b8cff;
+  --sw-panel: rgba(8, 9, 12, 0.55);
+  --sw-hairline: rgba(238, 241, 246, 0.14);
+  --sw-font-sans: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --sw-font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  background: var(--sw-bg);
+  color: var(--sw-ink);
+  font-family: var(--sw-font-sans);
+}
+
+.sw-root {
+  position: relative;
+  min-height: 100vh;
+  background: var(--sw-bg);
+}
+
+/* The scroll length the fixed layers are scrubbed against. */
+.sw-spacer {
+  position: relative;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Layer 1 — the world. Never takes pointer events. */
+.sw-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(140% 100% at 50% 0%, rgba(255, 255, 255, 0.05), transparent 60%),
+    var(--sw-bg);
+}
+
+.sw-stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(8, 9, 12, 0.82) 0%, rgba(8, 9, 12, 0.32) 46%, transparent 70%),
+    radial-gradient(120% 120% at 50% 50%, transparent 42%, rgba(8, 9, 12, 0.72) 100%);
+}
+
+/* Layer 2 — pinned copy. Individual panels opt back into pointer events. */
+.sw-copylayer {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.sw-copy {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 6rem clamp(1.25rem, 6vw, 7rem) 5rem;
+  will-change: opacity, transform;
+}
+
+.sw-copy__inner {
+  max-width: 46rem;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  border-radius: 1.25rem;
+  background: var(--sw-panel);
+  border: 1px solid var(--sw-hairline);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.sw-copy__eyebrow {
+  font-family: var(--sw-font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sw-accent);
+  margin-bottom: 0.85rem;
+}
+
+.sw-copy__title {
+  font-size: clamp(1.9rem, 4.6vw, 3.4rem);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  margin-bottom: 0.9rem;
+  text-wrap: balance;
+}
+
+.sw-copy__title--hero {
+  font-size: clamp(2.6rem, 8vw, 5.5rem);
+}
+
+.sw-copy__body {
+  font-size: clamp(0.98rem, 1.2vw, 1.12rem);
+  line-height: 1.6;
+  color: var(--sw-muted);
+  max-width: 38rem;
+}
+
+.sw-copy__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  list-style: none;
+  padding: 0;
+}
+
+.sw-copy__tags li {
+  font-family: var(--sw-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--sw-hairline);
+  color: var(--sw-faint);
+}
+
+.sw-copy__items {
+  margin-top: 1.4rem;
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.sw-item > a,
+.sw-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.15rem;
+  padding: 0.55rem 0;
+  border-top: 1px solid var(--sw-hairline);
+  text-decoration: none;
+  color: inherit;
+}
+
+.sw-item > a {
+  border-top: 0;
+  padding: 0;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.sw-item > a:hover {
+  opacity: 0.75;
+  transform: translateX(3px);
+}
+
+.sw-item__label {
+  font-size: 1rem;
+  font-weight: 550;
+}
+
+.sw-item__meta {
+  font-family: var(--sw-font-mono);
+  font-size: 0.74rem;
+  color: var(--sw-accent);
+  letter-spacing: 0.04em;
+}
+
+.sw-item__note {
+  font-size: 0.86rem;
+  color: var(--sw-faint);
+  line-height: 1.45;
+}
+
+.sw-copy__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.6rem;
+}
+
+.sw-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.65rem 1.25rem;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 550;
+  text-decoration: none;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.sw-cta:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+.sw-cta--primary {
+  background: var(--sw-accent);
+  color: #08090c;
+}
+
+.sw-cta--secondary {
+  border: 1px solid var(--sw-hairline);
+  color: var(--sw-ink);
+}
+
+.sw-copy__hint {
+  margin-top: 2rem;
+  font-family: var(--sw-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sw-faint);
+  animation: sw-breathe 2.8s ease-in-out infinite;
+}
+
+@keyframes sw-breathe {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* Layer 3 — chrome. */
+.sw-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem clamp(1.25rem, 6vw, 3rem);
+  padding-top: max(1.1rem, env(safe-area-inset-top));
+}
+
+.sw-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--sw-ink);
+}
+
+.sw-brand__mark {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--sw-hairline);
+  font-family: var(--sw-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+.sw-brand__name {
+  font-size: 0.92rem;
+  font-weight: 550;
+}
+
+.sw-topnav {
+  display: flex;
+  gap: 0.15rem;
+}
+
+.sw-topnav button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  font-family: var(--sw-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sw-faint);
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.sw-topnav button:hover,
+.sw-topnav button.is-active {
+  color: var(--sw-ink);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.sw-rail {
+  position: fixed;
+  z-index: 30;
+  right: clamp(0.9rem, 2.5vw, 1.6rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* The button is a 44px-minimum hit target; only the bead inside it is visible. */
+.sw-rail__dot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.sw-rail__bead {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 999px;
+  background: rgba(238, 241, 246, 0.28);
+  transition: background 0.24s ease, transform 0.24s ease;
+}
+
+.sw-rail__dot:hover .sw-rail__bead {
+  transform: scale(1.35);
+  background: var(--sw-ink);
+}
+
+.sw-rail__dot.is-active .sw-rail__bead {
+  background: var(--sw-accent);
+  transform: scale(1.5);
+}
+
+.sw-rail__label {
+  position: absolute;
+  right: 1.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-family: var(--sw-font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sw-ink);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.sw-rail__dot:hover .sw-rail__label,
+.sw-rail__dot.is-active .sw-rail__label {
+  opacity: 1;
+}
+
+/* Reduced motion — a plain stacked document, no scroll-driven movement. */
+.sw-static__scene {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 5rem clamp(1.25rem, 6vw, 7rem);
+  overflow: hidden;
+}
+
+.sw-static__art {
+  position: absolute;
+  inset: 0;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.sw-static__copy {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 860px) {
+  .sw-copy {
+    align-items: flex-end;
+    padding-bottom: max(4.5rem, env(safe-area-inset-bottom));
+  }
+
+  /* Tighten the panel so a content-heavy scene (contact, projects) fits a phone
+     without clipping its CTAs. If it still overruns, the panel scrolls and then
+     chains back to the page rather than hiding anything. */
+  .sw-copy__inner {
+    max-height: 76vh;
+    overflow-y: auto;
+  }
+
+  .sw-copy__title {
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+  }
+
+  .sw-copy__title--hero {
+    font-size: clamp(2.2rem, 12vw, 3.2rem);
+  }
+
+  .sw-copy__body {
+    font-size: 0.95rem;
+  }
+
+  .sw-item__label {
+    font-size: 0.95rem;
+  }
+
+  .sw-copy__items {
+    margin-top: 1rem;
+  }
+
+  .sw-copy__ctas {
+    margin-top: 1.1rem;
+  }
+
+  /* Long descriptions don't fit a phone panel; the label and meta carry it. */
+  .sw-item__note {
+    display: none;
+  }
+
+  .sw-topnav {
+    display: none;
+  }
+
+  .sw-rail {
+    right: auto;
+    left: 50%;
+    top: auto;
+    bottom: max(1.1rem, env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    flex-direction: row;
+  }
+
+  .sw-rail__label {
+    display: none;
+  }
+}
+
 /* Code syntax highlighting for v1 (outside layers) */
 pre {
   overflow-x: auto;
