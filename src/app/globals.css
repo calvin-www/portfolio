@@ -48,6 +48,27 @@
     --ring: 212.7 26.8% 83.9%;
   }
 
+  /* V3 warm paper tokens */
+  :root {
+    --v3-paper: #fffdf8;
+    --v3-surface: #f4efe6;
+    --v3-line: #eee7da;
+    --v3-ink: #201c15;
+    --v3-ink-muted: #6b6559;
+    --v3-teal: #00b5d8;
+    --v3-teal-ink: #007a91;
+  }
+
+  .dark {
+    --v3-paper: #181a1f;
+    --v3-surface: #22252b;
+    --v3-line: #33373f;
+    --v3-ink: #e7e9ec;
+    --v3-ink-muted: #9aa0a8;
+    --v3-teal: #00b5d8;
+    --v3-teal-ink: #00b5d8;
+  }
+
   * {
     @apply border-border;
   }

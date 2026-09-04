@@ -45,6 +45,18 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // V3 warm paper tokens (values live in globals.css)
+        paper: "var(--v3-paper)",
+        surface: "var(--v3-surface)",
+        line: "var(--v3-line)",
+        ink: {
+          DEFAULT: "var(--v3-ink)",
+          muted: "var(--v3-ink-muted)",
+        },
+        teal: {
+          DEFAULT: "var(--v3-teal)",
+          ink: "var(--v3-teal-ink)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -55,6 +67,8 @@ const config: Config = {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         heading: ["var(--font-sans)", ...fontFamily.sans],
         mono: ['var(--font-jetbrains)', 'JetBrains Mono', 'monospace'],
+        grotesk: ["var(--font-grotesk)", ...fontFamily.sans],
+        plex: ["var(--font-plex-mono)", ...fontFamily.mono],
       },
       animation: {
         'radar-spin': 'spin 8s linear infinite',
