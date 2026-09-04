@@ -66,3 +66,11 @@ test("clicking a row opens its modal and keeps the filter", async ({ page }) => 
   await expect(page.getByRole("dialog")).toBeHidden();
   await expect(page).toHaveURL(/\?filter=work$/);
 });
+
+test("about page shows bio, education, and photo", async ({ page }) => {
+  await page.goto("/about");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("about me");
+  await expect(page.getByRole("link", { name: "Rice University" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Klein Collins" })).toBeVisible();
+  await expect(page.getByRole("img", { name: /calvin/i })).toBeVisible();
+});
