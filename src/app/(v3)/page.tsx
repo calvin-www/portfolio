@@ -1,5 +1,5 @@
-import { ContactRow } from "@/components/v3/ContactRow";
+import { Intro } from "@/components/v3/Intro";
 
 export default function HomePage() {
-  return <ContactRow className="pt-10" />;
+  return <Intro />;
 }
