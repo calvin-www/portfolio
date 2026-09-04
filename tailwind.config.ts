@@ -45,21 +45,6 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Ocean theme (V2)
-        ocean: {
-          cyan: "#00B5D8",
-          blue: "#3182CE",
-          deep: "#1a365d",
-          light: "#EBF8FF",
-          text: "#1A202C",
-          muted: "#718096",
-        },
-        abyss: {
-          DEFAULT: "#0A1628",
-          text: "#E2E8F0",
-        },
-        // Legacy
-        coral: '#FF6B6B',
       },
       borderRadius: {
         lg: "var(--radius)",

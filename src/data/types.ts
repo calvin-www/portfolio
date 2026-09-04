@@ -4,12 +4,7 @@
  */
 
 /**
- * Skill category for ocean visualization mapping
- * - language: Programming languages (fish species)
- * - framework: Libraries/frameworks (coral formations)
- * - tool: Development tools (sea plants/anemones)
- * - design: Design tools (shells/starfish)
- * - ai: AI/ML tools (jellyfish)
+ * Skill category
  */
 export type SkillCategory = "language" | "framework" | "tool" | "design" | "ai";
 
