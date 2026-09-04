@@ -2,6 +2,7 @@
 
 import { ENTRIES, filterEntries, findEntry } from "@/data/adapters/v3";
 import { COPY } from "@/data/v3-copy";
+import { EntryModal } from "./EntryModal";
 import { EntryRow } from "./EntryRow";
 import { FilterBar } from "./FilterBar";
 import { useListParams } from "./useListParams";
@@ -27,8 +28,7 @@ export function EntryList() {
           ))}
         </ul>
       )}
-      {/* Task 9 replaces this with <EntryModal entry={active} onClose={closeItem} /> */}
-      {active && <span data-testid="modal-slot" hidden>{active.slug}</span>}
+      {active && <EntryModal entry={active} onClose={closeItem} />}
     </section>
   );
 }

@@ -40,3 +40,29 @@ test("filter updates the URL and the list, and survives reload", async ({ page }
   await expect(page).toHaveURL(/\/$/);
   await expect(page.getByTestId("entry-row")).toHaveCount(15);
 });
+
+test("modal opens from the URL and escape closes it", async ({ page }) => {
+  await page.goto("/?item=mockowl");
+  const dialog = page.getByRole("dialog");
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole("heading", { name: "MockOwl" })).toBeVisible();
+  await expect(dialog.getByRole("link", { name: /source/i })).toHaveAttribute("href", /github\.com/);
+  // Wait for the panel's own auto-focus effect to land before sending a key event:
+  // in `next dev` the SSR markup paints (and passes toBeVisible) before hydration
+  // attaches the keydown listener, so pressing Escape immediately can race it.
+  await expect(dialog).toBeFocused();
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+  await expect(page).toHaveURL(/\/$/);
+});
+
+test("clicking a row opens its modal and keeps the filter", async ({ page }) => {
+  await page.goto("/?filter=work");
+  await page.getByTestId("entry-row").first().click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  await expect(page).toHaveURL(/filter=work/);
+  await expect(page).toHaveURL(/item=jpmorgan-chase/);
+  await page.getByRole("button", { name: "close", exact: true }).click();
+  await expect(page.getByRole("dialog")).toBeHidden();
+  await expect(page).toHaveURL(/\?filter=work$/);
+});
