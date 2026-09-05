@@ -18,7 +18,7 @@ export function ContactRow({ className }: { className?: string }) {
             href={href}
             target={href.startsWith("mailto:") ? undefined : "_blank"}
             rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-            className="inline-flex items-center gap-1.5 text-ink-muted transition-colors hover:text-teal-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal rounded-sm"
+            className="inline-flex items-center gap-1.5 text-ink-muted transition-colors hover:text-teal-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-ink rounded-sm"
           >
             <Icon className="size-3.5" aria-hidden />
             {label}

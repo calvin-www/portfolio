@@ -13,7 +13,7 @@ export function FilterBar({ value, onChange }: { value: Filter; onChange: (f: Fi
             aria-pressed={active}
             onClick={() => onChange(f)}
             className={cn(
-              "border-b-2 pb-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal rounded-sm",
+              "border-b-2 pb-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-ink rounded-sm",
               active ? "border-teal text-ink" : "border-transparent text-ink-muted hover:text-ink",
             )}
           >

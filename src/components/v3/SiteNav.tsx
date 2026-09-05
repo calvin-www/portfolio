@@ -7,14 +7,14 @@ export function SiteNav() {
     <nav className="flex items-center justify-between py-6 text-sm">
       <Link
         href="/"
-        className="font-medium transition-colors hover:text-teal-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal rounded-sm"
+        className="font-medium transition-colors hover:text-teal-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-ink rounded-sm"
       >
-        🦈 {DATA.name.toLowerCase()}
+        <span aria-hidden>🦈</span> {DATA.name.toLowerCase()}
       </Link>
       <div className="flex items-center gap-5">
         <Link
           href="/about"
-          className="text-ink-muted transition-colors hover:text-teal-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal rounded-sm"
+          className="text-ink-muted transition-colors hover:text-teal-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-ink rounded-sm"
         >
           about
         </Link>

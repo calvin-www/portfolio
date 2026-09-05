@@ -10,7 +10,7 @@ const SKILL_SLUGS = [
   "typescript", "javascript", "java", "python", "c",
   "react", "nextdotjs", "nodedotjs", "prisma", "graphql",
   "html5", "css3", "tailwindcss", "mantine", "mui", "nextui",
-  "amazonaws", "firebase", "vercel", "mongodb", "sql",
+  "amazonwebservices", "firebase", "vercel", "mongodb", "sql",
   "git", "github", "visualstudiocode", "intellijidea",
   "figma", "latex", "adobe", "adobephotoshop", "adobelightroom", "adobeillustrator", "adobepremierepro",
 ];

@@ -8,7 +8,7 @@ export function EntryRow({ entry, onOpen }: { entry: Entry; onOpen: () => void }
         data-testid="entry-row"
         data-type={entry.type}
         onClick={onOpen}
-        className="group -mx-2 flex w-full items-start gap-3 rounded-md px-2 py-4 text-left transition-colors hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+        className="group -mx-2 flex w-full items-start gap-3 rounded-md px-2 py-4 text-left transition-colors hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-ink"
       >
         <span aria-hidden className="pt-0.5 text-xl leading-none">{entry.emoji}</span>
         <span className="min-w-0 flex-1">

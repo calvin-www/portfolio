@@ -69,6 +69,11 @@
     --v3-teal-ink: #00b5d8;
   }
 
+  /* V3 pages paint the body in paper so overscroll edges match */
+  body:has([data-portfolio="v3"]) {
+    background: var(--v3-paper);
+  }
+
   * {
     @apply border-border;
   }
@@ -154,4 +159,12 @@ code[data-line-numbers] [data-line]::before {
 
 [data-rehype-pretty-code-figure] code {
   @apply text-sm leading-loose md:leading-loose;
+}
+
+/* Windows forced-colors mode strips box-shadow rings; give v3 controls a real outline */
+@media (forced-colors: active) {
+  [data-portfolio="v3"] :focus-visible {
+    outline: 2px solid;
+    outline-offset: 2px;
+  }
 }

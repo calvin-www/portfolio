@@ -74,3 +74,13 @@ test("about page shows bio, education, and photo", async ({ page }) => {
   await expect(page.getByRole("link", { name: "Klein Collins" })).toBeVisible();
   await expect(page.getByRole("img", { name: /calvin/i })).toBeVisible();
 });
+
+test("clicking the backdrop closes the modal", async ({ page }) => {
+  await page.goto("/?item=pantrypal");
+  const dialog = page.getByRole("dialog");
+  await expect(dialog).toBeVisible();
+  await expect(dialog).toBeFocused();
+  await page.getByRole("button", { name: "close dialog" }).dispatchEvent("click");
+  await expect(dialog).toBeHidden();
+  await expect(page).toHaveURL(/\/$/);
+});
