@@ -40,6 +40,7 @@ Agreed with Calvin on 2026-09-04 after a grilling session. Inspiration: https://
   - Dark: paper `#181a1f`, surface `#22252b`, line `#33373f`, ink `#e7e9ec`, ink-muted `#9aa0a8`.
 - Accent teal `#00B5D8` for non-text accents (active filter underline, hover, focus rings) and for everything in dark mode. Link text in light mode uses `#007a91` (passes 4.5:1 on paper).
 - Space Grotesk for UI and headings, IBM Plex Mono for name, dates, tags, filter labels. Fonts load in the root layout.
+  - Amended 2026-09-05 (polish pass): one family, Bricolage Grotesque, loaded with its `opsz` and `wdth` axes. The headline uses `font-stretch: 82%`; dates use tabular numerals instead of a mono face. Pill tags are gone from rows and the modal; the type is a plain word at the right of each row and the modal lists tags comma-separated.
 - Site-wide lowercase copy. Proper nouns, entry titles, and company names keep their real casing.
 - Shark: 🦈 as brand mark in the nav and as the favicon. Plain filter labels. One shark line each in the intro, footer, and about page. Interactive shark deferred.
 
@@ -58,3 +59,36 @@ Keep Playwright. Add smoke tests: page loads, filter updates URL and list, modal
 ## Delivery
 
 `v3` branch, small commits, one PR into `main`. Vercel preview on the PR is the deploy check.
+
+## Round 2: personality (agreed 2026-09-05)
+
+Calvin's verdict on round 1: "feels like a google doc." Diagnosis: one text column, nothing drawn for him, no motion, the shark exists only as an emoji. Round 2 spends its boldness on one thing and keeps the rest quiet.
+
+### The shark
+
+- A single-stroke line drawing (SVG, `currentColor`, no fill, round caps) drawn in this round. Friendly: rounded snout, small smile, dot eye, three gills, falcate dorsal fin, lopsided tail, swept pectoral fin.
+- Lives in three places: the hero beside the headline, the nav mark (replaces 🦈), and the favicon (`src/app/icon.svg`).
+- Hero behaviour: on load the body outline draws itself (stroke-dash), then fin, gills, eye and mouth appear; afterwards it idles with a slow sway. On pointer devices it tilts a few degrees toward the cursor. `prefers-reduced-motion` shows the finished drawing, static.
+- The intro copy keeps 🦈 out; the drawing is the shark now. Footer and about lines keep their emoji.
+
+### Motion that answers an action (framer-motion, already a dependency)
+
+- Filter change: rows FLIP into their new positions; the teal underline slides between filter labels (shared `layoutId`).
+- Row hover (pointer devices only): a small thumbnail of the entry's image floats near the cursor. Rows stay text-only at rest. Entries without an image show nothing.
+- Modal: the panel scales and fades in on desktop, slides up as a sheet on mobile; the row title and the dialog title share a `layoutId` so the title travels. Closing reverses it.
+- All of the above collapse to instant changes under `prefers-reduced-motion`.
+
+### Quiet texture
+
+- A faint SVG noise grain fixed over the page in both themes (`pointer-events: none`, low opacity, mix-blend for dark).
+- The ":D" in the headline is rotated 90° so the face looks at the reader, and blinks every few seconds (CSS keyframe, disabled under reduced motion). The h1 text content stays `i like 2 build stuff :D` for tests and screen readers.
+
+### Cuts
+
+- The icon cloud is removed from the home page (six icons 404 from the CDN and it is the most templated element). Skills appear on the about page as a comma-separated line from `resume.json`.
+- No custom cursor, no scroll-triggered reveals.
+
+### Deferred
+
+- "dive / surface" theme toggle relabel and shark dip on toggle.
+- Light theme as default instead of system.
