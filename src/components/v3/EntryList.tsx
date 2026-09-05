@@ -13,16 +13,16 @@ export function EntryList() {
   const active = findEntry(ENTRIES, item);
 
   return (
-    <section id="list" className="py-6">
-      <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <h2 className="text-lg font-medium">{COPY.list.heading}</h2>
-        <p className="font-plex text-xs text-ink-muted">{COPY.list.hint}</p>
+    <section id="list" className="mt-10 border-t border-line pt-8">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+        <h2 className="text-v3-xl font-semibold tracking-[-0.01em]">{COPY.list.heading}</h2>
+        <p className="text-v3-sm text-ink-muted">{COPY.list.hint}</p>
       </div>
       <FilterBar value={filter} onChange={setFilter} />
       {visible.length === 0 ? (
-        <p className="mt-6 text-sm text-ink-muted">{COPY.list.empty}</p>
+        <p className="mt-8 text-ink-muted">{COPY.list.empty}</p>
       ) : (
-        <ul className="mt-4 divide-y divide-line border-b border-t border-line">
+        <ul className="mt-5 divide-y divide-line border-t border-line">
           {visible.map((entry) => (
             <EntryRow key={entry.slug} entry={entry} onOpen={() => openItem(entry.slug)} />
           ))}

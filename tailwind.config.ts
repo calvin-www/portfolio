@@ -58,6 +58,15 @@ const config: Config = {
           ink: "var(--v3-teal-ink)",
         },
       },
+      // V3 type scale: 17px base, ~1.2 ratio. Line heights are unitless.
+      fontSize: {
+        "v3-xs": ["0.8125rem", { lineHeight: "1.45" }],
+        "v3-sm": ["0.9375rem", { lineHeight: "1.5" }],
+        "v3-base": ["1.0625rem", { lineHeight: "1.6" }],
+        "v3-lg": ["1.25rem", { lineHeight: "1.35" }],
+        "v3-xl": ["1.5rem", { lineHeight: "1.2" }],
+        "v3-2xl": ["1.875rem", { lineHeight: "1.12" }],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -67,8 +76,7 @@ const config: Config = {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         heading: ["var(--font-sans)", ...fontFamily.sans],
         mono: ['var(--font-jetbrains)', 'JetBrains Mono', 'monospace'],
-        grotesk: ["var(--font-grotesk)", ...fontFamily.sans],
-        plex: ["var(--font-plex-mono)", ...fontFamily.mono],
+        bricolage: ["var(--font-bricolage)", ...fontFamily.sans],
       },
       animation: {
         'radar-spin': 'spin 8s linear infinite',

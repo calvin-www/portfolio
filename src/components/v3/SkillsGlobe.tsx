@@ -17,14 +17,14 @@ const SKILL_SLUGS = [
 
 export function SkillsGlobe() {
   return (
-    <section aria-label="skills" className="py-2">
-      <p className="font-plex text-xs text-ink-muted">{COPY.skills.label}</p>
-      <div className="mx-auto max-w-sm">
+    <section aria-label="skills" className="border-t border-line pt-8">
+      <p className="text-v3-sm text-ink-muted">{COPY.skills.label}</p>
+      <div className="mx-auto max-w-xs sm:max-w-sm">
         <IconCloud
           iconSlugs={SKILL_SLUGS}
           bgHexLight="#fffdf8"
           bgHexDark="#181a1f"
-          containerStyle={{ width: "100%", paddingTop: 8 }}
+          containerStyle={{ width: "100%", paddingTop: 0 }}
         />
       </div>
     </section>

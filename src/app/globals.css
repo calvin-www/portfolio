@@ -57,6 +57,7 @@
     --v3-ink-muted: #6b6559;
     --v3-teal: #00b5d8;
     --v3-teal-ink: #007a91;
+    --v3-underline: #d8cfbf;
   }
 
   .dark {
@@ -67,11 +68,47 @@
     --v3-ink-muted: #9aa0a8;
     --v3-teal: #00b5d8;
     --v3-teal-ink: #00b5d8;
+    --v3-underline: #4a505a;
   }
 
   /* V3 pages paint the body in paper so overscroll edges match */
   body:has([data-portfolio="v3"]) {
     background: var(--v3-paper);
+  }
+
+  /* V3 type. Optical size follows font-size automatically; width is set per role. */
+  [data-portfolio="v3"] {
+    font-optical-sizing: auto;
+    font-variant-numeric: tabular-nums;
+  }
+
+  [data-portfolio="v3"] .v3-display {
+    font-stretch: 82%;
+  }
+
+  /* One focus treatment for every v3 control, instead of a ring class on each. */
+  [data-portfolio="v3"] :focus-visible {
+    outline: 2px solid var(--v3-teal-ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* The dialog panel takes focus programmatically on open; its border is the cue. */
+  [data-portfolio="v3"] [role="dialog"]:focus-visible {
+    outline: none;
+  }
+
+  /* Text links: hairline underline in a paper tone that turns teal on hover. */
+  [data-portfolio="v3"] .v3-link {
+    text-decoration-line: underline;
+    text-decoration-color: var(--v3-underline);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 5px;
+    transition: text-decoration-color 150ms ease, color 150ms ease;
+  }
+
+  [data-portfolio="v3"] .v3-link:hover {
+    text-decoration-color: var(--v3-teal);
   }
 
   * {

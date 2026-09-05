@@ -9,14 +9,14 @@ const PREVIOUS = [
 
 export function Footer() {
   return (
-    <footer className="mt-16 border-t border-line py-8 font-plex text-xs text-ink-muted">
+    <footer className="mt-20 border-t border-line py-10 text-v3-sm text-ink-muted">
       <ContactRow />
-      <p className="mt-6">
+      <p className="mt-8">
         {COPY.footer.previous}{" "}
         {PREVIOUS.map((p, i) => (
           <span key={p.href}>
-            {i > 0 && " · "}
-            <Link href={p.href} className="underline decoration-line underline-offset-4 hover:text-teal-ink">
+            {i > 0 && ", "}
+            <Link href={p.href} className="v3-link text-ink">
               {p.label}
             </Link>
           </span>

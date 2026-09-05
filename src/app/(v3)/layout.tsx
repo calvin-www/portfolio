@@ -5,7 +5,7 @@ import { Footer } from "@/components/v3/Footer";
 export default function V3Layout({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-      <div data-portfolio="v3" className="min-h-screen bg-paper font-grotesk text-ink">
+      <div data-portfolio="v3" className="min-h-screen bg-paper font-bricolage text-v3-base text-ink">
         <div className="mx-auto flex min-h-screen w-full max-w-2xl flex-col px-5 sm:px-6">
           <SiteNav />
           <main className="flex-1">{children}</main>

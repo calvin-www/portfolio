@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 export function FilterBar({ value, onChange }: { value: Filter; onChange: (f: Filter) => void }) {
   return (
-    <div role="group" aria-label="filter" className="mt-4 flex flex-wrap gap-x-5 gap-y-2 font-plex text-xs">
+    <div role="group" aria-label="filter" className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-v3-sm">
       {FILTERS.map((f) => {
         const active = f === value;
         return (
@@ -13,8 +13,8 @@ export function FilterBar({ value, onChange }: { value: Filter; onChange: (f: Fi
             aria-pressed={active}
             onClick={() => onChange(f)}
             className={cn(
-              "border-b-2 pb-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-ink rounded-sm",
-              active ? "border-teal text-ink" : "border-transparent text-ink-muted hover:text-ink",
+              "border-b-2 pb-1 transition-colors",
+              active ? "border-teal font-medium text-ink" : "border-transparent text-ink-muted hover:text-ink",
             )}
           >
             {f}

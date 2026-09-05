@@ -1,19 +1,16 @@
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { Inter as FontSans, Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import { Inter as FontSans, Bricolage_Grotesque } from "next/font/google";
 import { DATA } from "@/data";
 import "./globals.css";
 
 const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" });
-const grotesk = Space_Grotesk({
+// One family for v3. The variable font carries its own width and optical-size
+// axes, so the display headline and body text come from the same file.
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-grotesk",
-});
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-plex-mono",
+  axes: ["opsz", "wdth"],
+  variable: "--font-bricolage",
 });
 
 export const metadata: Metadata = {
@@ -29,14 +26,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
-          grotesk.variable,
-          plexMono.variable,
-        )}
-      >
+      <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable, bricolage.variable)}>
         {children}
       </body>
     </html>
