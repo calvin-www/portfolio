@@ -5,7 +5,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { Shark } from "./Shark";
 
 /** Scroll distance for one crossing of the viewport. */
-const CROSSING_PX = 1500;
+const CROSSING_PX = 650;
 /** Where the first crossing starts: just as the hero has scrolled away. */
 const START_FRACTION_OF_VIEWPORT = 0.85;
 

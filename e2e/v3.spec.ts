@@ -145,7 +145,7 @@ test("the shark roams once the hero is gone", async ({ page }) => {
   };
   expect((await at(0)).opacity).toBe("0");
   const a = await at(1500);
-  const b = await at(2100);
+  const b = await at(1750);
   expect(a.opacity).toBe("1");
   expect(Math.abs(a.x - b.x)).toBeGreaterThan(100);
 });
