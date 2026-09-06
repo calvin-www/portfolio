@@ -196,6 +196,86 @@
     to { transform: scale(1); }
   }
 
+  /* ---- Round 3: scroll events ---------------------------------------- */
+
+  /* Sticky nav: a tinted, blurred bar with a hairline that appears once stuck. */
+  [data-portfolio="v3"] .v3-nav {
+    background: color-mix(in srgb, var(--v3-paper) 86%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 200ms ease;
+  }
+
+  [data-portfolio="v3"] .v3-nav[data-stuck="true"] {
+    border-bottom-color: var(--v3-line);
+  }
+
+  /* Pinned sections: a tall scroll runway with the content stuck part-way down. */
+  [data-portfolio="v3"] .v3-pin-section {
+    min-height: 190svh;
+  }
+
+  [data-portfolio="v3"] .v3-pin-section-short {
+    min-height: 200svh;
+  }
+
+  [data-portfolio="v3"] .v3-pin {
+    position: sticky;
+    top: 22svh;
+    padding-bottom: 4rem;
+  }
+
+  /* Typed statement: --typed is the number of characters revealed so far. */
+  [data-portfolio="v3"] .v3-ch {
+    opacity: clamp(0, calc(var(--typed) - var(--i)), 1);
+    color: color-mix(in srgb, var(--v3-teal) clamp(0%, calc((var(--i) + 1.6 - var(--typed)) * 100%), 100%), currentColor);
+  }
+
+  /* Three things: lines are muted until the scroll makes them active. */
+  [data-portfolio="v3"] .v3-three-line {
+    color: var(--v3-ink-muted);
+    opacity: 0.55;
+    transition: color 350ms ease, opacity 350ms ease;
+  }
+
+  [data-portfolio="v3"] .v3-three-line.is-active {
+    color: var(--v3-ink);
+    opacity: 1;
+  }
+
+  [data-portfolio="v3"] .v3-scroll-hint {
+    animation: v3-hint 2.4s ease-in-out infinite;
+  }
+
+  @keyframes v3-hint {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-portfolio="v3"] .v3-pin-section,
+    [data-portfolio="v3"] .v3-pin-section-short {
+      min-height: 0;
+      padding: 4rem 0;
+    }
+    [data-portfolio="v3"] .v3-pin {
+      position: static;
+      padding-bottom: 0;
+    }
+    [data-portfolio="v3"] .v3-ch {
+      opacity: 1;
+      color: inherit;
+    }
+    [data-portfolio="v3"] .v3-three-line {
+      color: var(--v3-ink);
+      opacity: 1;
+    }
+    [data-portfolio="v3"] .v3-scroll-hint {
+      animation: none;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     [data-portfolio="v3"] .v3-face-eyes,
     [data-portfolio="v3"] .shark-idle,

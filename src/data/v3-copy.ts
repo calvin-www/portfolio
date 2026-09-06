@@ -5,11 +5,23 @@
 export const COPY = {
   headline: "i like 2 build stuff :D",
 
-  intro: [
-    "cs @ Rice University, based in Houston, TX. i've been making things since before i knew what a compiler was, and the design, test, fail, fix loop is still the fun part.",
-    "somewhere along the way i took a sidequest into classics and won a national championship. then i came back to software, which has been way more fun than it has any right to be.",
-    "always circling for the next thing to build.",
-  ],
+  hero: {
+    scrollHint: "scroll",
+  },
+
+  /** Types out as you scroll. Keep it under ~300 characters so it fits the pinned section. */
+  statement:
+    "cs @ Rice, based in Houston. i've been making things since before i knew what a compiler was. somewhere along the way i took a sidequest into classics, won a national championship, and came back to software. always circling for the next thing to build.",
+
+  three: {
+    heading: "besides drawing sharks, i've also:",
+    lines: [
+      "shipped a full-stack legal app as a software engineering intern at JPMorgan Chase",
+      "designed and built the web presence for Fermilab's DUNE experiment",
+      "won a national championship in certamen, the classics quiz bowl",
+    ],
+    closing: "and a bunch more, below.",
+  },
 
   list: {
     heading: "stuff i've done",

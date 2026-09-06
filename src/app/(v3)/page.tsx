@@ -1,5 +1,8 @@
 import { Suspense } from "react";
-import { Intro } from "@/components/v3/Intro";
+import { Hero } from "@/components/v3/Hero";
+import { ScrollStatement } from "@/components/v3/ScrollStatement";
+import { SiteNav } from "@/components/v3/SiteNav";
+import { PinnedThree } from "@/components/v3/PinnedThree";
 import { EntryList } from "@/components/v3/EntryList";
 
 export const dynamic = "force-dynamic";
@@ -7,7 +10,10 @@ export const dynamic = "force-dynamic";
 export default function HomePage() {
   return (
     <>
-      <Intro />
+      <Hero />
+      <ScrollStatement />
+      <SiteNav />
+      <PinnedThree />
       <Suspense fallback={null}>
         <EntryList />
       </Suspense>

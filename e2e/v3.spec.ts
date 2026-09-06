@@ -10,10 +10,28 @@ test("home renders the v3 shell with nav and footer", async ({ page }) => {
   await expect(page.getByRole("link", { name: "resume", exact: true }).first()).toHaveAttribute("href", /drive\.google\.com/);
 });
 
-test("home shows the headline and intro", async ({ page }) => {
+test("home shows the headline and the statement", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("i like 2 build stuff :D");
-  await expect(page.getByText(/national championship/i).first()).toBeVisible();
+  await expect(page.getByRole("region", { name: "about me, briefly" })).toContainText(/national championship/i);
+});
+
+test("the statement types out as you scroll and the nav catches the top", async ({ page }) => {
+  await page.goto("/");
+  const statement = page.getByRole("region", { name: "about me, briefly" });
+  const nav = page.locator("nav");
+  const revealed = () =>
+    statement.locator(".v3-ch").evaluateAll((els) => els.filter((el) => Number(getComputedStyle(el).opacity) > 0.5).length);
+  expect(await revealed()).toBe(0);
+  // Scroll to the end of the statement's runway: every character is revealed.
+  await statement.evaluate((el) => window.scrollTo(0, el.offsetTop + el.offsetHeight - window.innerHeight * 0.9));
+  await expect.poll(revealed).toBeGreaterThan(200);
+  // The page is hydrated by now (the reveal is client-driven) and the nav is still below the fold.
+  await expect(nav).toHaveAttribute("data-stuck", "false");
+  // Keep going: the nav is now stuck to the top of the viewport.
+  await page.locator("#list").evaluate((el) => el.scrollIntoView());
+  await expect(nav).toHaveAttribute("data-stuck", "true");
+  expect(await nav.evaluate((el) => Math.round(el.getBoundingClientRect().top))).toBe(0);
 });
 
 test("home lists all fifteen entries newest first", async ({ page }) => {

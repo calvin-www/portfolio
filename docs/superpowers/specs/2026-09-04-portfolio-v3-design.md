@@ -92,3 +92,17 @@ Calvin's verdict on round 1: "feels like a google doc." Diagnosis: one text colu
 
 - "dive / surface" theme toggle relabel and shark dip on toggle.
 - Light theme as default instead of system.
+
+## Round 3: scroll events (agreed 2026-09-06)
+
+Calvin asked for scroll-driven moments like hanluxi.com: the statement that types out as you scroll, and the nav that starts partway down and catches the top of the screen. Measured on the reference: the hero fills the first screen with no nav; the typed heading is per-character opacity driven by scroll progress with a darker "cursor" character; the nav is in flow after it and sticks at top with a translucent bar; a later block is pinned for ~2.5 screens while three lines highlight in turn.
+
+Home page order:
+
+1. **Hero**, full viewport, no nav: shark, headline, contact row, small scroll hint. The shark swims left as the hero scrolls out.
+2. **Statement**: the old intro paragraphs as one large statement, pinned while a tall section scrolls past; characters appear in order with scroll and the leading character is teal. Copy in `COPY.statement`. A visually hidden copy carries the full text for assistive tech.
+3. **Nav**: moved out of the layout. In flow here, `position: sticky; top: 0`, paper-tinted blurred bar; a hairline appears only once stuck (`data-stuck`). The about page renders the nav at the top as before.
+4. **Three things**: pinned block; heading, three lines that turn from muted to ink one at a time with scroll, then a closing line. Copy in `COPY.three`.
+5. List, footer unchanged.
+
+Reduced motion: no pinning, all text shown, no scroll-linked transforms. The nav still sticks.
