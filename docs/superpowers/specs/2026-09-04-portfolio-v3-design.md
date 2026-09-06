@@ -106,3 +106,14 @@ Home page order:
 5. List, footer unchanged.
 
 Reduced motion: no pinning, all text shown, no scroll-linked transforms. The nav still sticks.
+
+### Revised the same day
+
+Calvin's reaction: the typed bio was "a huge wall of text", and the pinned block ("besides drawing sharks, i've also:") copied the reference's block too closely. Changes:
+
+- The statement is one sentence: "building things since before i knew what a compiler was." Larger type, runway cut to about one screen.
+- The pinned three-things block is removed.
+- In its place, a shark pass: between the nav and the list, the hero shark re-enters from the right and crosses the page once at low opacity, driven by scroll. Decorative, hidden under reduced motion.
+- The "scroll" hint under the hero stays at Calvin's request.
+
+Rule going forward: borrow mechanics from a reference, never its copy pattern or section order.

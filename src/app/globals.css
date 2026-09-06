@@ -213,11 +213,7 @@
 
   /* Pinned sections: a tall scroll runway with the content stuck part-way down. */
   [data-portfolio="v3"] .v3-pin-section {
-    min-height: 190svh;
-  }
-
-  [data-portfolio="v3"] .v3-pin-section-short {
-    min-height: 200svh;
+    min-height: 125svh;
   }
 
   [data-portfolio="v3"] .v3-pin {
@@ -232,16 +228,11 @@
     color: color-mix(in srgb, var(--v3-teal) clamp(0%, calc((var(--i) + 1.6 - var(--typed)) * 100%), 100%), currentColor);
   }
 
-  /* Three things: lines are muted until the scroll makes them active. */
-  [data-portfolio="v3"] .v3-three-line {
-    color: var(--v3-ink-muted);
-    opacity: 0.55;
-    transition: color 350ms ease, opacity 350ms ease;
-  }
-
-  [data-portfolio="v3"] .v3-three-line.is-active {
-    color: var(--v3-ink);
-    opacity: 1;
+  /* Shark pass: a full-bleed lane the shark crosses once, driven by scroll. */
+  [data-portfolio="v3"] .v3-shark-lane {
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    overflow: hidden;
   }
 
   [data-portfolio="v3"] .v3-scroll-hint {
@@ -254,10 +245,12 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    [data-portfolio="v3"] .v3-pin-section,
-    [data-portfolio="v3"] .v3-pin-section-short {
+    [data-portfolio="v3"] .v3-pin-section {
       min-height: 0;
       padding: 4rem 0;
+    }
+    [data-portfolio="v3"] .v3-shark-pass {
+      display: none;
     }
     [data-portfolio="v3"] .v3-pin {
       position: static;
@@ -266,10 +259,6 @@
     [data-portfolio="v3"] .v3-ch {
       opacity: 1;
       color: inherit;
-    }
-    [data-portfolio="v3"] .v3-three-line {
-      color: var(--v3-ink);
-      opacity: 1;
     }
     [data-portfolio="v3"] .v3-scroll-hint {
       animation: none;

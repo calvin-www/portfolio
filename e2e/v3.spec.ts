@@ -13,19 +13,21 @@ test("home renders the v3 shell with nav and footer", async ({ page }) => {
 test("home shows the headline and the statement", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("i like 2 build stuff :D");
-  await expect(page.getByRole("region", { name: "about me, briefly" })).toContainText(/national championship/i);
+  await expect(page.getByRole("region", { name: "in one line" })).toContainText(/compiler/);
 });
 
 test("the statement types out as you scroll and the nav catches the top", async ({ page }) => {
   await page.goto("/");
-  const statement = page.getByRole("region", { name: "about me, briefly" });
+  const statement = page.getByRole("region", { name: "in one line" });
   const nav = page.locator("nav");
   const revealed = () =>
     statement.locator(".v3-ch").evaluateAll((els) => els.filter((el) => Number(getComputedStyle(el).opacity) > 0.5).length);
   expect(await revealed()).toBe(0);
-  // Scroll to the end of the statement's runway: every character is revealed.
-  await statement.evaluate((el) => window.scrollTo(0, el.offsetTop + el.offsetHeight - window.innerHeight * 0.9));
-  await expect.poll(revealed).toBeGreaterThan(200);
+  // Scroll past the end of the statement's runway: every character is revealed.
+  const total = await statement.locator(".v3-ch").count();
+  expect(total).toBeGreaterThan(20);
+  await statement.evaluate((el) => window.scrollTo(0, el.offsetTop + el.offsetHeight));
+  await expect.poll(revealed).toBe(total);
   // The page is hydrated by now (the reveal is client-driven) and the nav is still below the fold.
   await expect(nav).toHaveAttribute("data-stuck", "false");
   // Keep going: the nav is now stuck to the top of the viewport.

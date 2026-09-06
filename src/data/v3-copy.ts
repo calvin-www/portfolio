@@ -9,19 +9,8 @@ export const COPY = {
     scrollHint: "scroll",
   },
 
-  /** Types out as you scroll. Keep it under ~300 characters so it fits the pinned section. */
-  statement:
-    "cs @ Rice, based in Houston. i've been making things since before i knew what a compiler was. somewhere along the way i took a sidequest into classics, won a national championship, and came back to software. always circling for the next thing to build.",
-
-  three: {
-    heading: "besides drawing sharks, i've also:",
-    lines: [
-      "shipped a full-stack legal app as a software engineering intern at JPMorgan Chase",
-      "designed and built the web presence for Fermilab's DUNE experiment",
-      "won a national championship in certamen, the classics quiz bowl",
-    ],
-    closing: "and a bunch more, below.",
-  },
+  /** Types out as you scroll. One sentence; it should fit on two lines on a phone. */
+  statement: "building things since before i knew what a compiler was.",
 
   list: {
     heading: "stuff i've done",
