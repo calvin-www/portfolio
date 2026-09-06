@@ -111,10 +111,43 @@ test("hero draws the shark and the nav carries it", async ({ page }) => {
   await expect(page.locator("nav svg.shark")).toBeVisible();
 });
 
-test("about page lists skills as a line", async ({ page }) => {
-  await page.goto("/about");
-  await expect(page.getByRole("heading", { name: "stuff i've played with" })).toBeVisible();
-  await expect(page.getByText(/typescript, javascript/)).toBeVisible();
+test("the nav carries the contact links", async ({ page }) => {
+  await page.goto("/");
+  const nav = page.locator("nav");
+  for (const name of ["github", "linkedin", "email", "resume"]) {
+    await expect(nav.getByRole("link", { name, exact: true })).toHaveCount(1);
+  }
+});
+
+test("skills marquee: four rows, click selects and shows where it was used", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByTestId("skill-row")).toHaveCount(4);
+  const skills = page.locator("#skills");
+  await skills.scrollIntoViewIfNeeded();
+  const detail = page.getByTestId("skill-detail");
+  await expect(detail).toHaveText("");
+  const button = skills.locator('button[data-skill="typescript"]').first();
+  await button.dispatchEvent("click");
+  await expect(button).toHaveAttribute("aria-pressed", "true");
+  await expect(detail).toContainText(/TypeScript used .*MockOwl/);
+  await expect(skills.locator('button[data-skill="react"]').first()).toHaveClass(/is-dimmed/);
+  await button.dispatchEvent("click");
+  await expect(detail).toHaveText("");
+});
+
+test("the shark roams once the hero is gone", async ({ page }) => {
+  await page.goto("/");
+  const shark = page.locator(".v3-roam > div");
+  const at = async (y: number) => {
+    await page.evaluate((y) => window.scrollTo(0, y), y);
+    await page.waitForTimeout(150);
+    return shark.evaluate((el) => ({ x: el.getBoundingClientRect().left, opacity: getComputedStyle(el).opacity }));
+  };
+  expect((await at(0)).opacity).toBe("0");
+  const a = await at(1500);
+  const b = await at(2100);
+  expect(a.opacity).toBe("1");
+  expect(Math.abs(a.x - b.x)).toBeGreaterThan(100);
 });
 
 test("hovering a row with a screenshot shows a floating thumbnail", async ({ page, isMobile }) => {

@@ -117,3 +117,9 @@ Calvin's reaction: the typed bio was "a huge wall of text", and the pinned block
 - The "scroll" hint under the hero stays at Calvin's request.
 
 Rule going forward: borrow mechanics from a reference, never its copy pattern or section order.
+
+## Round 4 (2026-09-06)
+
+- The nav also carries github, linkedin, email and resume. Icons only below the sm breakpoint, where the name is hidden too.
+- The shark roams: instead of one pass, a fixed shark behind the content swims back and forth across the viewport for as long as you scroll, one crossing per ~1500px, turning around off-screen. Fades in as the hero leaves. Removed under reduced motion.
+- Skills marquee on the home page after the list, full-bleed, four rows (languages, frameworks, infra, tools) at different speeds and alternating directions. Each list renders twice and wraps. Hover slows a row to 20%; drag scrubs 1:1; a fling adds momentum that decays back. Clicking a skill highlights it, dims the rest, and shows a one-line "used at/in" line derived from resume.json (override per skill in `COPY.skills.notes`). Reduced motion stops the base scroll but keeps drag and click. Rows are defined in `src/data/adapters/v3-skills.ts`. The about page no longer lists skills.

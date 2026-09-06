@@ -44,11 +44,6 @@ export function AboutContent() {
         </ul>
       </section>
 
-      <section className="mt-12 border-t border-line pt-8">
-        <h2 className="text-v3-xl font-semibold tracking-[-0.01em]">{COPY.about.skillsHeading}</h2>
-        <p className="mt-4 max-w-[60ch] text-ink-muted">{DATA.skills.map((s) => s.name).join(", ")}</p>
-      </section>
-
       <p className="mt-10 text-v3-sm text-ink-muted">{COPY.about.shark}</p>
       <ContactRow className="mt-6" />
     </article>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { DATA } from "@/data";
 import { ThemeToggle } from "./ThemeToggle";
 import { Shark } from "./Shark";
+import { ContactRow } from "./ContactRow";
 
 /**
  * The nav sits wherever the page puts it and sticks to the top from there.
@@ -33,12 +34,17 @@ export function SiteNav() {
     <>
       <div ref={sentinel} aria-hidden className="h-px w-full" />
       <nav data-stuck={stuck} className="v3-nav sticky top-0 z-30 -mx-5 px-5 sm:-mx-6 sm:px-6">
-        <div className="flex items-center justify-between py-5 text-v3-sm">
-          <Link href="/" className="inline-flex items-center gap-2 font-semibold transition-colors hover:text-teal-ink">
+        <div className="flex items-center justify-between gap-4 py-5 text-v3-sm">
+          <Link
+            href="/"
+            aria-label={DATA.name.toLowerCase()}
+            className="inline-flex shrink-0 items-center gap-2 font-semibold transition-colors hover:text-teal-ink"
+          >
             <Shark className="h-4 w-auto" />
-            {DATA.name.toLowerCase()}
+            <span className="hidden sm:inline">{DATA.name.toLowerCase()}</span>
           </Link>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-3 sm:gap-6">
+            <ContactRow compact />
             <Link href="/about" className="text-ink-muted transition-colors hover:text-ink">
               about
             </Link>

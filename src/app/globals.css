@@ -198,6 +198,11 @@
 
   /* ---- Round 3: scroll events ---------------------------------------- */
 
+  /* Keep anchor targets and scrolled-into-view elements clear of the sticky nav. */
+  html:has([data-portfolio="v3"]) {
+    scroll-padding-top: 4.5rem;
+  }
+
   /* Sticky nav: a tinted, blurred bar with a hairline that appears once stuck. */
   [data-portfolio="v3"] .v3-nav {
     background: color-mix(in srgb, var(--v3-paper) 86%, transparent);
@@ -228,11 +233,80 @@
     color: color-mix(in srgb, var(--v3-teal) clamp(0%, calc((var(--i) + 1.6 - var(--typed)) * 100%), 100%), currentColor);
   }
 
-  /* Shark pass: a full-bleed lane the shark crosses once, driven by scroll. */
-  [data-portfolio="v3"] .v3-shark-lane {
+  /* Full-bleed helper: break out of the column to the viewport edges. */
+  [data-portfolio="v3"] .v3-bleed {
     width: 100vw;
     margin-inline: calc(50% - 50vw);
     overflow: hidden;
+  }
+
+  /* Roaming shark: faint, behind the content. */
+  [data-portfolio="v3"] .v3-roam {
+    color: color-mix(in srgb, var(--v3-ink) 22%, transparent);
+  }
+
+  /* Skills marquee. */
+  [data-portfolio="v3"] .v3-marquee-band {
+    position: relative;
+    padding: 0.35rem 0;
+  }
+
+  [data-portfolio="v3"] .v3-marquee-label {
+    position: absolute;
+    left: max(1.25rem, calc(50vw - 21rem + 1.25rem));
+    top: -0.1rem;
+    font-size: 0.8125rem;
+    color: var(--v3-ink-muted);
+    pointer-events: none;
+  }
+
+  [data-portfolio="v3"] .v3-marquee-row {
+    overflow: hidden;
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+    padding-top: 0.9rem;
+  }
+
+  [data-portfolio="v3"] .v3-marquee-row:active {
+    cursor: grabbing;
+  }
+
+  [data-portfolio="v3"] .v3-marquee-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+
+  [data-portfolio="v3"] .v3-marquee-list {
+    display: flex;
+    flex: none;
+    gap: 2.25rem;
+    padding-right: 2.25rem;
+    white-space: nowrap;
+  }
+
+  [data-portfolio="v3"] .v3-skill {
+    font-size: clamp(1.5rem, 4vw, 2.75rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--v3-ink);
+    transition: color 200ms ease, opacity 200ms ease;
+  }
+
+  [data-portfolio="v3"] .v3-skill:hover {
+    color: var(--v3-teal-ink);
+  }
+
+  [data-portfolio="v3"] .v3-skill.is-dimmed {
+    color: var(--v3-ink-muted);
+    opacity: 0.45;
+  }
+
+  [data-portfolio="v3"] .v3-skill.is-selected {
+    color: var(--v3-teal-ink);
   }
 
   [data-portfolio="v3"] .v3-scroll-hint {
@@ -249,7 +323,7 @@
       min-height: 0;
       padding: 4rem 0;
     }
-    [data-portfolio="v3"] .v3-shark-pass {
+    [data-portfolio="v3"] .v3-roam {
       display: none;
     }
     [data-portfolio="v3"] .v3-pin {

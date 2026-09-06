@@ -9,19 +9,27 @@ const ITEMS = [
   { label: "resume", href: DATA.resumeUrl, Icon: FileText },
 ];
 
-export function ContactRow({ className }: { className?: string }) {
+/**
+ * The four contact links. `compact` is for the nav: icons only on small
+ * screens, icon and label from the sm breakpoint up.
+ */
+export function ContactRow({ className, compact = false }: { className?: string; compact?: boolean }) {
   return (
-    <ul className={cn("flex flex-wrap gap-x-6 gap-y-2 text-v3-sm", className)}>
+    <ul className={cn("flex flex-wrap text-v3-sm", compact ? "gap-x-3 sm:gap-x-5" : "gap-x-6 gap-y-2", className)}>
       {ITEMS.map(({ label, href, Icon }) => (
         <li key={label}>
           <a
             href={href}
             target={href.startsWith("mailto:") ? undefined : "_blank"}
             rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-            className="v3-link inline-flex items-center gap-1.5 text-ink"
+            aria-label={compact ? label : undefined}
+            className={cn(
+              "inline-flex items-center gap-1.5",
+              compact ? "text-ink-muted transition-colors hover:text-ink" : "v3-link text-ink",
+            )}
           >
-            <Icon className="size-3.5 text-ink-muted" aria-hidden />
-            {label}
+            <Icon className={cn("size-3.5", compact ? "size-4 sm:size-3.5" : "text-ink-muted")} aria-hidden />
+            <span className={cn(compact && "hidden sm:inline")}>{label}</span>
           </a>
         </li>
       ))}

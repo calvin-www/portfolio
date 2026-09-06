@@ -9,7 +9,7 @@ const PREVIOUS = [
 
 export function Footer() {
   return (
-    <footer className="mt-20 border-t border-line py-10 text-v3-sm text-ink-muted">
+    <footer className="relative z-[1] mt-20 border-t border-line py-10 text-v3-sm text-ink-muted">
       <ContactRow />
       <p className="mt-8">
         {COPY.footer.previous}{" "}

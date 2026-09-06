@@ -12,6 +12,15 @@ export const COPY = {
   /** Types out as you scroll. One sentence; it should fit on two lines on a phone. */
   statement: "building things since before i knew what a compiler was.",
 
+  skills: {
+    heading: "stuff i've played with",
+    hint: "click one to see where it's been used. the rows drag, if you're into that.",
+    /** Shown for a skill nothing on this page lists. */
+    none: "in the toolbox, but nothing on this page lists it yet.",
+    /** Optional hand-written lines by skill id (e.g. "next-js"). These win over the derived line. */
+    notes: {} as Record<string, string>,
+  },
+
   list: {
     heading: "stuff i've done",
     hint: "there's a bunch, so feel free to filter ;)",
@@ -32,7 +41,6 @@ export const COPY = {
       "most recently i interned at JPMorgan Chase as a software engineer. before that i designed and built for Fermilab's DUNE experiment and went through Headstarter's fellowship.",
     ],
     educationHeading: "school",
-    skillsHeading: "stuff i've played with",
     shark: "why the shark? sharks have to keep moving to breathe. so do side projects. 🦈",
   },
 } as const;
