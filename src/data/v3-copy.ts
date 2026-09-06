@@ -11,10 +11,6 @@ export const COPY = {
     "always circling for the next thing to build.",
   ],
 
-  skills: {
-    label: "stuff i've played with (drag it)",
-  },
-
   list: {
     heading: "stuff i've done",
     hint: "there's a bunch, so feel free to filter ;)",
@@ -35,6 +31,7 @@ export const COPY = {
       "most recently i interned at JPMorgan Chase as a software engineer. before that i designed and built for Fermilab's DUNE experiment and went through Headstarter's fellowship.",
     ],
     educationHeading: "school",
+    skillsHeading: "stuff i've played with",
     shark: "why the shark? sharks have to keep moving to breathe. so do side projects. 🦈",
   },
 } as const;

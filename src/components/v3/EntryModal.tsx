@@ -1,13 +1,40 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import type { Entry } from "@/data/adapters/v3";
 
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+const SHEET_QUERY = "(max-width: 639px)";
+
+/** True below the sm breakpoint, where the dialog is a bottom sheet. False during SSR. */
+function useIsSheet() {
+  return useSyncExternalStore(
+    (notify) => {
+      const mq = window.matchMedia(SHEET_QUERY);
+      mq.addEventListener("change", notify);
+      return () => mq.removeEventListener("change", notify);
+    },
+    () => window.matchMedia(SHEET_QUERY).matches,
+    () => false,
+  );
+}
+
+const PANEL = {
+  card: {
+    hidden: { opacity: 0, scale: 0.96, y: 12 },
+    shown: { opacity: 1, scale: 1, y: 0 },
+  },
+  sheet: {
+    hidden: { opacity: 1, y: "100%" },
+    shown: { opacity: 1, y: 0 },
+  },
+} as const;
 
 export function EntryModal({ entry, onClose }: { entry: Entry; onClose: () => void }) {
   const panelRef = useRef<HTMLDivElement>(null);
+  const sheet = useIsSheet();
 
   useEffect(() => {
     const previouslyFocused = document.activeElement as HTMLElement | null;
@@ -50,14 +77,23 @@ export function EntryModal({ entry, onClose }: { entry: Entry; onClose: () => vo
 
   return (
     <div className="fixed inset-0 z-50 flex items-stretch sm:items-center sm:justify-center sm:p-6">
-      <button
+      <motion.button
         type="button"
         aria-label="close dialog"
         onClick={onClose}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
         className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"
       />
-      <div
+      <motion.div
         ref={panelRef}
+        variants={sheet ? PANEL.sheet : PANEL.card}
+        initial="hidden"
+        animate="shown"
+        exit="hidden"
+        transition={sheet ? { type: "spring", stiffness: 380, damping: 38 } : { type: "spring", stiffness: 420, damping: 34 }}
         tabIndex={-1}
         role="dialog"
         aria-modal="true"
@@ -82,9 +118,13 @@ export function EntryModal({ entry, onClose }: { entry: Entry; onClose: () => vo
             </span>
           )}
           <div className="min-w-0 pt-1">
-            <h2 id="entry-title" className="text-v3-xl font-semibold tracking-[-0.01em]">
+            <motion.h2
+              id="entry-title"
+              layoutId={`entry-title-${entry.slug}`}
+              className="text-v3-xl font-semibold tracking-[-0.01em]"
+            >
               {entry.title}
-            </h2>
+            </motion.h2>
             <p className="mt-1 text-v3-xs text-ink-muted">{meta}</p>
           </div>
         </header>
@@ -122,7 +162,7 @@ export function EntryModal({ entry, onClose }: { entry: Entry; onClose: () => vo
             />
           </div>
         ) : null}
-      </div>
+      </motion.div>
     </div>
   );
 }

@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { FILTERS, type Filter } from "@/data/adapters/v3";
 import { cn } from "@/lib/utils";
 
@@ -13,11 +16,19 @@ export function FilterBar({ value, onChange }: { value: Filter; onChange: (f: Fi
             aria-pressed={active}
             onClick={() => onChange(f)}
             className={cn(
-              "border-b-2 pb-1 transition-colors",
-              active ? "border-teal font-medium text-ink" : "border-transparent text-ink-muted hover:text-ink",
+              "relative pb-1 transition-colors",
+              active ? "font-medium text-ink" : "text-ink-muted hover:text-ink",
             )}
           >
             {f}
+            {active && (
+              <motion.span
+                layoutId="filter-underline"
+                aria-hidden
+                className="absolute inset-x-0 bottom-0 h-0.5 bg-teal"
+                transition={{ type: "spring", stiffness: 500, damping: 40 }}
+              />
+            )}
           </button>
         );
       })}

@@ -84,3 +84,25 @@ test("clicking the backdrop closes the modal", async ({ page }) => {
   await expect(dialog).toBeHidden();
   await expect(page).toHaveURL(/\/$/);
 });
+
+test("hero draws the shark and the nav carries it", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("img", { name: /shark/i })).toBeVisible();
+  await expect(page.locator("nav svg.shark")).toBeVisible();
+});
+
+test("about page lists skills as a line", async ({ page }) => {
+  await page.goto("/about");
+  await expect(page.getByRole("heading", { name: "stuff i've played with" })).toBeVisible();
+  await expect(page.getByText(/typescript, javascript/)).toBeVisible();
+});
+
+test("hovering a row with a screenshot shows a floating thumbnail", async ({ page, isMobile }) => {
+  test.skip(isMobile, "hover previews are mouse-only");
+  await page.goto("/");
+  await expect(page.getByTestId("hover-preview")).toHaveCount(0);
+  await page.getByTestId("entry-row").filter({ hasText: "MockOwl" }).hover();
+  await expect(page.getByTestId("hover-preview")).toBeVisible();
+  await page.getByTestId("entry-row").filter({ hasText: "JPMorgan Chase" }).hover();
+  await expect(page.getByTestId("hover-preview")).toHaveCount(0);
+});
