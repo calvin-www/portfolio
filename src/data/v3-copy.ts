@@ -36,6 +36,5 @@ export const COPY = {
       "most recently i interned at JPMorgan Chase as a software engineer. before that i designed and built for Fermilab's DUNE experiment and went through Headstarter's fellowship.",
     ],
     educationHeading: "school",
-    shark: "why the shark? sharks have to keep moving to breathe. so do side projects. 🦈",
   },
 } as const;

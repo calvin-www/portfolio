@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { DATA } from "@/data";
 import { COPY } from "@/data/v3-copy";
-import { ContactRow } from "./ContactRow";
 
 export function AboutContent() {
   return (
@@ -45,8 +44,6 @@ export function AboutContent() {
         </ul>
       </section>
 
-      <p className="mt-10 text-v3-sm text-ink-muted">{COPY.about.shark}</p>
-      <ContactRow className="mt-6" />
     </article>
   );
 }
