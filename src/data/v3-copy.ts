@@ -3,22 +3,17 @@
  * Edit freely; nothing here is referenced by tests except `headline`.
  */
 export const COPY = {
-  headline: "i like 2 build stuff :D",
-
   hero: {
+    subtitle: "making stuff @ Google",
     scrollHint: "scroll",
   },
 
-  /** Types out as you scroll. One sentence; it should fit on two lines on a phone. */
-  statement: "building things since before i knew what a compiler was.",
+  /** Types out as you scroll inside the ink band. A trailing ":D" is rotated to face the reader. */
+  statement: "i like 2 build stuff :D",
 
   skills: {
     heading: "stuff i've played with",
-    hint: "click one to see where it's been used. the rows drag, if you're into that.",
-    /** Shown for a skill nothing on this page lists. */
-    none: "in the toolbox, but nothing on this page lists it yet.",
-    /** Optional hand-written lines by skill id (e.g. "next-js"). These win over the derived line. */
-    notes: {} as Record<string, string>,
+    hint: "the rows drag, if you're into that.",
   },
 
   list: {

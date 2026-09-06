@@ -1,11 +1,9 @@
 /**
  * v3 skills adapter
  *
- * Four rows for the skills marquee. Each skill carries the names it goes by
- * in resume.json so we can find the work, projects and hackathons that used
- * it and build a "where i used it" line without hand-written copy.
+ * Four rows for the skills marquee. Each skill keeps the names it goes by in
+ * resume.json so the rows can be cross-referenced with entries later.
  */
-import type { Entry } from "./v3";
 
 export interface Skill {
   id: string;
@@ -69,27 +67,4 @@ export const ALL_SKILLS: Skill[] = SKILL_ROWS.flatMap((r) => r.skills);
 
 export function findSkill(id: string | null): Skill | null {
   return id ? ALL_SKILLS.find((k) => k.id === id) ?? null : null;
-}
-
-/** Titles of the entries whose tags mention this skill, newest first. */
-export function usedIn(skill: Skill, entries: Entry[]): Entry[] {
-  return entries.filter((e) => e.tags.some((t) => skill.aliases.includes(t.toLowerCase())));
-}
-
-function joinNames(names: string[]): string {
-  if (names.length <= 1) return names.join("");
-  return `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
-}
-
-/** One line: where the skill shows up on this site. */
-export function usageLine(skill: Skill, entries: Entry[], notes: Record<string, string>, none: string): string {
-  if (notes[skill.id]) return notes[skill.id];
-  const used = usedIn(skill, entries);
-  if (used.length === 0) return none;
-  const work = used.filter((e) => e.type === "work").map((e) => e.title);
-  const built = used.filter((e) => e.type !== "work").map((e) => e.title);
-  const parts: string[] = [];
-  if (work.length) parts.push(`at ${joinNames(work)}`);
-  if (built.length) parts.push(`in ${joinNames(built)}`);
-  return `used ${parts.join(", and ")}.`;
 }

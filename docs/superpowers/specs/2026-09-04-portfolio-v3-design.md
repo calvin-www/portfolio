@@ -127,3 +127,9 @@ Rule going forward: borrow mechanics from a reference, never its copy pattern or
 ### Width rhythm (2026-09-06)
 
 Calvin: the full-bleed marquee next to a padded column was jarring. Fix: make full width part of the page's language. The typed statement sits in an inverted full-width band (ink on paper, paper on ink in dark mode) that fills a screen while pinned. The skills section is a surface-toned band with the marquee inside it. The sticky nav bar and the section rules above the list, the footer and the about page's school section run edge to edge. All band content stays on the column grid via `.v3-band-inner`. The shark now turns around every 650px of scroll.
+
+### Hero and band revisions (2026-09-06)
+
+- Hero: the name "Calvin Wong" as the h1 with the subtitle "making stuff @ Google". The old headline "i like 2 build stuff :D" is now the line that types out in the ink band, with the rotated blinking face kept.
+- Clicking a skill only highlights it and dims the rest; the "used in" detail line is removed.
+- The roaming shark is also painted inside the ink band, in the band's text colour, at exactly the spot the fixed copy occupies, so it appears to swim straight through the band.

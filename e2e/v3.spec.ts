@@ -10,10 +10,11 @@ test("home renders the v3 shell with nav and footer", async ({ page }) => {
   await expect(page.getByRole("link", { name: "resume", exact: true }).first()).toHaveAttribute("href", /drive\.google\.com/);
 });
 
-test("home shows the headline and the statement", async ({ page }) => {
+test("home shows the name, the subtitle and the typed line", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("i like 2 build stuff :D");
-  await expect(page.getByRole("region", { name: "in one line" })).toContainText(/compiler/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Calvin Wong");
+  await expect(page.getByText("making stuff @ Google")).toBeVisible();
+  await expect(page.getByRole("region", { name: "in one line" })).toContainText("i like 2 build stuff :D");
 });
 
 test("the statement types out as you scroll and the nav catches the top", async ({ page }) => {
@@ -25,9 +26,9 @@ test("the statement types out as you scroll and the nav catches the top", async 
   expect(await revealed()).toBe(0);
   // Scroll past the end of the statement's runway: every character is revealed.
   const total = await statement.locator(".v3-ch").count();
-  expect(total).toBeGreaterThan(20);
+  expect(total).toBeGreaterThan(10);
   await statement.evaluate((el) => window.scrollTo(0, el.offsetTop + el.offsetHeight));
-  await expect.poll(revealed).toBe(total);
+  await expect.poll(revealed).toBe(await statement.locator(".v3-ch").count());
   // The page is hydrated by now (the reveal is client-driven) and the nav is still below the fold.
   await expect(nav).toHaveAttribute("data-stuck", "false");
   // Keep going: the nav is now stuck to the top of the viewport.
@@ -119,20 +120,31 @@ test("the nav carries the contact links", async ({ page }) => {
   }
 });
 
-test("skills marquee: four rows, click selects and shows where it was used", async ({ page }) => {
+test("skills marquee: four rows, click highlights one and dims the rest", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByTestId("skill-row")).toHaveCount(4);
   const skills = page.locator("#skills");
   await skills.scrollIntoViewIfNeeded();
-  const detail = page.getByTestId("skill-detail");
-  await expect(detail).toHaveText("");
   const button = skills.locator('button[data-skill="typescript"]').first();
+  const other = skills.locator('button[data-skill="react"]').first();
   await button.dispatchEvent("click");
   await expect(button).toHaveAttribute("aria-pressed", "true");
-  await expect(detail).toContainText(/TypeScript used .*MockOwl/);
-  await expect(skills.locator('button[data-skill="react"]').first()).toHaveClass(/is-dimmed/);
+  await expect(button).toHaveClass(/is-selected/);
+  await expect(other).toHaveClass(/is-dimmed/);
   await button.dispatchEvent("click");
-  await expect(detail).toHaveText("");
+  await expect(button).toHaveAttribute("aria-pressed", "false");
+  await expect(other).not.toHaveClass(/is-dimmed/);
+});
+
+test("the shark also shows inside the ink band", async ({ page }) => {
+  await page.goto("/");
+  const band = page.getByRole("region", { name: "in one line" });
+  await band.evaluate((el) => window.scrollTo(0, el.offsetTop + 200));
+  await page.waitForTimeout(200);
+  const fixed = await page.locator(".v3-roam > div").evaluate((el) => el.getBoundingClientRect());
+  const inBand = await page.locator(".v3-roam-band > div").evaluate((el) => el.getBoundingClientRect());
+  expect(Math.abs(fixed.left - inBand.left)).toBeLessThan(2);
+  expect(Math.abs(fixed.top - inBand.top)).toBeLessThan(2);
 });
 
 test("the shark roams once the hero is gone", async ({ page }) => {

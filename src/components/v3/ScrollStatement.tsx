@@ -3,13 +3,17 @@
 import { useRef } from "react";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import { COPY } from "@/data/v3-copy";
+import { BandShark } from "./RoamingShark";
+
+const FACE = ":D";
 
 /**
- * A statement that types itself out as you scroll. The section is tall and
- * the text is pinned inside it; scroll progress through the section becomes
- * a character count written to one CSS variable (`--typed`), and CSS derives
- * each character's opacity and colour from that. The words are inline-block
- * so lines still break between words.
+ * A line that types itself out as you scroll, inside an inverted full-width
+ * band. The section is tall and the text is pinned inside it; scroll progress
+ * through the section becomes a character count written to one CSS variable
+ * (`--typed`), and CSS derives each character's opacity and colour from that.
+ * Words are inline-block so lines still break between words. A trailing ":D"
+ * is rotated to face the reader and blinks, as the old headline did.
  *
  * Reduced motion: globals.css unpins the text and shows every character.
  */
@@ -25,6 +29,15 @@ export function ScrollStatement() {
   });
 
   let index = 0;
+  const char = (ch: string, extra?: string) => {
+    const i = index++;
+    return (
+      <span key={i} className={extra ? `v3-ch ${extra}` : "v3-ch"} style={{ "--i": i } as React.CSSProperties}>
+        {ch}
+      </span>
+    );
+  };
+
   return (
     <section
       ref={ref}
@@ -32,22 +45,20 @@ export function ScrollStatement() {
       className="v3-pin-section v3-band v3-band-ink relative"
       style={{ "--typed": 0, "--total": total } as React.CSSProperties}
     >
-      <div className="v3-pin v3-band-inner">
+      <BandShark />
+      <div className="v3-pin v3-band-inner z-[1]">
         <p className="sr-only">{text}</p>
-        <p aria-hidden className="v3-typed max-w-[16ch] text-[clamp(2rem,5.5vw,3.25rem)] font-semibold leading-[1.1] tracking-[-0.02em]">
+        <p
+          aria-hidden
+          className="v3-typed v3-display max-w-[14ch] text-[clamp(2.75rem,8vw,4.75rem)] font-bold leading-[0.95] tracking-[-0.02em]"
+        >
           {words.map((word, w) => {
-            const chars = word.split("").map((ch) => {
-              const i = index++;
-              return (
-                <span key={i} className="v3-ch" style={{ "--i": i } as React.CSSProperties}>
-                  {ch}
-                </span>
-              );
-            });
+            const isFace = word === FACE;
+            const chars = isFace ? [char(":", "v3-face-eyes"), char("D")] : word.split("").map((ch) => char(ch));
             index++; // the space after the word
             return (
               <span key={w}>
-                <span className="inline-block whitespace-nowrap">{chars}</span>
+                <span className={isFace ? "v3-face" : "inline-block whitespace-nowrap"}>{chars}</span>
                 {w < words.length - 1 ? " " : null}
               </span>
             );

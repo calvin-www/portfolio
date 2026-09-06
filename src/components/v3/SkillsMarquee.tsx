@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { useReducedMotion } from "framer-motion";
-import { ENTRIES } from "@/data/adapters/v3";
-import { SKILL_ROWS, findSkill, usageLine } from "@/data/adapters/v3-skills";
+import { SKILL_ROWS } from "@/data/adapters/v3-skills";
 import { COPY } from "@/data/v3-copy";
 import { MarqueeRow } from "./MarqueeRow";
 
@@ -13,8 +12,6 @@ const SPEEDS = [-38, 52, -30, 44];
 export function SkillsMarquee() {
   const [selected, setSelected] = useState<string | null>(null);
   const reduced = useReducedMotion() ?? false;
-  const skill = findSkill(selected);
-  const detail = skill ? usageLine(skill, ENTRIES, COPY.skills.notes, COPY.skills.none) : null;
 
   return (
     <section
@@ -47,16 +44,6 @@ export function SkillsMarquee() {
             />
           </div>
         ))}
-      </div>
-
-      <div className="v3-band-inner">
-        <p data-testid="skill-detail" aria-live="polite" className="mt-6 min-h-[1.6em] text-ink-muted">
-          {skill ? (
-            <>
-              <span className="font-semibold text-ink">{skill.label}</span> {detail}
-            </>
-          ) : null}
-        </p>
       </div>
     </section>
   );
