@@ -11,6 +11,7 @@ export default function V3Layout({ children }: { children: React.ReactNode }) {
           <main className="flex-1">{children}</main>
           <Footer />
         </div>
+        <div aria-hidden className="v3-grain" />
       </div>
     </ThemeProvider>
   );

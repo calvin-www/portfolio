@@ -8,7 +8,7 @@ export const COPY = {
   intro: [
     "cs @ Rice University, based in Houston, TX. i've been making things since before i knew what a compiler was, and the design, test, fail, fix loop is still the fun part.",
     "somewhere along the way i took a sidequest into classics and won a national championship. then i came back to software, which has been way more fun than it has any right to be.",
-    "🦈 always circling for the next thing to build.",
+    "always circling for the next thing to build.",
   ],
 
   skills: {

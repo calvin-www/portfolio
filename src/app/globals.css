@@ -111,6 +111,103 @@
     text-decoration-color: var(--v3-teal);
   }
 
+  /* ---- Round 2: shark, face, grain ---------------------------------- */
+
+  /* Paper grain: a fixed noise layer over everything, never interactive. */
+  [data-portfolio="v3"] .v3-grain {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.055;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+
+  .dark [data-portfolio="v3"] .v3-grain {
+    opacity: 0.09;
+    filter: invert(1);
+  }
+
+  /* The emoticon in the headline turns to face the reader and blinks. */
+  [data-portfolio="v3"] .v3-face {
+    display: inline-block;
+    transform: rotate(90deg) translateY(-0.04em);
+    transform-origin: 50% 50%;
+  }
+
+  [data-portfolio="v3"] .v3-face-eyes {
+    display: inline-block;
+    transform-origin: 50% 50%;
+    animation: v3-blink 5.5s ease-in-out 3s infinite;
+  }
+
+  @keyframes v3-blink {
+    0%, 92%, 100% { transform: scaleX(1); }
+    95% { transform: scaleX(0.12); }
+  }
+
+  /* Hero shark: draw the outline, then the details, then idle. */
+  [data-portfolio="v3"] .shark-tilt {
+    --shark-tilt: 0deg;
+    transform: rotate(var(--shark-tilt));
+    transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  [data-portfolio="v3"] .shark-idle {
+    animation: v3-shark-idle 6s ease-in-out infinite;
+  }
+
+  @keyframes v3-shark-idle {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(-1.2deg); }
+  }
+
+  [data-portfolio="v3"] .shark-draw path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: v3-draw 0.5s ease-out forwards;
+  }
+
+  [data-portfolio="v3"] .shark-draw .shark-body {
+    animation-duration: 1.6s;
+    animation-delay: 0.2s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.3, 1);
+  }
+  [data-portfolio="v3"] .shark-draw .shark-fin { animation-delay: 1.55s; }
+  [data-portfolio="v3"] .shark-draw .shark-gill:nth-of-type(3) { animation-delay: 1.85s; animation-duration: 0.3s; }
+  [data-portfolio="v3"] .shark-draw .shark-gill:nth-of-type(4) { animation-delay: 1.95s; animation-duration: 0.3s; }
+  [data-portfolio="v3"] .shark-draw .shark-gill:nth-of-type(5) { animation-delay: 2.05s; animation-duration: 0.3s; }
+  [data-portfolio="v3"] .shark-draw .shark-mouth { animation-delay: 2.2s; animation-duration: 0.4s; }
+
+  [data-portfolio="v3"] .shark-draw .shark-eye {
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: scale(0);
+    animation: v3-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) 2.45s forwards;
+  }
+
+  @keyframes v3-draw {
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes v3-pop {
+    to { transform: scale(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-portfolio="v3"] .v3-face-eyes,
+    [data-portfolio="v3"] .shark-idle,
+    [data-portfolio="v3"] .shark-draw path,
+    [data-portfolio="v3"] .shark-draw .shark-eye {
+      animation: none;
+    }
+    [data-portfolio="v3"] .shark-draw path { stroke-dashoffset: 0; }
+    [data-portfolio="v3"] .shark-draw .shark-eye { transform: scale(1); }
+    [data-portfolio="v3"] .shark-tilt { transition: none; transform: none; }
+  }
+
   * {
     @apply border-border;
   }
