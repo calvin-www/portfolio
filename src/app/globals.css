@@ -218,13 +218,17 @@
 
   /* Pinned sections: a tall scroll runway with the content stuck part-way down. */
   [data-portfolio="v3"] .v3-pin-section {
-    min-height: 125svh;
+    min-height: 175svh;
   }
 
   [data-portfolio="v3"] .v3-pin {
     position: sticky;
-    top: 22svh;
-    padding-bottom: 4rem;
+    top: 0;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 4rem;
   }
 
   /* Typed statement: --typed is the number of characters revealed so far. */
@@ -233,7 +237,48 @@
     color: color-mix(in srgb, var(--v3-teal) clamp(0%, calc((var(--i) + 1.6 - var(--typed)) * 100%), 100%), currentColor);
   }
 
-  /* Full-bleed helper: break out of the column to the viewport edges. */
+  /* Full-bleed bands: run edge to edge, keep their content on the column grid.
+     The wrapper clips the half-scrollbar overshoot this trick produces. */
+  [data-portfolio="v3"] {
+    overflow-x: clip;
+  }
+
+  [data-portfolio="v3"] .v3-band {
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+  }
+
+  [data-portfolio="v3"] .v3-band-inner {
+    width: 100%;
+    max-width: 42rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    [data-portfolio="v3"] .v3-band-inner {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  /* Inverted band: ink on paper becomes paper on ink, in either theme. */
+  [data-portfolio="v3"] .v3-band-ink {
+    background: var(--v3-ink);
+    color: var(--v3-paper);
+  }
+
+  [data-portfolio="v3"] .v3-band-surface {
+    background: var(--v3-surface);
+  }
+
+  /* Section rules run edge to edge. */
+  [data-portfolio="v3"] .v3-rule {
+    border: 0;
+    border-top: 1px solid var(--v3-line);
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+  }
+
   [data-portfolio="v3"] .v3-bleed {
     width: 100vw;
     margin-inline: calc(50% - 50vw);
@@ -247,17 +292,13 @@
 
   /* Skills marquee. */
   [data-portfolio="v3"] .v3-marquee-band {
-    position: relative;
     padding: 0.35rem 0;
   }
 
   [data-portfolio="v3"] .v3-marquee-label {
-    position: absolute;
-    left: max(1.25rem, calc(50vw - 21rem + 1.25rem));
-    top: -0.1rem;
+    display: block;
     font-size: 0.8125rem;
     color: var(--v3-ink-muted);
-    pointer-events: none;
   }
 
   [data-portfolio="v3"] .v3-marquee-row {
@@ -266,7 +307,7 @@
     touch-action: pan-y;
     user-select: none;
     -webkit-user-select: none;
-    padding-top: 0.9rem;
+    padding-top: 0.4rem;
   }
 
   [data-portfolio="v3"] .v3-marquee-row:active {
@@ -328,7 +369,8 @@
     }
     [data-portfolio="v3"] .v3-pin {
       position: static;
-      padding-bottom: 0;
+      min-height: 0;
+      padding-block: 0;
     }
     [data-portfolio="v3"] .v3-ch {
       opacity: 1;

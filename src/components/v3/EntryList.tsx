@@ -26,7 +26,8 @@ export function EntryList() {
   return (
     <MotionConfig reducedMotion="user">
       <LayoutGroup>
-        <section id="list" className="mt-10 border-t border-line pt-8">
+        <section id="list" className="mt-10">
+          <hr className="v3-rule mb-8" />
           <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
             <h2 className="text-v3-xl font-semibold tracking-[-0.01em]">{COPY.list.heading}</h2>
             <p className="text-v3-sm text-ink-muted">{COPY.list.hint}</p>

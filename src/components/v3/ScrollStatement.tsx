@@ -19,15 +19,20 @@ export function ScrollStatement() {
   const words = text.split(" ");
   const total = text.length;
 
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.7", "end 0.95"] });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.55", "end 1"] });
   useMotionValueEvent(scrollYProgress, "change", (p) => {
     ref.current?.style.setProperty("--typed", (p * (total + 2)).toFixed(2));
   });
 
   let index = 0;
   return (
-    <section ref={ref} aria-label="in one line" className="v3-pin-section relative" style={{ "--typed": 0, "--total": total } as React.CSSProperties}>
-      <div className="v3-pin">
+    <section
+      ref={ref}
+      aria-label="in one line"
+      className="v3-pin-section v3-band v3-band-ink relative"
+      style={{ "--typed": 0, "--total": total } as React.CSSProperties}
+    >
+      <div className="v3-pin v3-band-inner">
         <p className="sr-only">{text}</p>
         <p aria-hidden className="v3-typed max-w-[16ch] text-[clamp(2rem,5.5vw,3.25rem)] font-semibold leading-[1.1] tracking-[-0.02em]">
           {words.map((word, w) => {

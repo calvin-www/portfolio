@@ -33,8 +33,8 @@ export function SiteNav() {
   return (
     <>
       <div ref={sentinel} aria-hidden className="h-px w-full" />
-      <nav data-stuck={stuck} className="v3-nav sticky top-0 z-30 -mx-5 px-5 sm:-mx-6 sm:px-6">
-        <div className="flex items-center justify-between gap-4 py-5 text-v3-sm">
+      <nav data-stuck={stuck} className="v3-nav v3-band sticky top-0 z-30">
+        <div className="v3-band-inner flex items-center justify-between gap-4 py-5 text-v3-sm">
           <Link
             href="/"
             aria-label={DATA.name.toLowerCase()}

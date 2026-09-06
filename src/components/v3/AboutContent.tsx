@@ -22,7 +22,8 @@ export function AboutContent() {
         </div>
       </div>
 
-      <section className="mt-12 border-t border-line pt-8">
+      <section className="mt-12">
+        <hr className="v3-rule mb-8" />
         <h2 className="text-v3-xl font-semibold tracking-[-0.01em]">{COPY.about.educationHeading}</h2>
         <ul className="mt-4 divide-y divide-line border-t border-line">
           {DATA.education.map((edu) => (
