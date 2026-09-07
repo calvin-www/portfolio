@@ -1,6 +1,6 @@
 /**
  * All v3 prose in one place. Lowercase by convention except proper nouns.
- * Edit freely; nothing here is referenced by tests except `headline`.
+ * Edit freely; the e2e tests assert only `hero.subtitle` and `statement`.
  */
 export const COPY = {
   hero: {
@@ -13,7 +13,6 @@ export const COPY = {
 
   skills: {
     heading: "stuff i've played with",
-    hint: "",
   },
 
   list: {

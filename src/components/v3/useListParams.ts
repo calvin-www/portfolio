@@ -20,7 +20,7 @@ export function useListParams() {
 
   const openItem = useCallback(
     (slug: string) => {
-      router.push(buildListHref(pathname, searchParams, { item: slug }), { scroll: false });
+      router.replace(buildListHref(pathname, searchParams, { item: slug }), { scroll: false });
     },
     [router, pathname, searchParams],
   );

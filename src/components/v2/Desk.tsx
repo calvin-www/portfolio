@@ -478,7 +478,7 @@ export function Desk() {
                 icon: brandEmoji,
                 color: "#c9efe3",
                 dot: "transparent",
-                act: () => openProject(projects[0]),
+                act: () => openProject(projects.find((x) => x.links.length > 0) ?? projects[0]),
               },
               { icon: "✉️", color: "#c2e0ff", dot: p.accent, act: () => openWinById("contact") },
             ].map((d, i) => (
@@ -704,7 +704,7 @@ export function Desk() {
               {
                 icon: brandEmoji,
                 color: "#c9efe3",
-                act: () => setSheet({ type: "project", project: projects[0] }),
+                act: () => setSheet({ type: "project", project: projects.find((x) => x.links.length > 0) ?? projects[0] }),
               },
               { icon: "✉️", color: "#c2e0ff", act: () => setSheet({ type: "contact" }) },
             ].map((d, i) => (
@@ -974,7 +974,7 @@ function ProjectBody({ p, project }: { p: Pal; project: DeskProject }) {
         <div style={{ fontFamily: mono, fontSize: 12, color: p.accent, marginTop: 6 }}>
           {project.stack}
         </div>
-        <div style={{ fontSize: 15, lineHeight: 1.6, opacity: 0.85, marginTop: 14 }}>
+        <div style={{ fontSize: 15, lineHeight: 1.6, opacity: 0.85, marginTop: 14, whiteSpace: "pre-line" }}>
           {project.desc}
         </div>
 

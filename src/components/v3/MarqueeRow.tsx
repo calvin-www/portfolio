@@ -124,10 +124,19 @@ export function MarqueeRow({ skills, speed, selected, onSelect, reducedMotion }:
     }
   };
 
-  const onSkillClick = (id: string) => {
-    // Ignore the click that ends a drag.
-    if (state.current.dragDistance > CLICK_SLOP_PX) return;
+  const onSkillClick = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    // Ignore the mouse click that ends a drag. A keyboard activation arrives as a
+    // click with detail 0 and must not be swallowed by the last drag's distance;
+    // a real mouse click always has its own pointerdown, which resets it.
+    if (e.detail > 0 && state.current.dragDistance > CLICK_SLOP_PX) return;
     onSelect(id);
+  };
+
+  // Capture only starts once a press has moved past the slop, so a press that
+  // leaves the row before then would otherwise never see its pointerup.
+  const onPointerLeave = (e: React.PointerEvent<HTMLDivElement>) => {
+    state.current.hovering = false;
+    if (state.current.dragging && !e.currentTarget.hasPointerCapture(state.current.pointerId)) endDrag(e);
   };
 
   const copies = [0, 1];
@@ -136,7 +145,7 @@ export function MarqueeRow({ skills, speed, selected, onSelect, reducedMotion }:
       className="v3-marquee-row"
       data-testid="skill-row"
       onPointerEnter={() => (state.current.hovering = true)}
-      onPointerLeave={() => (state.current.hovering = false)}
+      onPointerLeave={onPointerLeave}
       onFocusCapture={() => (state.current.focused = true)}
       onBlurCapture={() => (state.current.focused = false)}
       onPointerDown={onPointerDown}
@@ -156,7 +165,7 @@ export function MarqueeRow({ skills, speed, selected, onSelect, reducedMotion }:
                     tabIndex={copy === 1 ? -1 : undefined}
                     aria-pressed={copy === 0 ? isSelected : undefined}
                     data-skill={skill.id}
-                    onClick={() => onSkillClick(skill.id)}
+                    onClick={(e) => onSkillClick(e, skill.id)}
                     className={cn(
                       "v3-skill",
                       selected && !isSelected && "is-dimmed",

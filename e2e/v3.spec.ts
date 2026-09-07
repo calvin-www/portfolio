@@ -171,3 +171,21 @@ test("hovering a row with a screenshot shows a floating thumbnail", async ({ pag
   await page.getByTestId("entry-row").filter({ hasText: "JPMorgan Chase" }).hover();
   await expect(page.getByTestId("hover-preview")).toHaveCount(0);
 });
+
+test("skills marquee: a mouse drag does not swallow later keyboard activation", async ({ page, isMobile }) => {
+  test.skip(isMobile, "mouse drag only");
+  await page.goto("/");
+  const skills = page.locator("#skills");
+  await skills.scrollIntoViewIfNeeded();
+  const row = page.getByTestId("skill-row").first();
+  const box = (await row.boundingBox())!;
+  // Scrub the row well past the click slop, then let go.
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(box.x + box.width / 2 + 60, box.y + box.height / 2, { steps: 6 });
+  await page.mouse.up();
+  const button = skills.locator('button[data-skill="typescript"]').first();
+  await button.focus();
+  await page.keyboard.press("Enter");
+  await expect(button).toHaveAttribute("aria-pressed", "true");
+});

@@ -279,12 +279,6 @@
     margin-inline: calc(50% - 50vw);
   }
 
-  [data-portfolio="v3"] .v3-bleed {
-    width: 100vw;
-    margin-inline: calc(50% - 50vw);
-    overflow: hidden;
-  }
-
   /* Roaming shark: faint, behind the content. Inside the ink band it takes the band's text colour. */
   [data-portfolio="v3"] .v3-roam {
     color: color-mix(in srgb, var(--v3-ink) 22%, transparent);
@@ -306,7 +300,7 @@
   }
 
   [data-portfolio="v3"] .v3-marquee-row {
-    overflow: hidden;
+    overflow: clip;
     cursor: grab;
     touch-action: pan-y;
     user-select: none;

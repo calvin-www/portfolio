@@ -18,13 +18,11 @@ export function SkillsMarquee() {
       id="skills"
       aria-labelledby="skills-heading"
       className="v3-band v3-band-surface mt-16 py-10 sm:py-12"
-      data-selected={selected ?? ""}
     >
-      <div className="v3-band-inner flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+      <div className="v3-band-inner">
         <h2 id="skills-heading" className="text-v3-xl font-semibold tracking-[-0.01em]">
           {COPY.skills.heading}
         </h2>
-        <p className="text-v3-sm text-ink-muted">{COPY.skills.hint}</p>
       </div>
 
       <div className="mt-6">

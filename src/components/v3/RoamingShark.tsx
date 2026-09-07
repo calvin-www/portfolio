@@ -2,7 +2,7 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { Shark } from "./Shark";
 
 /** Scroll distance for one crossing of the viewport. */
@@ -65,15 +65,14 @@ function SharkBody({ x, facing, opacity, top }: { x: MotionValue<string>; facing
  * "always circling": once the hero is gone, the shark swims back and forth
  * across the whole page for as long as you scroll, turning around off-screen.
  * Rendered by the layout as a sibling of <main> so it paints behind the
- * content; home page only. Decorative, and removed under reduced motion.
+ * content; home page only. Decorative; hidden by CSS under reduced motion.
  */
 export function RoamingShark() {
   const pathname = usePathname();
-  const reduced = useReducedMotion();
   const { x, facing, bob, opacity } = useRoamingPath();
   const top = useTransform(bob, (b) => `calc(${LANE_TOP * 100}vh + ${b}vh)`);
 
-  if (reduced || pathname !== "/") return null;
+  if (pathname !== "/") return null;
 
   return (
     <div aria-hidden className="v3-roam pointer-events-none fixed inset-0 z-0">
@@ -89,7 +88,6 @@ export function RoamingShark() {
  * swim straight through it in the band's text colour.
  */
 export function BandShark() {
-  const reduced = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const [bandTop, setBandTop] = useState(0);
   const { scrollY, x, facing, opacity } = useRoamingPath();
@@ -109,8 +107,6 @@ export function BandShark() {
     const vh = viewportHeight();
     return `${y - bandTop + vh * LANE_TOP + (bobAt(crossingsAt(y)) / 100) * vh}px`;
   });
-
-  if (reduced) return null;
 
   return (
     <div ref={ref} aria-hidden className="v3-roam-band pointer-events-none absolute inset-0 z-0 overflow-hidden">
