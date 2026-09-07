@@ -30,7 +30,7 @@ const fixture = {
       title: "Widget", href: "", active: true, description: "A widget.",
       technologies: ["TS", "React"],
       links: [{ type: "Source", href: "https://gh.test/w", icon: "github" }, { type: "Demo", href: "", icon: "globe" }],
-      image: "/widget.png", video: "",
+      image: "/widget.png", video: "", logoUrl: "/sponsor.svg",
       slug: "widget", tagline: "a widget", emoji: "🔧", startDate: "2024-06", endDate: "2024-06",
     },
   ],
@@ -92,6 +92,11 @@ describe("buildEntries", () => {
     expect(widget.links).toEqual([{ type: "Source", href: "https://gh.test/w" }]);
     expect(widget.image).toBe("/widget.png");
     expect(widget.video).toBeNull();
+    expect(widget.logo).toBe("/sponsor.svg");
+  });
+  test("projects without a logoUrl get a null logo", () => {
+    const noLogo = buildEntries({ ...fixture, projects: [{ ...fixture.projects[0], logoUrl: undefined }] } as ResumeData);
+    expect(findEntry(noLogo, "widget")!.logo).toBeNull();
   });
   test("hackathon descriptions split on newlines", () => {
     const hack = findEntry(entries, "hack-1")!;
@@ -134,9 +139,9 @@ describe("isFilter", () => {
 });
 
 describe("ENTRIES from resume.json", () => {
-  test("has 15 entries with unique slugs", () => {
-    expect(ENTRIES).toHaveLength(15);
-    expect(new Set(ENTRIES.map((e) => e.slug)).size).toBe(15);
+  test("has 17 entries with unique slugs", () => {
+    expect(ENTRIES).toHaveLength(17);
+    expect(new Set(ENTRIES.map((e) => e.slug)).size).toBe(17);
   });
   test("every entry has a non-empty tagline, emoji and dateLabel", () => {
     for (const e of ENTRIES) {

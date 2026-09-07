@@ -94,7 +94,7 @@ export function buildEntries(data: ResumeData): Entry[] {
     links: p.links.filter((l) => l.href).map((l) => ({ type: l.type, href: l.href })),
     image: orNull(p.image),
     video: orNull(p.video),
-    logo: null,
+    logo: orNull(p.logoUrl),
     location: null,
   }));
 

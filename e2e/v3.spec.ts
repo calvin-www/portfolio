@@ -37,11 +37,11 @@ test("the statement types out as you scroll and the nav catches the top", async 
   expect(await nav.evaluate((el) => Math.round(el.getBoundingClientRect().top))).toBe(0);
 });
 
-test("home lists all fifteen entries newest first", async ({ page }) => {
+test("home lists all seventeen entries newest first", async ({ page }) => {
   await page.goto("/");
   const rows = page.getByTestId("entry-row");
-  await expect(rows).toHaveCount(15);
-  await expect(rows.first()).toContainText("JPMorgan Chase");
+  await expect(rows).toHaveCount(17);
+  await expect(rows.first()).toContainText("Google");
   await expect(rows.last()).toContainText("Oculosophy");
 });
 
@@ -59,7 +59,7 @@ test("filter updates the URL and the list, and survives reload", async ({ page }
   await expect(page.getByRole("button", { name: "hackathons", exact: true })).toHaveAttribute("aria-pressed", "true");
   await page.getByRole("button", { name: "all", exact: true }).click();
   await expect(page).toHaveURL(/\/$/);
-  await expect(page.getByTestId("entry-row")).toHaveCount(15);
+  await expect(page.getByTestId("entry-row")).toHaveCount(17);
 });
 
 test("modal opens from the URL and escape closes it", async ({ page }) => {
@@ -82,7 +82,7 @@ test("clicking a row opens its modal and keeps the filter", async ({ page }) => 
   await page.getByTestId("entry-row").first().click();
   await expect(page.getByRole("dialog")).toBeVisible();
   await expect(page).toHaveURL(/filter=work/);
-  await expect(page).toHaveURL(/item=jpmorgan-chase/);
+  await expect(page).toHaveURL(/item=google/);
   await page.getByRole("button", { name: "close", exact: true }).click();
   await expect(page.getByRole("dialog")).toBeHidden();
   await expect(page).toHaveURL(/\?filter=work$/);

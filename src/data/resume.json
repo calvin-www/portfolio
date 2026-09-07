@@ -232,6 +232,42 @@
     {
       "name": "express.js",
       "category": "framework"
+    },
+    {
+      "name": "microsoft azure",
+      "category": "tool"
+    },
+    {
+      "name": "cosmos db",
+      "category": "tool"
+    },
+    {
+      "name": "azure functions",
+      "category": "tool"
+    },
+    {
+      "name": "ast analysis",
+      "category": "tool"
+    },
+    {
+      "name": "agentic workflows",
+      "category": "ai"
+    },
+    {
+      "name": "distributed systems",
+      "category": "tool"
+    },
+    {
+      "name": "rest",
+      "category": "tool"
+    },
+    {
+      "name": "service bus",
+      "category": "tool"
+    },
+    {
+      "name": "event grid",
+      "category": "tool"
     }
   ],
   "navbar": [
@@ -279,36 +315,52 @@
   },
   "work": [
     {
+      "company": "Google",
+      "slug": "google",
+      "tagline": "software engineering intern · agentic de-singleton migration across Docs, Sheets and Slides",
+      "emoji": "🔍",
+      "startDate": "2026-05",
+      "endDate": "2026-08",
+      "href": "https://www.google.com",
+      "badges": [],
+      "location": "New York, NY",
+      "title": "Software Engineering Intern",
+      "logoUrl": "/google.svg",
+      "start": "May 2026",
+      "end": "Aug 2026",
+      "description": "At Google I built an autonomous, hierarchical agentic workflow to de-singleton Google Workspace's cross-platform editor framework. It orchestrates LLM worker subagents inside deterministic script guardrails, reads from an AST-derived call-graph database, and generates migration CLs that propagate dependency injection up call trees five or more classes deep.\nThe system eliminated 10,000+ legacy singleton usages, accelerating a migration that had been ongoing since 2017 and resolving state-corruption risks from per-document JSVMs being consolidated into a single JVM.\nOver the summer I shipped 460+ CLs (40K+ lines) to production across Docs, Sheets, and Slides, reviewed by senior engineers on five to ten owning teams."
+    },
+    {
       "company": "JPMorgan Chase",
       "slug": "jpmorgan-chase",
       "tagline": "software engineering intern · full-stack legal app on hybrid cloud",
       "emoji": "🏦",
-      "startDate": "2025-02",
+      "startDate": "2025-06",
       "endDate": "2025-08",
       "href": "https://www.jpmorganchase.com",
       "badges": [],
       "location": "Houston, TX",
       "title": "Software Engineering Intern",
       "logoUrl": "/JPMC.png",
-      "start": "Feb 2025",
+      "start": "Jun 2025",
       "end": "Aug 2025",
       "description": "As a Software Engineering Intern at JPMorgan Chase, I engineered a robust, scalable full-stack legal application for hybrid cloud deployment. Utilizing a tech stack that included Java, Spring, and SQL for the backend and Angular with TypeScript for the front-end, the application integrated over 20 microservices via RESTful APIs. This system was designed to securely manage over 43 million rows of data, and its implementation resulted in a 30x increase in the efficiency of legal investigations. Collaborating with industry mentors and traders within an Agile framework, I helped deliver more than 15 key features while ensuring the entire application complied with stringent security and legal practices."
     },
     {
-      "company": "Fermilab",
+      "company": "Fermilab + CERN",
       "slug": "fermilab",
-      "tagline": "designed and built the web presence for the DUNE experiment",
+      "tagline": "ml-driven compute scheduling and the DUNE file browser for CERN researchers",
       "emoji": "⚛️",
       "startDate": "2024-10",
-      "endDate": "2025-05",
+      "endDate": "2026-05",
       "href": "https://www.dunescience.org",
       "badges": [],
       "location": "Houston, TX",
-      "title": "Webpage Designer and Developer",
+      "title": "Software Engineer",
       "logoUrl": "/dune.png",
       "start": "Oct 2024",
-      "end": "May 2025",
-      "description": "At Fermilab, I worked on the DUNE (Deep Underground Neutrino Experiment) Project in association with CERN. I transformed the project's outdated static website into a dynamic, user-friendly platform built with Next.js, React, and a Python backend via FastAPI. This overhaul included implementing an advanced search system to efficiently manage and display millions of data files, ensuring seamless integration with an updated SQL-backed file server. I also tackled the challenges of adapting modern architecture to legacy infrastructure, managing large datasets, and improving accessibility for a global research audience."
+      "end": "May 2026",
+      "description": "At Fermilab, in association with CERN, I worked on the DUNE (Deep Underground Neutrino Experiment) project. I architected an isolated, end-to-end application to optimize computational workflows, implementing machine learning models that predict the optimal compute node for a job and detect anomalous runtime behavior. I engineered the complete stack: a data ingestor, a robust database schema, a model execution runner, and a frontend dashboard that visualizes real-time job metrics.\nI also modernized the DUNE file management system with Next.js and React, replacing an outdated static site with a comprehensive search interface that lets researchers efficiently manage millions of data files on an updated SQL-backed file server, while adapting modern architecture to legacy infrastructure for a global research audience."
     },
     {
       "company": "Headstarter",
@@ -363,7 +415,7 @@
     {
       "school": "Rice University",
       "href": "https://rice.edu",
-      "degree": "Bachelor's Degree of Computer Science (BSCS) w/ Minor in Classical Civilizations",
+      "degree": "Bachelor's Degree of Computer Science (BSCS) w/ Minor in Classical Civilizations · RiceApps, Rice CS Club, Rice Machine Learning, Rice Eclipse, Rice Owl Certamen",
       "logoUrl": "/rice.png",
       "start": "2023",
       "end": "2027"
@@ -379,15 +431,38 @@
   ],
   "projects": [
     {
+      "title": "DPO (Data Pipeline Orchestrator)",
+      "slug": "dpo",
+      "tagline": "serverless dag orchestrator on Azure, built with Two Sigma",
+      "emoji": "🛰️",
+      "startDate": "2026-01",
+      "endDate": "2026-05",
+      "href": "",
+      "logoUrl": "/two-sigma.svg",
+      "active": true,
+      "description": "Led a team of engineers in a Two Sigma-sponsored capstone to design a fully distributed, serverless pipeline orchestration system, translating customer requirements into a scalable Azure architecture for arbitrary DAG-based compute workflows.\nDrove iterative design reviews with Two Sigma stakeholders, aligning decisions on the control plane (DAG parser, scheduler, state store) and the data plane (executor adapters, compute resources) with production-grade reliability and extensibility goals.\nArchitected a self-sustaining \"flywheel\" execution model on Azure Functions and Service Bus: each task completion triggers evaluation of its successors, so there is no long-running scheduler, which cuts infrastructure cost and operational complexity.",
+      "technologies": [
+        "Azure Functions",
+        "Cosmos DB",
+        "Service Bus",
+        "Event Grid",
+        "Azure Container Instances",
+        "Python"
+      ],
+      "links": [],
+      "image": "",
+      "video": ""
+    },
+    {
       "title": "MockOwl",
       "slug": "mockowl",
       "tagline": "api mocking platform across http, grpc and websockets",
       "emoji": "🦉",
-      "startDate": "2025-01",
+      "startDate": "2024-05",
       "endDate": "2025-01",
       "href": "",
       "active": true,
-      "description": "A comprehensive API mocking platform designed to simplify development and testing workflows by providing robust mock servers across multiple communication protocols. MockOwl enables developers to create dynamic, configurable mock endpoints, simulate complex network conditions, and streamline the process of building and testing distributed systems with an intuitive, developer-friendly interface.",
+      "description": "A comprehensive API mocking platform for dynamically creating and managing mock services across HTTP, WebSocket, and gRPC. Built in TypeScript and React, it uses Strategy, Factory, and Singleton patterns for extensible protocol handling and connection management, so developers can spin up configurable mock endpoints, simulate network conditions, and test distributed systems from one developer-friendly interface.",
       "technologies": [
         "Next.js",
         "React",
@@ -397,6 +472,9 @@
         "Prisma",
         "gRPC",
         "WebSocket",
+        "REST",
+        "GraphQL",
+        "Express.js",
         "Monaco Editor",
         "Node.js"
       ],

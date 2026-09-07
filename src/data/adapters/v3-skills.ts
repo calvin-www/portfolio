@@ -47,9 +47,11 @@ export const SKILL_ROWS: SkillRow[] = [
     id: "infra",
     label: "infra",
     skills: [
-      s("AWS", "amazonaws"), s("Google Cloud", "google cloud platform", "gcp"), s("Vercel"), s("Firebase", "firebase auth"),
+      s("AWS", "amazonaws"), s("Google Cloud", "google cloud platform", "gcp"),
+      s("Azure", "microsoft azure", "azure functions", "azure container instances"), s("Cosmos DB"), s("Service Bus"), s("Event Grid"), s("Vercel"), s("Firebase", "firebase auth"),
       s("Heroku"), s("Docker"), s("MongoDB"), s("Neon"), s("GraphQL"), s("gRPC"), s("WebSocket", "websockets"),
-      s("Spark"), s("CI/CD"), s("Gemini", "gemini ai"), s("OpenAI"), s("Cohere", "cohere command r"), s("RAG", "ai rag"),
+      s("REST", "rest apis", "apis"), s("Spark"), s("CI/CD"), s("Distributed Systems"),
+      s("Machine Learning", "ml"), s("Agentic Workflows", "llm agents"), s("Gemini", "gemini ai"), s("OpenAI"), s("Cohere", "cohere command r"), s("RAG", "ai rag"),
     ],
   },
   {
@@ -58,7 +60,7 @@ export const SKILL_ROWS: SkillRow[] = [
     skills: [
       s("Git"), s("GitHub"), s("VS Code", "vscode"), s("IntelliJ", "intellijidea"), s("Figma"), s("Photoshop"),
       s("Illustrator"), s("Lightroom"), s("Premiere Pro", "premierepro"), s("LaTeX"), s("Maven"), s("JUnit"),
-      s("Bruno"), s("Clerk"), s("Monaco", "monaco editor"),
+      s("Bruno"), s("Clerk"), s("Monaco", "monaco editor"), s("AST Analysis", "ast"),
     ],
   },
 ];

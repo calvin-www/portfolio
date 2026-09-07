@@ -104,6 +104,8 @@ export interface ProjectLink {
 export interface Project extends TimelineFields {
   title: string;
   href: string;
+  /** Optional square mark shown in the modal header instead of the emoji (e.g. a sponsor's logo). */
+  logoUrl?: string;
   active: boolean;
   description: string;
   technologies: string[];
