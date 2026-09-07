@@ -43,3 +43,6 @@ next-env.d.ts
 
 # playwright mcp scratch (screenshots, console logs, probe scripts)
 .playwright-mcp/
+
+# jetbrains
+.idea/
