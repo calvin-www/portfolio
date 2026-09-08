@@ -4,12 +4,7 @@
  */
 
 /**
- * Skill category for ocean visualization mapping
- * - language: Programming languages (fish species)
- * - framework: Libraries/frameworks (coral formations)
- * - tool: Development tools (sea plants/anemones)
- * - design: Design tools (shells/starfish)
- * - ai: AI/ML tools (jellyfish)
+ * Skill category
  */
 export type SkillCategory = "language" | "framework" | "tool" | "design" | "ai";
 
@@ -19,6 +14,24 @@ export type SkillCategory = "language" | "framework" | "tool" | "design" | "ai";
 export interface Skill {
   name: string;
   category: SkillCategory;
+}
+
+/** ISO date, "YYYY-MM" or "YYYY-MM-DD". Compared as strings, so keep zero-padded. */
+export type IsoDate = string;
+
+/**
+ * Fields every timeline entry (work, project, hackathon) needs for the v3 merged list.
+ */
+export interface TimelineFields {
+  /** URL-safe id, unique across work, projects and hackathons. Used in ?item=. */
+  slug: string;
+  /** One line shown under the title in the list. Lowercase except proper nouns. */
+  tagline: string;
+  /** Single emoji shown beside the title. */
+  emoji: string;
+  startDate: IsoDate;
+  /** null means ongoing. */
+  endDate: IsoDate | null;
 }
 
 /**
@@ -52,7 +65,7 @@ export interface NavbarItem {
 /**
  * Work experience entry
  */
-export interface WorkExperience {
+export interface WorkExperience extends TimelineFields {
   company: string;
   href: string;
   badges: string[];
@@ -88,9 +101,11 @@ export interface ProjectLink {
 /**
  * Project entry
  */
-export interface Project {
+export interface Project extends TimelineFields {
   title: string;
   href: string;
+  /** Optional square mark shown in the modal header instead of the emoji (e.g. a sponsor's logo). */
+  logoUrl?: string;
   active: boolean;
   description: string;
   technologies: string[];
@@ -102,7 +117,7 @@ export interface Project {
 /**
  * Hackathon entry
  */
-export interface Hackathon {
+export interface Hackathon extends TimelineFields {
   title: string;
   dates: string;
   location: string;

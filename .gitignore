@@ -9,6 +9,7 @@ node_modules
 # testing
 /coverage
 test-results/
+playwright-report/
 
 # planning
 .sisyphus/
@@ -39,3 +40,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# playwright mcp scratch (screenshots, console logs, probe scripts)
+.playwright-mcp/
+
+# jetbrains
+.idea/

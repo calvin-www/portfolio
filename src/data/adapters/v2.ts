@@ -36,6 +36,7 @@ const TILE_COLORS = ["#cfe8ff", "#ffe4d1", "#d5f3ea", "#e8d6ff", "#fff0b8", "#f4
 
 /** Per-project emoji + short tag, keyed by title (falls back to a generic app icon). */
 const PROJECT_META: Record<string, { icon: string; tag: string }> = {
+  "DPO (Data Pipeline Orchestrator)": { icon: "🛰️", tag: "azure · infra" },
   MockOwl: { icon: "🦉", tag: "devtools" },
   PantryPal: { icon: "🥫", tag: "ai" },
   "Market Madness": { icon: "📈", tag: "ai · finance" },

@@ -45,21 +45,27 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Ocean theme (V2)
-        ocean: {
-          cyan: "#00B5D8",
-          blue: "#3182CE",
-          deep: "#1a365d",
-          light: "#EBF8FF",
-          text: "#1A202C",
-          muted: "#718096",
+        // V3 warm paper tokens (values live in globals.css)
+        paper: "var(--v3-paper)",
+        surface: "var(--v3-surface)",
+        line: "var(--v3-line)",
+        ink: {
+          DEFAULT: "var(--v3-ink)",
+          muted: "var(--v3-ink-muted)",
         },
-        abyss: {
-          DEFAULT: "#0A1628",
-          text: "#E2E8F0",
+        teal: {
+          DEFAULT: "var(--v3-teal)",
+          ink: "var(--v3-teal-ink)",
         },
-        // Legacy
-        coral: '#FF6B6B',
+      },
+      // V3 type scale: 17px base, ~1.2 ratio. Line heights are unitless.
+      fontSize: {
+        "v3-xs": ["0.8125rem", { lineHeight: "1.45" }],
+        "v3-sm": ["0.9375rem", { lineHeight: "1.5" }],
+        "v3-base": ["1.0625rem", { lineHeight: "1.6" }],
+        "v3-lg": ["1.25rem", { lineHeight: "1.35" }],
+        "v3-xl": ["1.5rem", { lineHeight: "1.2" }],
+        "v3-2xl": ["1.875rem", { lineHeight: "1.12" }],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -70,6 +76,7 @@ const config: Config = {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         heading: ["var(--font-sans)", ...fontFamily.sans],
         mono: ['var(--font-jetbrains)', 'JetBrains Mono', 'monospace'],
+        bricolage: ["var(--font-bricolage)", ...fontFamily.sans],
       },
       animation: {
         'radar-spin': 'spin 8s linear infinite',

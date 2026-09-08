@@ -48,6 +48,350 @@
     --ring: 212.7 26.8% 83.9%;
   }
 
+  /* V3 warm paper tokens */
+  :root {
+    --v3-paper: #fffdf8;
+    --v3-surface: #f4efe6;
+    --v3-line: #eee7da;
+    --v3-ink: #201c15;
+    --v3-ink-muted: #6b6559;
+    --v3-teal: #00b5d8;
+    --v3-teal-ink: #007a91;
+    --v3-underline: #d8cfbf;
+  }
+
+  .dark {
+    --v3-paper: #181a1f;
+    --v3-surface: #22252b;
+    --v3-line: #33373f;
+    --v3-ink: #e7e9ec;
+    --v3-ink-muted: #9aa0a8;
+    --v3-teal: #00b5d8;
+    --v3-teal-ink: #00b5d8;
+    --v3-underline: #4a505a;
+  }
+
+  /* V3 pages paint the body in paper so overscroll edges match */
+  body:has([data-portfolio="v3"]) {
+    background: var(--v3-paper);
+  }
+
+  /* V3 type. Optical size follows font-size automatically; width is set per role. */
+  [data-portfolio="v3"] {
+    font-optical-sizing: auto;
+    font-variant-numeric: tabular-nums;
+  }
+
+  [data-portfolio="v3"] .v3-display {
+    font-stretch: 82%;
+  }
+
+  /* One focus treatment for every v3 control, instead of a ring class on each. */
+  [data-portfolio="v3"] :focus-visible {
+    outline: 2px solid var(--v3-teal-ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* The dialog panel takes focus programmatically on open; its border is the cue. */
+  [data-portfolio="v3"] [role="dialog"]:focus-visible {
+    outline: none;
+  }
+
+  /* Text links: hairline underline in a paper tone that turns teal on hover. */
+  [data-portfolio="v3"] .v3-link {
+    text-decoration-line: underline;
+    text-decoration-color: var(--v3-underline);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 5px;
+    transition: text-decoration-color 150ms ease, color 150ms ease;
+  }
+
+  [data-portfolio="v3"] .v3-link:hover {
+    text-decoration-color: var(--v3-teal);
+  }
+
+  /* ---- Round 2: shark, face, grain ---------------------------------- */
+
+  /* Paper grain: a fixed noise layer over everything, never interactive. */
+  [data-portfolio="v3"] .v3-grain {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.055;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+
+  .dark [data-portfolio="v3"] .v3-grain {
+    opacity: 0.09;
+    filter: invert(1);
+  }
+
+  /* The emoticon in the headline turns to face the reader and blinks. */
+  [data-portfolio="v3"] .v3-face {
+    display: inline-block;
+    transform: rotate(90deg) translateY(-0.04em);
+    transform-origin: 50% 50%;
+  }
+
+  [data-portfolio="v3"] .v3-face-eyes {
+    display: inline-block;
+    transform-origin: 50% 50%;
+    animation: v3-blink 5.5s ease-in-out 3s infinite;
+  }
+
+  @keyframes v3-blink {
+    0%, 92%, 100% { transform: scaleX(1); }
+    95% { transform: scaleX(0.12); }
+  }
+
+  /* Hero shark: draw the outline, then the details, then idle. */
+  [data-portfolio="v3"] .shark-tilt {
+    --shark-tilt: 0deg;
+    transform: rotate(var(--shark-tilt));
+    transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  [data-portfolio="v3"] .shark-idle {
+    animation: v3-shark-idle 6s ease-in-out infinite;
+  }
+
+  @keyframes v3-shark-idle {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(-1.2deg); }
+  }
+
+  [data-portfolio="v3"] .shark-draw path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: v3-draw 0.5s ease-out forwards;
+  }
+
+  [data-portfolio="v3"] .shark-draw .shark-body {
+    animation-duration: 1.6s;
+    animation-delay: 0.2s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.3, 1);
+  }
+  [data-portfolio="v3"] .shark-draw .shark-fin { animation-delay: 1.55s; }
+  [data-portfolio="v3"] .shark-draw .shark-gill:nth-of-type(3) { animation-delay: 1.85s; animation-duration: 0.3s; }
+  [data-portfolio="v3"] .shark-draw .shark-gill:nth-of-type(4) { animation-delay: 1.95s; animation-duration: 0.3s; }
+  [data-portfolio="v3"] .shark-draw .shark-gill:nth-of-type(5) { animation-delay: 2.05s; animation-duration: 0.3s; }
+  [data-portfolio="v3"] .shark-draw .shark-mouth { animation-delay: 2.2s; animation-duration: 0.4s; }
+
+  [data-portfolio="v3"] .shark-draw .shark-eye {
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: scale(0);
+    animation: v3-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) 2.45s forwards;
+  }
+
+  @keyframes v3-draw {
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes v3-pop {
+    to { transform: scale(1); }
+  }
+
+  /* ---- Round 3: scroll events ---------------------------------------- */
+
+  /* Keep anchor targets and scrolled-into-view elements clear of the sticky nav. */
+  html:has([data-portfolio="v3"]) {
+    scroll-padding-top: 4.5rem;
+  }
+
+  /* Sticky nav: a tinted, blurred bar with a hairline that appears once stuck. */
+  [data-portfolio="v3"] .v3-nav {
+    background: color-mix(in srgb, var(--v3-paper) 86%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 200ms ease;
+  }
+
+  [data-portfolio="v3"] .v3-nav[data-stuck="true"] {
+    border-bottom-color: var(--v3-line);
+  }
+
+  /* Pinned sections: a tall scroll runway with the content stuck part-way down. */
+  [data-portfolio="v3"] .v3-pin-section {
+    min-height: 175svh;
+  }
+
+  [data-portfolio="v3"] .v3-pin {
+    position: sticky;
+    top: 0;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 4rem;
+  }
+
+  /* Typed statement: --typed is the number of characters revealed so far. */
+  [data-portfolio="v3"] .v3-ch {
+    opacity: clamp(0, calc(var(--typed) - var(--i)), 1);
+    color: color-mix(in srgb, var(--v3-teal) clamp(0%, calc((var(--i) + 1.6 - var(--typed)) * 100%), 100%), currentColor);
+  }
+
+  /* Full-bleed bands: run edge to edge, keep their content on the column grid.
+     The wrapper clips the half-scrollbar overshoot this trick produces. */
+  [data-portfolio="v3"] {
+    overflow-x: clip;
+  }
+
+  [data-portfolio="v3"] .v3-band {
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+  }
+
+  [data-portfolio="v3"] .v3-band-inner {
+    width: 100%;
+    max-width: 42rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    [data-portfolio="v3"] .v3-band-inner {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  /* Inverted band: ink on paper becomes paper on ink, in either theme. */
+  [data-portfolio="v3"] .v3-band-ink {
+    background: var(--v3-ink);
+    color: var(--v3-paper);
+  }
+
+  [data-portfolio="v3"] .v3-band-surface {
+    background: var(--v3-surface);
+  }
+
+  /* Section rules run edge to edge. */
+  [data-portfolio="v3"] .v3-rule {
+    border: 0;
+    border-top: 1px solid var(--v3-line);
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+  }
+
+  /* Roaming shark: faint, behind the content. Inside the ink band it takes the band's text colour. */
+  [data-portfolio="v3"] .v3-roam {
+    color: color-mix(in srgb, var(--v3-ink) 22%, transparent);
+  }
+
+  [data-portfolio="v3"] .v3-roam-band {
+    color: color-mix(in srgb, currentColor 32%, transparent);
+  }
+
+  /* Skills marquee. */
+  [data-portfolio="v3"] .v3-marquee-band {
+    padding: 0.35rem 0;
+  }
+
+  [data-portfolio="v3"] .v3-marquee-label {
+    display: block;
+    font-size: 0.8125rem;
+    color: var(--v3-ink-muted);
+  }
+
+  [data-portfolio="v3"] .v3-marquee-row {
+    overflow: clip;
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+    padding-top: 0.4rem;
+  }
+
+  [data-portfolio="v3"] .v3-marquee-row:active {
+    cursor: grabbing;
+  }
+
+  [data-portfolio="v3"] .v3-marquee-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+
+  [data-portfolio="v3"] .v3-marquee-list {
+    display: flex;
+    flex: none;
+    gap: 2.25rem;
+    padding-right: 2.25rem;
+    white-space: nowrap;
+  }
+
+  [data-portfolio="v3"] .v3-skill {
+    font-size: clamp(1.5rem, 4vw, 2.75rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--v3-ink);
+    transition: color 200ms ease, opacity 200ms ease;
+  }
+
+  [data-portfolio="v3"] .v3-skill:hover {
+    color: var(--v3-teal-ink);
+  }
+
+  [data-portfolio="v3"] .v3-skill.is-dimmed {
+    color: var(--v3-ink-muted);
+    opacity: 0.45;
+  }
+
+  [data-portfolio="v3"] .v3-skill.is-selected {
+    color: var(--v3-teal-ink);
+  }
+
+  [data-portfolio="v3"] .v3-scroll-hint {
+    animation: v3-hint 2.4s ease-in-out infinite;
+  }
+
+  @keyframes v3-hint {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-portfolio="v3"] .v3-pin-section {
+      min-height: 0;
+      padding: 4rem 0;
+    }
+    [data-portfolio="v3"] .v3-roam,
+    [data-portfolio="v3"] .v3-roam-band {
+      display: none;
+    }
+    [data-portfolio="v3"] .v3-pin {
+      position: static;
+      min-height: 0;
+      padding-block: 0;
+    }
+    [data-portfolio="v3"] .v3-ch {
+      opacity: 1;
+      color: inherit;
+    }
+    [data-portfolio="v3"] .v3-scroll-hint {
+      animation: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-portfolio="v3"] .v3-face-eyes,
+    [data-portfolio="v3"] .shark-idle,
+    [data-portfolio="v3"] .shark-draw path,
+    [data-portfolio="v3"] .shark-draw .shark-eye {
+      animation: none;
+    }
+    [data-portfolio="v3"] .shark-draw path { stroke-dashoffset: 0; }
+    [data-portfolio="v3"] .shark-draw .shark-eye { transform: scale(1); }
+    [data-portfolio="v3"] .shark-tilt { transition: none; transform: none; }
+  }
+
   * {
     @apply border-border;
   }
@@ -102,42 +446,6 @@
     --ring: 212.7 26.8% 83.9%;
   }
 
-  /* V2 scoped tokens (ocean theme) */
-  [data-portfolio="v2"] {
-    @apply bg-ocean-light text-ocean-text;
-  }
-
-  .dark [data-portfolio="v2"] {
-    @apply bg-abyss text-abyss-text;
-  }
-
-  [data-portfolio="v2"] * {
-    @apply border-ocean-muted/20;
-  }
-
-  /* Hide default cursor on desktop when custom cursor active (v2) */
-  @media (hover: hover) and (pointer: fine) {
-    body.custom-cursor-active {
-      cursor: none;
-    }
-
-    body.custom-cursor-active a,
-    body.custom-cursor-active button,
-    body.custom-cursor-active [data-interactive] {
-      cursor: none;
-    }
-  }
-}
-
-@layer utilities {
-  /* HUD text styling (v2) */
-  .hud-text {
-    @apply font-mono text-xs uppercase tracking-wider text-ocean-muted;
-  }
-
-  .dark .hud-text {
-    @apply text-ocean-muted/70;
-  }
 }
 
 /* Code syntax highlighting for v1 (outside layers) */
@@ -169,4 +477,12 @@ code[data-line-numbers] [data-line]::before {
 
 [data-rehype-pretty-code-figure] code {
   @apply text-sm leading-loose md:leading-loose;
+}
+
+/* Windows forced-colors mode strips box-shadow rings; give v3 controls a real outline */
+@media (forced-colors: active) {
+  [data-portfolio="v3"] :focus-visible {
+    outline: 2px solid;
+    outline-offset: 2px;
+  }
 }
