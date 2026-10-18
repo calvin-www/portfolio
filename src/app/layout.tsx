@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter as FontSans, Bricolage_Grotesque } from "next/font/google";
 import { DATA } from "@/data";
 import "./globals.css";
@@ -28,6 +29,16 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" suppressHydrationWarning>
       <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable, bricolage.variable)}>
         {children}
+        {process.env.NODE_ENV === "production" && process.env.VERCEL_ENV !== "preview" && (
+          <Script
+            id="umami-analytics"
+            src="https://cloud.umami.is/script.js"
+            strategy="afterInteractive"
+            data-website-id="90daee70-0fea-4c34-8b4b-cd61fc052819"
+            data-domains="calvinw.me,www.calvinw.me"
+            data-do-not-track="true"
+          />
+        )}
       </body>
     </html>
   );

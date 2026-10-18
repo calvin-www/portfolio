@@ -20,6 +20,7 @@ export function ContactRow({ className, compact = false }: { className?: string;
         <li key={label}>
           <a
             href={href}
+            data-umami-event={`${label}_click`}
             target={href.startsWith("mailto:") ? undefined : "_blank"}
             rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
             aria-label={compact ? label : undefined}

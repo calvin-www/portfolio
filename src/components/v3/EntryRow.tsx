@@ -26,6 +26,9 @@ export const EntryRow = forwardRef<HTMLLIElement, Props>(function EntryRow({ ent
         type="button"
         data-testid="entry-row"
         data-type={entry.type}
+        data-umami-event="entry_open"
+        data-umami-event-entry={entry.slug}
+        data-umami-event-category={entry.type}
         onClick={onOpen}
         onPointerEnter={(e) => e.pointerType === "mouse" && onHover({ x: e.clientX, y: e.clientY })}
         onPointerMove={(e) => e.pointerType === "mouse" && onHover({ x: e.clientX, y: e.clientY })}

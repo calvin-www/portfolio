@@ -141,7 +141,15 @@ export function EntryModal({ entry, onClose }: { entry: Entry; onClose: () => vo
           <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-v3-sm">
             {entry.links.map((l) => (
               <li key={l.href}>
-                <a href={l.href} target="_blank" rel="noopener noreferrer" className="v3-link text-ink">
+                <a
+                  href={l.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="v3-link text-ink"
+                  data-umami-event="entry_link_click"
+                  data-umami-event-entry={entry.slug}
+                  data-umami-event-link={l.type.toLowerCase()}
+                >
                   {l.type.toLowerCase()}
                 </a>
               </li>
