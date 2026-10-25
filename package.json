@@ -21,11 +21,11 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.29.2",
-    "lucide-react": "^0.395.0",
-    "next": "^14.2.7",
+    "lucide-react": "0.468.0",
+    "next": "15.5.28",
     "next-themes": "^0.4.6",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
     "react-icon-cloud": "^4.1.4",
     "react-markdown": "^9.0.1",
     "tailwind-merge": "^2.2.0"
@@ -34,10 +34,14 @@
     "@playwright/test": "^1.40.0",
     "@types/bun": "^1.4.1",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "autoprefixer": "^10.4.17",
-    "postcss": "^8.4.32",
+    "@types/react": "19.3.0",
+    "autoprefixer": "10.6.1",
+    "postcss": "8.5.31",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  }
+  },
+  "overrides": {
+    "postcss": "8.5.31"
+  },
+  "packageManager": "npm@11.12.1"
 }
